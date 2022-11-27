@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @Slf4j
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.tfe.fournil.controller"})
+
 public class FournilApplication
 {
     public static void main(String[] args)
