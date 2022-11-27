@@ -2,21 +2,20 @@ package com.tfe.fournil;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 
 @Slf4j
 @SpringBootApplication
-
-public class FournilApplication {
-
-
-    public static void main(String[] args) {
+@ComponentScan(basePackages = {"com.tfe.fournil.controller"})
+public class FournilApplication
+{
+    public static void main(String[] args)
+    {
         log.info("!!!!!!!!!!API IS READY!!!!!!!!!!");
         SpringApplication.run(FournilApplication.class, args);
-              }
-
     }
+}
 
 
