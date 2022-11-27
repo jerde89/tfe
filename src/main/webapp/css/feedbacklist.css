@@ -1,0 +1,73 @@
+.the-table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.contentSeeFeedbacks{
+    display: none;
+    padding: 100px;
+}
+
+.contentSeeFeedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: auto;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 100;
+    display: none;
+    background-color: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0.24);
+
+}
+
+
+
+.contentConfirmationDeleteFeedback {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: auto;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 100;
+    display: none;
+    border-radius: 5px;
+    background-color: white;
+    border:1px grey solid;
+
+    /*to hide popup initially*/
+}
+
+.close-btn {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+button{
+    border:none;
+    background-color: transparent;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+    line-height: unset;
+}
+
+#comment{
+    overflow-wrap: break-word;
+    height: auto;
+}

@@ -1,0 +1,14 @@
+/*li.active a {color: red; font-weight:bold;}*/
+
+/*navbar navbar-expand-lg navbar-dark sticky-top li.nav-item-right*/
+/*{*/
+/*    display: inline-block;*/
+/*    float: right;*/
+/*    margin-left: 30px;*/
+/*    position: absolute;*/
+/*}*/
+
+#navbarNav .nav-item a {
+    font-size: 1.5rem;
+    size: 1.5rem;
+}

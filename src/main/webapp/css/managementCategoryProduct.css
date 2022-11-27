@@ -1,0 +1,60 @@
+.rowMargin{
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.btn{
+    background: #e3b04b !important;
+    border: 1px solid #e3b04b !important;
+    color: #fff !important;
+}
+.contentAddCategory {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: auto;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 100;
+    display: none;
+    border-radius: 5px;
+    background-color: white;
+    border:1px grey solid;
+
+    /*to hide popup initially*/
+}
+
+.contentModifyCategory {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 100;
+    display: none;
+    border-radius: 5px;
+    background-color: white;
+    border:1px grey solid;
+
+    /*to hide popup initially*/
+}
+
+/*permet de possitionnner correctment le chiffre repris dans "afficher .... entrées"*/
+div.dataTables_wrapper div.dataTables_length select {
+    line-height: unset;
+}
+
+/*permet d'enlever le cardre noir se trouvant autour du bouton action "crayon"*/
+button{
+    border:none;
+    background-color: transparent;
+}
