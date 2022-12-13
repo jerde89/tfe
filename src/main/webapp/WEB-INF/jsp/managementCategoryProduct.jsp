@@ -31,6 +31,13 @@
         </div>
     </div>
 </div>
+
+    <c:if test="${not empty sessionScope.success}">
+    <div class="alert alert-success" role="alert">
+            ${sessionScope.success}
+    </div>
+        <c:remove var="success" scope="session"></c:remove>
+    </c:if>
 <div class="container">
     <div>
         <ul class="nav nav-tabs" role="tablist">

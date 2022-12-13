@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/feedbacklist.css">
     <script src="${pageContext.request.contextPath}/js/feedbackList.js"></script>
     <script type="text/javascript">
-        //transforme le json en javascript
-        var feedBackJson = JSON.parse('${feedbacksJson}');
         var pageContextPath = "${pageContext.request.contextPath}";
     </script>
 </head>

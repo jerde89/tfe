@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +10,7 @@
     <meta charset="UTF-8">
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
+    <script src="${pageContext.request.contextPath}/js/contact.js"></script>
 
 </head>
 <body>
@@ -138,16 +141,10 @@
     </c:if>
 
     <div class="container align-items-center col-8 ">
-
-
-        <!--<form action="" method="">-->
-
-
         <div class="col-12">
-
-
-            <form class="shadow p-4 bg-white rounded" novalidate method="post"
-                  action="${pageContext.request.contextPath}/contact/sendFeedback">
+            <form class="shadow p-4 bg-white rounded" name="contactFeedback"
+                  method="post" action="${pageContext.request.contextPath}/contact/sendFeedback"
+                  onsubmit="return validateContactFeedback()">
 
                 <div class="mt-2 mb-5 text-center">
                     <h3 class="text-black">Formulaire de contact</h3>
@@ -158,47 +155,39 @@
                 <div class="row pb-3">
                     <div class="col-6">
                         <label for="exampleInputNom" class="form-label text-black">Nom*</label>
-                        <input type="text" class="form-control" id="exampleInputNom" name="nameFeedback"
-                               aria-describedby="inputGroupPrepend" required placeholder="Nom">
-                        <div class="invalid-feedback">
-                            Veuillez introduire un nom !
-                        </div>
+                        <input type="text" class="form-control" id="exampleInputNom" name="nameFeedback" aria-describedby="inputGroupPrepend" placeholder="Nom">
+                        <div class="span-error-div"><span class="span-error4" id="errorNameFeedback"></span></div>
                     </div>
 
                     <div class="col-6">
-                        <label for="exampleInputPrenom" class="form-label text-black">Prénom*</label> <input type="text"
-                                                                                                             class="form-control"
-                                                                                                             id="exampleInputPrenom"
-                                                                                                             name="firstnameFeedback"
-                    >
+                        <label for="exampleInputPrenom" class="form-label text-black">Prénom*</label>
+                        <input type="text" class="form-control" id="exampleInputPrenom" name="firstnameFeedback">
                     </div>
-
                 </div>
 
 
                 <div class="mb-3 pb-3">
                     <label class="form-label text-black">Adresse email *</label>
-                    <input type="text" required="required" class="form-control" id="exampleInputEmail1"
+                    <input type="text"  class="form-control" id="exampleInputEmail1"
+
                            name="emailFeedback" aria-describedby="emailHelp" placeholder="Email">
                 </div>
 
                 <div class="mb-1 pb-3">
-                    <label for="exampleInputTelephone" class="form-label text-black">Téléphone*</label> <input
-                        type="text" class="form-control" id="exampleInputTelephone" name="phoneFeedback"
-                        aria-describedby="telephoneHelp" placeholder="Téléphone">
+                    <label for="exampleInputTelephone" class="form-label text-black">Téléphone*</label>
+                    <input type="text" class="form-control" id="exampleInputTelephone" name="phoneFeedback"
+                           aria-describedby="telephoneHelp" placeholder="Téléphone">
                 </div>
 
                 <div class="mb-3 pb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Commentaire*</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="commentFeedback"
-                              rows="3"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" name="commentFeedback" rows="3"></textarea>
                 </div>
 
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary" style="background-color:#F0BF72">Envoyer le
-                        formulaire
-                    </button>
+                    <button type="submit" class="btn btn-primary" style="background-color:#F0BF72">Envoyer le formulaire</button>
                 </div>
+
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </div>
