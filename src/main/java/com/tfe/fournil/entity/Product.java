@@ -3,12 +3,11 @@ package com.tfe.fournil.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
-import java.util.List;
+
 
 @Entity
 @Table(name ="Product")
@@ -20,7 +19,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id_product")
-    private long Idproduct;
+    private long IdProduct;
 
     @NotBlank (message = "le nom du produit doit comporter au moins 1 caractère")
     @Size(max = 50, message = "le nom du produit doit comporter maximun 50 caractères")

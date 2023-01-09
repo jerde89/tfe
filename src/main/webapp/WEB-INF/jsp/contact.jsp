@@ -11,7 +11,6 @@
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/contact.css">
     <script src="${pageContext.request.contextPath}/js/contact.js"></script>
-
 </head>
 <body>
 <%@include file="navbar.jsp" %>
@@ -85,7 +84,7 @@
                 <div class="text-center fw-bold"><h3>Heures d'ouverture</h3></div>
             </div>
 
-            <div class="row justify-content-center">
+            <div class="row justify-content-center lh-lg">
                 <!--ps-5 => p=padding s=� gauche 5=largeur (plus large)-->
                 <div class="col-6 ps-5">
                     <div>Lundi</div>
@@ -112,7 +111,8 @@
         <div class="col-md-6 ms-auto text-center pt-5">
             <div class="zoom">
                 <div class="zoom :hover">
-                    <img src="${pageContext.request.contextPath}/image/Profil.png" alt="Image des gérants"  width="40%" alt="Profil">
+                    <img src="${pageContext.request.contextPath}/image/Profil.png" alt="Image des gérants" width="40%"
+                         alt="Profil">
                 </div>
             </div>
         </div>
@@ -133,10 +133,31 @@
         <c:remove var="errors" scope="session"></c:remove>
     </c:if>
 
+<%--    <c:if test="${not empty sessionScope.success}">--%>
+<%--        <script>--%>
+<%--            //mettre toaster rosi--%>
+<%--            $('#succesFeedback').show();--%>
+<%--        </script>--%>
+<%--        <div class="alert alert-success" id="succesFeedback" role="alert">--%>
+<%--                ${sessionScope.success}--%>
+<%--        </div>--%>
+<%--        <c:remove var="success" scope="session"></c:remove>--%>
+<%--    </c:if> --%>
+
     <c:if test="${not empty sessionScope.success}">
-        <div class="alert alert-success" role="alert">
-                ${sessionScope.success}
-        </div>
+        <script>
+            $.toast(
+                {
+                    heading: 'Félicitations',
+                    text: 'Votre formulaire a été envoyé avec succès',
+                    showHideTransition: 'slide',
+                    icon: 'success',
+                    position: 'top-right',
+                    stack: false,
+                }
+            );
+        </script>
+
         <c:remove var="success" scope="session"></c:remove>
     </c:if>
 
@@ -152,40 +173,57 @@
                 </div>
 
 
-                <div class="row pb-3">
+                <div class="row pb-3 mx-2">
                     <div class="col-6">
-                        <label for="exampleInputNom" class="form-label text-black">Nom*</label>
-                        <input type="text" class="form-control" id="exampleInputNom" name="nameFeedback" aria-describedby="inputGroupPrepend" placeholder="Nom">
+                        <label for="InputName" class="form-label text-black">Nom*</label>
+                        <input type="text" class="form-control" id="InputName" name="nameFeedback" placeholder="Nom">
                         <div class="span-error-div"><span class="span-error4" id="errorNameFeedback"></span></div>
                     </div>
 
                     <div class="col-6">
-                        <label for="exampleInputPrenom" class="form-label text-black">Prénom*</label>
-                        <input type="text" class="form-control" id="exampleInputPrenom" name="firstnameFeedback">
+                        <label for="InputFirstname" class="form-label text-black">Prénom*</label>
+                        <input type="text" class="form-control" id="InputFirstname" name="firstnameFeedback"
+                               placeholder="Prénom">
+                        <div class="span-error-div"><span class="span-error4" id="errorFirstnameFeedback"></span></div>
                     </div>
                 </div>
 
 
-                <div class="mb-3 pb-3">
-                    <label class="form-label text-black">Adresse email *</label>
-                    <input type="text"  class="form-control" id="exampleInputEmail1"
-
-                           name="emailFeedback" aria-describedby="emailHelp" placeholder="Email">
+                <div class="row pb-3 mx-2">
+                    <div class="col-12">
+                        <label class="form-label text-black">Adresse email *</label>
+                        <input type="text" class="form-control" id="InputEmail" name="emailFeedback"
+                               placeholder="Email">
+                        <div class="span-error-div"><span class="span-error4" id="errorEmailFeedback"></span></div>
+                    </div>
                 </div>
 
-                <div class="mb-1 pb-3">
-                    <label for="exampleInputTelephone" class="form-label text-black">Téléphone*</label>
-                    <input type="text" class="form-control" id="exampleInputTelephone" name="phoneFeedback"
-                           aria-describedby="telephoneHelp" placeholder="Téléphone">
+                <div class="row pb-3 mx-2">
+                    <div class="col-12">
+                        <label class="form-label text-black">Téléphone*</label>
+                        <input type="text" class="form-control" id="InputPhone" name="phoneFeedback"
+                               placeholder="Téléphone">
+                        <div class="span-error-div"><span class="span-error4" id="errorPhoneFeedback"></span></div>
+                    </div>
                 </div>
 
-                <div class="mb-3 pb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">Commentaire*</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" name="commentFeedback" rows="3"></textarea>
+                <div class="row pb-3 mx-2">
+                    <div class="col-12">
+                        <label class="form-label">Commentaire*</label>
+                        <textarea class="form-control" id="InputCommentFeedback" name="commentFeedback" rows="3"
+                                  placeholder="Commentaire"></textarea>
+                        <div class="span-error-div"><span class="span-error4" id="errorCommentFeedback"></span></div>
+                    </div>
                 </div>
 
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary" style="background-color:#F0BF72">Envoyer le formulaire</button>
+                <%--                <div class="divSubmit">--%>
+                <%--                    <button type="submit" class="btn btn-primary" style="background-color:#F0BF72">Envoyer le formulaire</button>--%>
+                <%--                </div>--%>
+
+                <div class="form-group" style="text-align:center">
+                    <button id="submitBtn" type="submit" class="form-control btn btn-primary rounded submit px-3">
+                        Envoyer le formulaire
+                    </button>
                 </div>
 
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -194,7 +232,6 @@
         <!--  </form>-->
     </div>
 </div>
-
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-muted">Merci de votre visite</p>

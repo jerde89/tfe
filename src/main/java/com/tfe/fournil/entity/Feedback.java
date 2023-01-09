@@ -47,7 +47,7 @@ public class Feedback {
     @Column(name = "comment_feedback", nullable = false, length = 500)
     private String commentFeedback;
 
-    @Column(name = "statut_feedback", nullable = false, length = 500)
+    @Column(name = "statut_feedback", nullable = false)
     private Boolean statutFeedback=false;
 
     @Temporal(TemporalType.TIMESTAMP)
