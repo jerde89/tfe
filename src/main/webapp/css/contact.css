@@ -45,6 +45,9 @@ row justify-content-center{
     line-height : 25px;
 }
 
+.containerBody{
+    overflow-y: scroll;!important;
+}
 .container{
     padding-left: 5px;
 }

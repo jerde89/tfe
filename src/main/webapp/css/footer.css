@@ -1,11 +1,9 @@
-#footer {
-    position:absolute;
-    bottom:0;  /* on le colle en bas */
-    width:100%;
-    height:10px;   /* Hauteur du pied de page */
+.footer{
+    background-color: #E9EDED;
+    color: black;
 
 }
 
-/*#containerFooter {*/
-/*    height:100%;*/
-/*}*/
+.col-4{
+    padding-top: 10px;
+}

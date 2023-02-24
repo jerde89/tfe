@@ -23,7 +23,7 @@ public class Address {
 
     @NotBlank(message = "la rue doit comporter au moins 1 caractère")
     @Size(max = 100, message = "la rue doit comporter maximun 100 caractères")
-    @Column(name = "street", nullable = false, length = 50)
+    @Column(name = "street", nullable = false, length = 100)
     private String street;
 
     @NotBlank(message = "la numéro doit comporter au moins 1 caractère")
@@ -31,12 +31,11 @@ public class Address {
     @Column(name = "number", nullable = false, length = 10)
     private String number;
 
-    @NotBlank(message = "la boîte doit comporter au moins 1 caractère")
-    @Size(max = 10, message = "la boîte doit comporter maximun 10 caractères")
+
     @Column(name = "box", length = 10)
     private String box;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "id_city")
     private City city;
 }

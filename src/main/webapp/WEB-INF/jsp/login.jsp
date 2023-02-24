@@ -18,10 +18,13 @@
 </head>
 <body>
 
-<%@include file="navbar.jsp" %>
+<div class="containerHeader">
+    <%@include file="navbar.jsp" %>
+</div>
 
 
-<section class="ftco-section">
+<div class="containerBody">
+    <section class="ftco-section">
     <div class="container">
 
         <div class="row justify-content-center">
@@ -75,18 +78,18 @@
 <%--                        <p class="text-center">Pas encore membre? <a data-toggle="tab" href="${pageContext.request.contextPath}/register" >Inscrivez-vous</a>--%>
 <%--&lt;%&ndash;                            href="${pageContext.request.contextPath}/register"&ndash;%&gt;--%>
 <%--                        </p>--%>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-
+    </section>
 </div>
 
-<%@include file="footer.jsp" %>
-</body>
+<div class="containerFooter">
+    <%@include file="footer.jsp" %>
+</div>
 
+</body>
 
 </html>

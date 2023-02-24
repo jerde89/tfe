@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -36,23 +38,23 @@ public class User {
     private String email;
 
     @NotBlank(message = "le téléphone doit comporter au moins 1 caractère")
-    @Size(max = 50, message = "le téléphone doit comporter maximun 100 caractères")
-    @Column(name = "phone", nullable = false, length = 100)
+    @Size(max = 50, message = "le téléphone doit comporter maximun 50 caractères")
+    @Column(name = "phone", nullable = false, length = 50)
     private String phone;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "date_of_birth")
-    private Date dateOfBirth;
+//    @Temporal(TemporalType..DATE)
+    @Column(name = "date_of_birth", nullable = true)
+    private LocalDate dateOfBirth;
 
     @NotBlank(message = "le mot de passe doit comporter au moins 1 caractère")
     @Size(max = 50, message = "le mot de passe doit comporter maximun 50 caractères")
-    @Column(name = "password", nullable = false, length = 100)
+    @Column(name = "password", nullable = false, length = 50)
     private String password;
 
     @Column(name = "active_user", nullable = false)
-    private Boolean active_user=false;
+    private Boolean active_user=true;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "id_address")
     private Address address;
 
