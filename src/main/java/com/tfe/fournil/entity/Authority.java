@@ -5,28 +5,29 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 
 @Entity
-@Table(name = "authorities", schema = "public")
+@Table(name = "authority", schema = "public")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Authority {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "auth_id", nullable = false)
-    private Long auth_id;
+    @Column(name = "id_authority", nullable = false)
+    private long idAuthority;
 
-    @Basic
-    @Column(name = "username")
-    private String username;
-    @Basic
-    @Column(name = "authority")
-    private String authority;
+    @Size(max = 50, message = "le nom de la ville doit comporter maximun 50 caractères")
+    @Column(name = "authority_description", nullable = false, length = 50)
+    private String authorityDescription;
 
-
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn (name = "username")
+    private User username;
 
 }
 

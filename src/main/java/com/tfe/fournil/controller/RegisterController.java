@@ -1,15 +1,16 @@
 package com.tfe.fournil.controller;
 
-import com.tfe.fournil.entity.Feedback;
 import com.tfe.fournil.entity.User;
-import com.tfe.fournil.repository.FeedbackRepository;
 import com.tfe.fournil.repository.UserRepository;
+import com.tfe.fournil.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -25,7 +26,10 @@ public class RegisterController {
 
     //injecte la classe
     @Autowired
-    UserRepository userRepositoryRepository;
+    UserRepository userRepository;
+
+    @Autowired
+    UserService userService;
 
 
     @GetMapping("")
@@ -47,10 +51,15 @@ public class RegisterController {
             session.setAttribute("user", user);
         } else {
             log.info("save user success");
-            userRepositoryRepository.save(user);
+            userRepository.save(user);
             session.setAttribute("success", "Votre user a été enregistré");
 
         }
         return "redirect:/register";
+    }
+
+    @GetMapping("/emailIsUnique/{email}")
+    public ResponseEntity<Boolean> checkEmailUnique(@PathVariable("email") String email) {
+        return ResponseEntity.ok(userService.checkIfEmailIsUnique(email));
     }
 }

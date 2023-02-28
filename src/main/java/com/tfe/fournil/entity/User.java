@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +21,10 @@ public class User {
     @Id
     @Column(name = "id_user")
     private Long IdUser;
+
+
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
 
     @NotBlank(message = "le nom doit comporter au moins 1 caractère")
     @Size(max = 50, message = "le nom doit comporter maximun 50 caractères")
@@ -42,17 +46,17 @@ public class User {
     @Column(name = "phone", nullable = false, length = 50)
     private String phone;
 
-//    @Temporal(TemporalType..DATE)
+//    @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth", nullable = true)
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "le mot de passe doit comporter au moins 1 caractère")
-    @Size(max = 50, message = "le mot de passe doit comporter maximun 50 caractères")
-    @Column(name = "password", nullable = false, length = 50)
+
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "active_user", nullable = false)
-    private Boolean active_user=true;
+    @Column(name = "enabled", nullable = false)
+    private Boolean enabled=true;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "id_address")

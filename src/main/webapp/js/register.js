@@ -1,3 +1,5 @@
+let emailAlreadyExist = false;
+
 // Fonction permettant d'afficher le calendrier dans un input date (exemple date de naissance)
 $(function () {
     $("#datepicker").datepicker({
@@ -10,158 +12,78 @@ $(function () {
 
 
 
-// Fonction permettant d'afficher ou non le mot de passe => oeil
-$(document).ready(function() {
-    $("#show_hide_password a").on('click', function(event) {
+$(document).ready(function () {
+    //Permet d'afficher ou non le mot de passe  => oeil
+    $("#show_hide_password a").on('click', function (event) {
         event.preventDefault();
-        if($('#show_hide_password input').attr("type") == "text"){
+        if ($('#show_hide_password input').attr("type") == "text") {
             $('#show_hide_password input').attr('type', 'password');
-            $('#show_hide_password i').addClass( "fa-eye-slash" );
-            $('#show_hide_password i').removeClass( "fa-eye" );
-        }else if($('#show_hide_password input').attr("type") == "password"){
+            $('#show_hide_password i').addClass("fa-eye-slash");
+            $('#show_hide_password i').removeClass("fa-eye");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
             $('#show_hide_password input').attr('type', 'text');
-            $('#show_hide_password i').removeClass( "fa-eye-slash" );
-            $('#show_hide_password i').addClass( "fa-eye" );
+            $('#show_hide_password i').removeClass("fa-eye-slash");
+            $('#show_hide_password i').addClass("fa-eye");
+        }
+    });
+    $("#show_hide_password_confirm a").on('click', function (event) {
+        event.preventDefault();
+        if ($('#show_hide_password_confirm input').attr("type") == "text") {
+            $('#show_hide_password_confirm input').attr('type', 'password');
+            $('#show_hide_password_confirm i').addClass("fa-eye-slash");
+            $('#show_hide_password_confirm i').removeClass("fa-eye");
+        } else if ($('#show_hide_password_confirm input').attr("type") == "password") {
+            $('#show_hide_password_confirm input').attr('type', 'text');
+            $('#show_hide_password_confirm i').removeClass("fa-eye-slash");
+            $('#show_hide_password_confirm i').addClass("fa-eye");
         }
     });
     $("#country_selector").countrySelect({
-        defaultCountry:"be",
-        preferredCountries: ['be','fr','lu','nl','de'],
+        defaultCountry: "be",
+        preferredCountries: ['be', 'fr', 'lu', 'nl', 'de'],
     });
 
 });
 
-// Fonction de vérification des différents champs sur le Onsubmit du formulaire registerForm (register.jsp)
-function validateRegisterForm() {
-    return true;
-
-    let emailUser = document.forms["registerForm"]["email"];
-    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    let password = document.forms["registerForm"]["passwordNoConfirm"];
-    let nameUser = document.forms["registerForm"]["lastname"];
-    let firstnameUser = document.forms["registerForm"]["firstname"];
-    let phoneUser = document.forms["registerForm"]["phone"];
-    let street = document.forms["registerForm"]["Address.street"];
-    let number = document.forms["registerForm"]["Address.number"];
-    let PostalCode = document.forms["registerForm"]["Address.City.postalCode"];
-    let cityName = document.forms["registerForm"]["Address.City.cityName"];
-    let flag = true;
-
-    if (emailUser.value == "" || emailUser.value == null) {
-        document.getElementById("errorEmailUser").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputEmail").addClass("fieldMistake ");
-        flag = false;
-
-    } else {
-        document.getElementById("errorEmailUser").innerHTML = "";
-        emailUser.removeAttribute('style');
-        $("#inputEmail").removeClass("fieldMistake ");
-    }
-
-    if (password.value == "" || password.value == null) {
-        document.getElementById("errorPassword").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputPassword").addClass("fieldMistake ");
-        flag = false;
-
-    } else {
-        document.getElementById("errorPassword").innerHTML = "";
-        password.removeAttribute('style');
-        $("#inputPassword").removeClass("fieldMistake ");
-
-    }
-
-    if (nameUser.value == "" || nameUser.value == null) {
-        document.getElementById("errorNameUser").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputName").addClass("fieldMistake ");
-        flag = false;
-
-    }  else {
-        document.getElementById("errorNameUser").innerHTML = "";
-        nameUser.removeAttribute('style');
-        $("#inputName").removeClass("fieldMistake ");
-    }
-
-    if (firstnameUser.value == "" || firstnameUser.value == null) {
-        document.getElementById("errorFirstnameUser").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputFirstname").addClass("fieldMistake ");
-        flag = false;
-    } else {
-        document.getElementById("errorFirstnameUser").innerHTML = "";
-        firstnameUser.removeAttribute('style');
-        $("#inputFirstname").removeClass("fieldMistake ");
-    }
-
-    if (phoneUser.value == "" || phoneUser.value == null) {
-        document.getElementById("errorPhoneUser").innerHTML = "Veuillez indiquer au moins un numéro";
-        $("#inputPhone").addClass("fieldMistake ");
-        flag = false;
-
-    }  else {
-        document.getElementById("errorPhoneUser").innerHTML = "";
-        phoneUser.removeAttribute('style');
-        $("#inputPhone").removeClass("fieldMistake ");
-    }
-
-    if (street.value == "" || street.value == null) {
-        document.getElementById("errorStreet").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputStreet").addClass("fieldMistake ");
-        flag = false;
-
-    } else {
-        document.getElementById("errorStreet").innerHTML = "";
-        street.removeAttribute('style');
-        $("#inputStreet").removeClass("fieldMistake ");
-    }
-
-    if (number.value == "" || number.value == null) {
-        document.getElementById("errorNumber").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputNumber").addClass("fieldMistake ");
-        flag = false;
-    }  else {
-        document.getElementById("errorNumber").innerHTML = "";
-        number.removeAttribute('style');
-        $("#inputNumber").removeClass("fieldMistake ");
-    }
-
-    if (PostalCode.value == "" || PostalCode.value == null) {
-        document.getElementById("errorPostalCode").innerHTML = "Veuillez indiquer au moins un numéro";
-        $("#inputPostalCode").addClass("fieldMistake ");
-        flag = false;
-    }  else {
-        document.getElementById("errorPostalCode").innerHTML = "";
-        PostalCode.removeAttribute('style');
-        $("#inputPostalCode").removeClass("fieldMistake ");
-    }
-
-    if (cityName.value == "" || cityName.value == null) {
-        document.getElementById("errorCityName").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputCityName").addClass("fieldMistake ");
-        flag = false;
-    } else {
-        document.getElementById("errorCityName").innerHTML = "";
-        cityName.removeAttribute('style');
-        $("#inputCityName").removeClass("fieldMistake ");
-    }
-    return flag;
-}
-
 function checkEmailUser() {
 
     var emailUser = $("#inputEmail").val();
-
     if (emailUser == "" || emailUser == null) {
         document.getElementById("errorEmailUser").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputEmail").addClass("fieldMistake ");
-
     } else if (emailUser.length > 100) {
         document.getElementById("errorEmailUser").innerHTML = "Maximun 100 Caractères";
         $("#inputEmail").addClass("fieldMistake ");
-
     } else {
         document.getElementById("errorEmailUser").innerHTML = "";
         $("#inputEmail").removeClass("fieldMistake ");
     }
-
+    $.ajax({
+        type: "GET",
+        url: pageContextPath + "/register/emailIsUnique/" + emailUser,
+        success: function (response) {
+            if (response === false) {
+                document.getElementById("errorEmailUser").innerHTML = "L'email existe déja dans notre système";
+                $("#inputEmail").addClass("fieldMistake ");
+                emailAlreadyExist = true;
+            } else {
+                emailAlreadyExist = false;
+            }
+        },
+        fail: function () {
+            console.log("fail");
+            $.toast(
+                {
+                    heading: 'Erreur',
+                    text: 'Erreur lors de la vérification de l\'email ',
+                    showHideTransition: 'slide',
+                    icon: 'error',
+                    position: 'top-right',
+                    stack: false
+                }
+            )
+        }
+    });
 }
 
 
@@ -181,7 +103,6 @@ function checkPassword() {
         document.getElementById("errorPassword").innerHTML = "";
         $("#inputPassword").removeClass("fieldMistake ");
     }
-
 }
 
 function checkConfirmPassword() {
@@ -200,39 +121,35 @@ function checkConfirmPassword() {
 }
 
 function checkNameUser() {
-
     var nameUser = $("#inputName").val();
-
     if (nameUser == "" || nameUser == null) {
         document.getElementById("errorNameUser").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputName").addClass("fieldMistake ");
-
+        return false;
     } else if (nameUser.length > 50) {
         document.getElementById("errorNameUser").innerHTML = "Maximun 50 Caractères";
         $("#inputName").addClass("fieldMistake ");
-
-    } else {
-        document.getElementById("errorNameUser").innerHTML = "";
-        $("#inputName").removeClass("fieldMistake ");
+        return false;
     }
+    document.getElementById("errorNameUser").innerHTML = "";
+    $("#inputName").removeClass("fieldMistake ");
+    return true;
 }
 
 function checkFirstnameUser() {
-
     var firstnameUser = $("#inputFirstname").val();
-
     if (firstnameUser == "" || firstnameUser == null) {
         document.getElementById("errorFirstnameUser").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputFirstname").addClass("fieldMistake ");
-
+        return false;
     } else if (firstnameUser.length > 50) {
         document.getElementById("errorFirstnameUser").innerHTML = "Maximun 50 Caractères";
         $("#inputFirstname").addClass("fieldMistake ");
-
-    } else {
-        document.getElementById("errorFirstnameUser").innerHTML = "";
-        $("#inputFirstname").removeClass("fieldMistake ");
+        return false;
     }
+    document.getElementById("errorFirstnameUser").innerHTML = "";
+    $("#inputFirstname").removeClass("fieldMistake ");
+    return true;
 }
 
 function checkPhoneUser() {
@@ -323,5 +240,34 @@ function checkCity() {
         document.getElementById("errorCityName").innerHTML = "";
         $("#inputCityName").removeClass("fieldMistake ");
     }
+}
+
+// Fonction de vérification des différents champs sur le Onsubmit du formulaire registerForm (register.jsp)
+function validateRegisterForm() {
+
+    //Par défaut, on met que le formulaire est valide (true)
+    let formIsValid = true;
+
+    //checkEmailUser() => on appelle la fonction checkEmailUser
+    //checkEmailUser() === false => SI cette fonction retourne false (conditions ne sont pas réspectées (exemple : champ vide))
+    //? formIsValid = false => ALORS passe formIsValid à false
+    //: formIsValid =formIsValid => SINON (pas utilisé dans ce cas)
+
+    //Revient au même que de faire
+    // if(!checkFirstnameUser()){
+    //     formIsValid = false;
+    // }
+    checkEmailUser() === false ? formIsValid = false: formIsValid=formIsValid;
+    checkPassword() === false ? formIsValid = false: formIsValid=formIsValid;
+    checkNameUser() === false ? formIsValid = false: formIsValid=formIsValid;
+    checkFirstnameUser() === false ? formIsValid = false: formIsValid=formIsValid;
+    checkPhoneUser() === false ? formIsValid = false: formIsValid=formIsValid;
+    checkStreet() === false ? formIsValid = false : formIsValid=formIsValid;
+    checkNumber() === false ? formIsValid = false : formIsValid=formIsValid;
+    checkPostalCode() === false ? formIsValid = false : formIsValid=formIsValid;
+    checkCity() ===false ? formIsValid = false : formIsValid=formIsValid;
+
+    //retourne la valeur de formIsValid (true ou false)
+    return formIsValid;
 }
 

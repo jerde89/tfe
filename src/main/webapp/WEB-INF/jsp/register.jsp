@@ -13,32 +13,13 @@
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
     <script src="${pageContext.request.contextPath}/js/register.js"></script>
     <script src="${pageContext.request.contextPath}/js/countrySelect.js"></script>
+    <script type="text/javascript">
+        var pageContextPath = "${pageContext.request.contextPath}";
+    </script>
 </head>
 <body>
 
 <%@include file="navbar.jsp" %>
-
-<c:if test="${not empty sessionScope.errors}">
-
-        <c:forEach items="${sessionScope.errors}" var="error">
-
-            <script>
-                $.toast(
-                    {
-                        heading: 'Error',
-                        text: '${error}',
-                        showHideTransition: 'slide',
-                        icon: 'error',
-                        position: 'top-right',
-                        stack: false,
-                    }
-                );
-            </script>
-        </c:forEach>
-
-    <c:remove var="errors" scope="session"></c:remove>
-</c:if>
-
 
 
 <c:if test="${not empty sessionScope.success}">
@@ -57,6 +38,18 @@
 
     <c:remove var="success" scope="session"></c:remove>
 </c:if>
+
+
+<div class="container">
+    <c:if test="${not empty sessionScope.errors}">
+        <div class="alert alert-danger" role="alert">
+            <c:forEach items="${sessionScope.errors}" var="error">
+                <li>${error}</li>
+            </c:forEach>
+        </div>
+        <c:remove var="errors" scope="session"></c:remove>
+    </c:if>
+</div>
 <%--<div class="container align-items-center col-8 ">--%>
 <div class="container align-items-center col-8 ">
     <form class="shadow p-4 bg-white rounded" name="registerForm" id="registerForm"
@@ -96,7 +89,7 @@
         <div class="row mx-2">
             <div class="col-12">
                 <label for="inputConfirmPassword" class="form-label text-black">Confirmer le mot de passe*</label>
-                <div class="input-group" id="show_hide_password">
+                <div class="input-group" id="show_hide_password_confirm">
                     <input type="password" class="form-control" id="inputConfirmPassword" name="password" placeholder="Entrez le Mot de passe de nouveau" onblur="checkConfirmPassword()">
                     <div class="input-group-addon">
                         <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
