@@ -10,4 +10,6 @@ public interface UserRepository extends JpaRepository<User,Long> {
     // findByEmail(String email) REVIENT AU MEME QUE select * from user where email = 'mail que tu recois en paramertre'
     List<User> findByEmail(String email);
 
+    User findByUsername(String username);
+
 }

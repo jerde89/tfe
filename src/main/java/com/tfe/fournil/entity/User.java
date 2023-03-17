@@ -62,4 +62,8 @@ public class User {
     @JoinColumn (name = "id_address")
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
 }

@@ -1,11 +1,14 @@
 package com.tfe.fournil.controller;
 
+import com.tfe.fournil.entity.Role;
 import com.tfe.fournil.entity.User;
+import com.tfe.fournil.repository.RoleRepository;
 import com.tfe.fournil.repository.UserRepository;
 import com.tfe.fournil.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,13 +34,15 @@ public class RegisterController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    RoleRepository roleRepository;
 
     @GetMapping("")
     public String showRegister() {
         return "register";
     }
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/addUser")
     public String addUser(Model model,@Valid User user, BindingResult bindingResult, HttpSession session) {
         log.info("call send user " + user);
         session.removeAttribute("errors");
@@ -51,6 +56,12 @@ public class RegisterController {
             session.setAttribute("user", user);
         } else {
             log.info("save user success");
+            String passwordCrypt = new BCryptPasswordEncoder().encode(user.getPassword());
+            log.info("call password " + passwordCrypt);
+            user.setPassword(passwordCrypt);
+            user.setUsername(user.getEmail());
+            Role role = roleRepository.findByRole("USER");
+            user.setRole(role);
             userRepository.save(user);
             session.setAttribute("success", "Votre user a été enregistré");
 

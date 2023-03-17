@@ -1,4 +1,5 @@
 <c:set var="pagina" value="${requestScope['javax.servlet.forward.request_uri']}" />
+<%@ page pageEncoding="UTF-8" %>
 
 
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #522110">
@@ -40,6 +41,10 @@
                     <a class="dropdown-item" href="${pageContext.request.contextPath}/managementCategoryProduct">Gestion
                         des Produits</a>
                 </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/myPersonalData">Mes données</a>
             </li>
 
         </ul>

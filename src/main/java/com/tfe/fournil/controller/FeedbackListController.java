@@ -28,12 +28,12 @@ public class FeedbackListController {
     FeedbackRepository feedbackRepository;
 
     @GetMapping("")
-    public String showFeedbackList(Model model) {
-        List<Feedback> feedbacks = feedbackRepository.findAll();
-        model.addAttribute("feedbacks", feedbacks);
-        //converti list javascript en json
-        model.addAttribute("feedbacksJson", new Gson().toJson(feedbacks));
-        log.info("feedbacklist log" + feedbacks.toString());
+    public String showFeedbackList() {
+//        List<Feedback> feedbacks = feedbackRepository.findAll();
+//        model.addAttribute("feedbacks", feedbacks);
+//        //converti list javascript en json
+//        model.addAttribute("feedbacksJson", new Gson().toJson(feedbacks));
+//        log.info("feedbacklist log" + feedbacks.toString());
 
         return "feedbackList";
     }

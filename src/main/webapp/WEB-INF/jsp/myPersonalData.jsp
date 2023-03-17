@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
@@ -11,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/countrySelect.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
-    <script src="${pageContext.request.contextPath}/js/register.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/js/register.js"></script>--%>
     <script src="${pageContext.request.contextPath}/js/countrySelect.js"></script>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
@@ -52,32 +53,43 @@
 </div>
 <%--<div class="container align-items-center col-8 ">--%>
 <div class="container align-items-center col-8 ">
-    <form class="shadow p-4 bg-white rounded" name="registerForm" id="registerForm"
-          method="post" action="${pageContext.request.contextPath}/register/addUser"
-          onsubmit="return validateRegisterForm()">
+    <form class="shadow p-4 bg-white rounded" name="myPersonalDataForm" id="myPersonalDataForm"
+          method="post" action="#">
 
         <input type="hidden"
                name="${_csrf.parameterName}"
                value="${_csrf.token}"/>
 
         <div class="mt-2 mb-5 text-center">
-            <h3 class="text-black">Inscription</h3>
+            <h3 class="text-black">Mes données personnelles</h3>
             <h6 class="text-black-50">Veuillez entrer les champs obligatoires (*)</h6>
         </div>
 
         <div class="row mx-2">
             <div class="col-12">
-                <label for="inputEmail" class="form-label text-black">Email (identifiant)*</label>
-                <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" onblur="checkEmailUser()">
+                <label for="inputEmail" class="form-label text-black">Email (identifiant => non modifiable)</label>
+                <input type="email" class="form-control" id="inputEmail" name="email" value="${email}"   readonly>
+            </div>
+        </div>
+
+        <div class="row mx-2">
+            <div class="col-12">
+                <label for="inputOldPassword" class="form-label text-black">Ancien Mot de passe*</label>
+                <div class="input-group" id="show_hide_password">
+                    <input type="password" class="form-control" id="inputOldPassword" name="passwordNoConfirm" placeholder="Mot de passe" onblur="checkPassword()">
+                    <div class="input-group-addon">
+                        <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                    </div>
+                </div>
                 <div class="col-12">
-                    <div class="span-error-div"><span class="span-error4" id="errorEmailUser"></span></div>
+                    <div class="span-error-div"><span class="span-error4" id="errorPassword"></span></div>
                 </div>
             </div>
         </div>
 
         <div class="row mx-2">
             <div class="col-12">
-                <label for="inputPassword" class="form-label text-black">Mot de passe*</label>
+                <label for="inputPassword" class="form-label text-black">Nouveau Mot de passe*</label>
                 <div class="input-group" id="show_hide_password">
                     <input type="password" class="form-control" id="inputPassword" name="passwordNoConfirm" placeholder="Mot de passe" onblur="checkPassword()">
                     <div class="input-group-addon">
@@ -92,7 +104,7 @@
 
         <div class="row mx-2">
             <div class="col-12">
-                <label for="inputConfirmPassword" class="form-label text-black">Confirmer le mot de passe*</label>
+                <label for="inputConfirmPassword" class="form-label text-black">Confirmer le nouveau mot de passe*</label>
                 <div class="input-group" id="show_hide_password_confirm">
                     <input type="password" class="form-control" id="inputConfirmPassword" name="password" placeholder="Entrez le Mot de passe de nouveau" onblur="checkConfirmPassword()">
                     <div class="input-group-addon">
@@ -109,7 +121,7 @@
         <div class="row mx-2">
             <div class="col-6">
                 <label for="inputName" class="form-label text-black">Nom*</label>
-                <input type="text" class="form-control" id="inputName" name="lastname" placeholder="Nom" onblur="checkNameUser()">
+                <input type="text" class="form-control" id="inputName" name="lastname" value="${lastname}" onblur="checkNameUser()">
                 <div class="col-6">
                     <div class="span-error-div"><span class="span-error4" id="errorNameUser"></span></div>
                 </div>
