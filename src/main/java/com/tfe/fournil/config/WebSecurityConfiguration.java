@@ -18,8 +18,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private String[] FREE_URLS =  {"/", "/home", "/register", "/addUser"};
-    private String[] USER_URLS =  {};
+    private String[] FREE_URLS =  { "/", "/home", "/register", "/addUser"};
+    private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*"};
     private String[] EMPLOYE_URLS = {"/feedbackList"};
     private String[] ADMIN_URLS =  {"/managementCategoryProduct"};
 
@@ -44,11 +44,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(FREE_URLS)
                 .permitAll()
                 .antMatchers(USER_URLS)
-                .hasAnyAuthority("USER", "EMPLOYE", "ADMIN")
+                .hasAnyAuthority(Authority.USER.name(), Authority.EMPLOYEE.name(), Authority.ADMIN.name())
                 .antMatchers(EMPLOYE_URLS)
-                .hasAnyAuthority("EMPLOYE", "ADMIN")
+                .hasAnyAuthority(Authority.EMPLOYEE.name(), Authority.ADMIN.name())
                 .antMatchers(ADMIN_URLS)
-                .hasAuthority("ADMIN")
+                .hasAuthority(Authority.ADMIN.name())
                 .and()
                 .formLogin().permitAll()
                 .loginPage("/login").permitAll()

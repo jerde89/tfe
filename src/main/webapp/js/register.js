@@ -243,7 +243,7 @@ function checkCity() {
 }
 
 // Fonction de vérification des différents champs sur le Onsubmit du formulaire registerForm (register.jsp)
-function validateRegisterForm() {
+function validateRegisterForm(origin) {
 
     //Par défaut, on met que le formulaire est valide (true)
     let formIsValid = true;
@@ -258,7 +258,10 @@ function validateRegisterForm() {
     //     formIsValid = false;
     // }
     checkEmailUser() === false ? formIsValid = false: formIsValid=formIsValid;
-    checkPassword() === false ? formIsValid = false: formIsValid=formIsValid;
+    if (origin == "register"){
+        checkPassword() === false ? formIsValid = false: formIsValid=formIsValid;
+    }
+
     checkNameUser() === false ? formIsValid = false: formIsValid=formIsValid;
     checkFirstnameUser() === false ? formIsValid = false: formIsValid=formIsValid;
     checkPhoneUser() === false ? formIsValid = false: formIsValid=formIsValid;

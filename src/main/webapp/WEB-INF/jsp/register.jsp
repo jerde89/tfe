@@ -54,7 +54,7 @@
 <div class="container align-items-center col-8 ">
     <form class="shadow p-4 bg-white rounded" name="registerForm" id="registerForm"
           method="post" action="${pageContext.request.contextPath}/register/addUser"
-          onsubmit="return validateRegisterForm()">
+          onsubmit="return validateRegisterForm('register')">
 
         <input type="hidden"
                name="${_csrf.parameterName}"

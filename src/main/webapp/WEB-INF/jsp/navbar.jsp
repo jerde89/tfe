@@ -1,4 +1,5 @@
 <c:set var="pagina" value="${requestScope['javax.servlet.forward.request_uri']}" />
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page pageEncoding="UTF-8" %>
 
 
@@ -7,12 +8,17 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+            <sec:authorize access="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
+                <li class="nav-item">
+                    je suis un admin
+                </li>
+            </sec:authorize>
             <li class="nav-item">
-                <a class="navbar-brand" style="padding-top: 5px" href="#"> <img
-                        src="${pageContext.request.contextPath}/image/logo.jpg" alt="logo"
-                        width="40" height="40" class="d-inline-block align-text-top">
-                </a>
-            </li>
+            <a class="navbar-brand" style="padding-top: 5px" href="#"> <img
+                    src="${pageContext.request.contextPath}/image/logo.jpg" alt="logo"
+                    width="40" height="40" class="d-inline-block align-text-top">
+            </a>
+        </li>
 
             <li class="nav-item"><a class="nav-link"
                                     aria-current="page" href="${pageContext.request.contextPath}/">Accueil</a></li>
@@ -42,10 +48,11 @@
                         des Produits</a>
                 </div>
             </li>
-
+            <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/myPersonalData">Mes données</a>
             </li>
+            </sec:authorize>
 
         </ul>
 <%--        <div class="d-flex" style="float: right;    margin: 6px;">--%>
