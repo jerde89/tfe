@@ -1,17 +1,17 @@
 package com.tfe.fournil.controller;
 
 
-import com.tfe.fournil.entity.Role;
+import com.tfe.fournil.entity.MyPersonalData;
 import com.tfe.fournil.entity.User;
 import com.tfe.fournil.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,26 +42,16 @@ public class MyPersonalDataController {
         User user = userRepository.findByUsername(username);
         log.info("user " + user.getUsername());
         log.info("test Controller MyPersonalData");
-
-        model.addAttribute("email", user.getEmail());
-        model.addAttribute("password", user.getPassword());
-        model.addAttribute("lastname", user.getLastname());
-        model.addAttribute("firstname", user.getFirstname());
-        model.addAttribute("phone", user.getPhone());
-        model.addAttribute("dateOfBirth", user.getDateOfBirth());
-        model.addAttribute("street", user.getAddress().getStreet());
-        model.addAttribute("number", user.getAddress().getNumber());
-        model.addAttribute("box", user.getAddress().getBox());
-        model.addAttribute("postalCode", user.getAddress().getCity().getPostalCode());
-        model.addAttribute("cityName", user.getAddress().getCity().getCityName());
-        model.addAttribute("country", user.getAddress().getCity().getCountry().getCountryName());
-
+        model.addAttribute("user", user);
         //Nom de la JSP
         return "myPersonalData";
     }
 
     @PostMapping(value = "/modifiedUser")
-    public String modifiedUser(Model model, @Valid User user, BindingResult bindingResult, HttpSession session) {
+    public String modifiedUser(Model model,
+                               @Validated(MyPersonalData.class) User user,
+//                               @Valid User user,
+                               BindingResult bindingResult, HttpSession session) {
         log.info("call send user " + user);
         session.removeAttribute("errors");
         session.removeAttribute("success");
@@ -77,8 +67,17 @@ public class MyPersonalDataController {
             User userDb = userRepository.findByUsername(user.getEmail());
             userDb.setLastname(user.getLastname());
             userDb.setFirstname(user.getFirstname());
+            userDb.setPhone(user.getPhone());
+            userDb.setDateOfBirth(user.getDateOfBirth());
+            userDb.getAddress().setStreet(user.getAddress().getStreet());
+            userDb.getAddress().setNumber(user.getAddress().getNumber());
+            userDb.getAddress().setBox(user.getAddress().getBox());
+            userDb.getAddress().getCity().setPostalCode(user.getAddress().getCity().getPostalCode());
+            userDb.getAddress().getCity().setCityName(user.getAddress().getCity().getCityName());
+            userDb.getAddress().getCity().getCountry().setCountryName(user.getAddress().getCity().getCountry().getCountryName());
 
             userRepository.save(userDb);
+
 
 
             session.setAttribute("success", "Votre user a été enregistré");

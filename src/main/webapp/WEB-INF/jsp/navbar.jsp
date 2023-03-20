@@ -50,8 +50,13 @@
             </li>
             <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/myPersonalData">Mes données</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/myPersonalData">Mes données personnelles</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/changePassword">Modifier mot de passe</a>
+            </li>
+
             </sec:authorize>
 
         </ul>

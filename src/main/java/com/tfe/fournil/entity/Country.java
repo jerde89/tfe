@@ -20,7 +20,7 @@ public class Country {
     @Column(name = "id_country")
     private long IdCountry;
 
-    @NotBlank(message = "le nomm de la ville doit comporter au moins 1 caractère")
+    @NotBlank(message = "le nomm de la ville doit comporter au moins 1 caractère",groups = MyPersonalData.class)
     @Size(max = 100, message = "le nom du produit doit comporter maximun 100 caractères")
     @Column(name = "country_name", nullable = false, length = 100)
     private String countryName;

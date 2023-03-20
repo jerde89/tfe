@@ -12,8 +12,16 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+
+
     public boolean checkIfEmailIsUnique(String email) {
         List<User> userList = userRepository.findByEmail(email);
+        return CollectionUtils.isEmpty(userList);
+    }
+
+    public boolean checkPasswordOldCorrect(String password) {
+        List<User> userList = userRepository.findByEmail(password);
         return CollectionUtils.isEmpty(userList);
     }
 }
