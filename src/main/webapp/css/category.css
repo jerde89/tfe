@@ -1,0 +1,69 @@
+.rowMargin{
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-bottom: 50px;
+    margin-top: 30px;
+}
+
+.btn{
+    background: #e3b04b !important;
+    border: 1px solid #e3b04b !important;
+    color: #fff !important;
+}
+
+.shadow{
+    width: 800px;
+}
+
+.popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: auto;
+    /*text-align: center;*/
+    box-sizing: border-box;
+    padding: 10px;
+    z-index: 100;
+    display: none;
+    border-radius: 5px;
+    background-color: white;
+    border:1px grey solid;
+
+
+    /*to hide popup initially*/
+}
+
+/*permet de possitionnner correctment le chiffre repris dans "afficher .... entrées"*/
+div.dataTables_wrapper div.dataTables_length select {
+    line-height: unset;
+}
+
+/*permet d'enlever le cardre noir se trouvant autour du bouton action "crayon"*/
+button{
+    border:none;
+    background-color: transparent;
+}
+.fieldMistake{
+    border : 1px solid red;
+    boxShadow: 0 0 1px 2px red;
+}
+
+.span-error-div {
+    margin-top: 2px;
+}
+
+.span-error4 {
+    color: red;
+    font-size: 14px;
+}
+
+.form-control:focus, .form-control:active {
+    outline: none !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid #e3b04b; }
+
+
+

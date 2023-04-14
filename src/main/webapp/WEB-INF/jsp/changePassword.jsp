@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/changePassword.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
-    <script src="${pageContext.request.contextPath}/js/changePassword.js"></script>
+<%--    <script src="${pageContext.request.contextPath}/js/changePassword.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/js/register.js"></script>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
     </script>
@@ -51,7 +52,8 @@
 <%--<div class="container align-items-center col-8 ">--%>
 <div class="container align-items-center col-8 ">
     <form class="shadow p-4 bg-white rounded" name="myPersonalDataForm" id="myPersonalDataForm"
-          method="post" action="${pageContext.request.contextPath}/myPersonalData/modifiedUser"  onsubmit="return validateRegisterForm('myPersonalData')">
+          method="post" action="${pageContext.request.contextPath}/changePassword/test"  >
+<%--        onsubmit="return validateRegisterForm('myPersonalData')"--%>
 
         <input type="hidden"
                name="${_csrf.parameterName}"
@@ -62,22 +64,11 @@
             <h6 class="text-black-50">Veuillez entrer les champs obligatoires (*)</h6>
         </div>
 
-        <div class="row mx-2">
-            <div class="col-12">
-                <label for="inputEmail" class="form-label text-black">Email (identifiant => non modifiable)</label>
-                <input type="email" class="form-control" id="inputEmail" name="email" value="${email}"   readonly>
-            </div>
-        </div>
-
-        <input type="hidden"
-               name="password"
-               value="${password}"/>
-
                 <div class="row mx-2">
                     <div class="col-12">
                         <label for="inputOldPassword" class="form-label text-black">Ancien Mot de passe*</label>
                         <div class="input-group" id="show_hide_password">
-                            <input type="password" class="form-control" id="inputOldPassword" name="passwordNoConfirm" placeholder="Mot de passe" onblur="checkPasswordOld()">
+                            <input type="password" class="form-control" id="inputOldPassword" name="oldPassword" placeholder="Ancien mot de passe" onblur="checkPasswordOld()">
                             <div class="input-group-addon">
                                 <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
@@ -92,7 +83,7 @@
                     <div class="col-12">
                         <label for="inputPassword" class="form-label text-black">Nouveau Mot de passe*</label>
                         <div class="input-group" id="show_hide_password">
-                            <input type="password" class="form-control" id="inputPassword" name="passwordNoConfirm" placeholder="Mot de passe" onblur="checkPassword()">
+                            <input type="password" class="form-control" id="inputPassword" name="newPassword" placeholder="Mot de passe" onblur="checkPassword()">
                             <div class="input-group-addon">
                                 <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
@@ -107,7 +98,7 @@
                     <div class="col-12">
                         <label for="inputConfirmPassword" class="form-label text-black">Confirmer le nouveau mot de passe*</label>
                         <div class="input-group" id="show_hide_password_confirm">
-                            <input type="password" class="form-control" id="inputConfirmPassword" name="password" placeholder="Entrez le Mot de passe de nouveau" onblur="checkConfirmPassword()">
+                            <input type="password" class="form-control" id="inputConfirmPassword" name="newConfirmPassword" placeholder="Entrez le Mot de passe de nouveau" onblur="checkConfirmPassword()">
                             <div class="input-group-addon">
                                 <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>
@@ -131,9 +122,8 @@
 
 </div>
 
-
-
 </body>
+
 <%@include file="footer.jsp" %>
 
 

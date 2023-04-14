@@ -1,16 +1,19 @@
 package com.tfe.fournil.controller;
 
 
+import com.tfe.fournil.entity.User;
 import com.tfe.fournil.repository.UserRepository;
 import com.tfe.fournil.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 
 
 @Slf4j
@@ -30,9 +33,17 @@ public class ChangePasswordController {
         return "changePassword";
     }
 
-    @GetMapping("/passwordOldCorrect/{password}")
-    public ResponseEntity<Boolean> checkPasswordOldCorrect(@PathVariable("password") String password) {
-        return ResponseEntity.ok(userService.checkPasswordOldCorrect(password));
+    @PostMapping ("/test")
+    public String changePassword( ChangePasswordDTO changePasswordDTO, HttpSession session) {
+        try {
+            userService.changePassword(changePasswordDTO);
+            session.setAttribute("success", "Votre user a été enregistré");
+        } catch (Exception e) {
+            session.setAttribute("errors", Arrays.asList(e.getMessage()));
+        }
+        return "redirect:/changePassword";
     }
+
+
 
 }

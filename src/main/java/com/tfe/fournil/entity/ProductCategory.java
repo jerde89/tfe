@@ -19,16 +19,16 @@ public class ProductCategory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id_product_category")
-    private long IdProductCategory;
+    private long idProductCategory;
 
     @NotBlank (message = "le nom de la catégorie doit comporter au moins 1 caractère")
     @Size(max = 50, message = "le nom de la catégorie doit comporter maximun 50 caractères")
-    @Column(name = "name", nullable = false, length = 50)
+    @Column(name = "name", nullable = false, unique = true, length = 50)
     private String name;
 
     @NotBlank (message = "la description de la categorie doit comporter au moins 1 caractère")
-    @Size(max = 10, message = "la description du produit doit comporter maximun 200 caractères")
-    @Column(name = "description", nullable = false, length = 50)
+    @Size(max = 200, message = "la description du produit doit comporter maximun 200 caractères")
+    @Column(name = "description", nullable = false, length = 200)
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)

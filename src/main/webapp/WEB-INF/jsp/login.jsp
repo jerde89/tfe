@@ -44,7 +44,7 @@
                             </c:if>
                             <c:if test="${param.logout != null }">
                                 <div class="alert alert-success col-xs-offset-1 col-xs-10">
-                                    You have been logged out.
+                                    Vous êtes déconnecté.
                                 </div>
                             </c:if>
                         </div>
@@ -90,7 +90,7 @@
                                         </label>
                                     </div>
                                     <div class="w-50 text-md-right">
-                                        <a href="#">Mot de passe oublié</a>
+                                        <a href="${pageContext.request.contextPath}/passwordForgot">Mot de passe oublié</a>
                                     </div>
                                 </div>
                                 <input type="hidden"

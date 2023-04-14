@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/countrySelect.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
-<%--    <script src="${pageContext.request.contextPath}/js/register.js"></script>--%>
+    <script src="${pageContext.request.contextPath}/js/register.js"></script>
     <script src="${pageContext.request.contextPath}/js/countrySelect.js"></script>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";

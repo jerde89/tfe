@@ -7,9 +7,13 @@
 <head>
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/feedbacklist.css">
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
     <script src="${pageContext.request.contextPath}/js/feedbackList.js"></script>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
     </script>
 </head>
 <body>
@@ -62,7 +66,7 @@
     </div>
 
     <!--Popup pour voir les feedbacks-->
-    <div id ="contentSeeFeedback" class="contentSeeFeedbacks"  title="Feedback" >
+    <div id ="contentSeeFeedback" class="contentSeeFeedbacks"  title="Feedback"  >
         <div class="pb-3" align="left">
             <label><b>Email : </b></label>
             <a id="email"> </a>
@@ -91,7 +95,9 @@
         <div class="pb-1">
             <h3>Etes vous sûr de vouloir supprimer ce feedback</h3>
         </div>
+        <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
         <input type="hidden" id="deleteFeedBackIdHidden"/>
+
         <button onclick="callAjaxDeleteFeedback()" class="btn btn-primary" style="background-color:#F0BF72">
             Oui
         </button>
