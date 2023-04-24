@@ -95,7 +95,7 @@
         <div class="pb-1">
             <h3>Etes vous sûr de vouloir supprimer ce feedback</h3>
         </div>
-        <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
+
         <input type="hidden" id="deleteFeedBackIdHidden"/>
 
         <button onclick="callAjaxDeleteFeedback()" class="btn btn-primary" style="background-color:#F0BF72">
@@ -108,6 +108,8 @@
 
     <input type="hidden" name="feedbackId" value="${feedback.feedbackId}" data-placement="top"/>
 </div>
+
+<input type="hidden" id='_csrf' name="csrf" value="${_csrf.token}">
 </body>
 
 <c:import url="footer.jsp"/>

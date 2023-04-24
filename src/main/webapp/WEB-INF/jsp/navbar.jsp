@@ -9,12 +9,6 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-            <sec:authorize access="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
-                <li class="nav-item">
-                    je suis un admin
-                </li>
-            </sec:authorize>
             <li class="nav-item">
             <a class="navbar-brand" style="padding-top: 5px" href="#"> <img
                     src="${pageContext.request.contextPath}/image/logo.jpg" alt="logo"
@@ -25,13 +19,7 @@
             <li class="nav-item"><a class="nav-link"
                                     aria-current="page" href="${pageContext.request.contextPath}/">Accueil</a></li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Nos produits</a>
-            </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">Promotions</a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="#">Commmander</a>
@@ -40,16 +28,26 @@
                 <a class="nav-link ${pagina.endsWith('/contact') ? 'active' : ''}"
                    href="${pageContext.request.contextPath}/contact">Contact</a>
             </li>
+            <li class="nav-item">
+            <sec:authorize access="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
+            <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/category">Gestion des Catégories</a>
+            <li class="nav-item">
+            <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/product">Gestion des Produits</a>
+            <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/userManage">Gestion des Utilisateurs</a>
+            <li class="nav-item">
+            </sec:authorize>
 
-<%--            <li class="nav-item dropdown ">--%>
-<%--                <a class="nav-link dropdown-toggle ${pagina.endsWith('/feedbackList') ? 'active' : ''}" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"--%>
-<%--                   aria-expanded="false">Administration</a>--%>
-<%--                <div class="dropdown-menu">--%>
-<%--                    <a class="dropdown-item ${pagina.endsWith('/feedbackList') ? 'active' : ''}" href="${pageContext.request.contextPath}/feedbackList">Liste des                        feedbacks</a>--%>
-<%--                    <a class="dropdown-item" href="${pageContext.request.contextPath}/managementCategoryProduct">Gestion--%>
-<%--                        des Produits</a>--%>
-<%--                </div>--%>
-<%--            </li>--%>
+            <sec:authorize access="hasAnyAuthority('ADMIN')">
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/feedbackList">Liste des feedbacks</a>
+            <li class="nav-item">
+            </sec:authorize>
+            </li>
+
         </ul>
         <div class="d-flex" style="float: right;    margin: 6px;">
                 <div class="btn-group dropstart ">
@@ -65,9 +63,6 @@
                         <sec:authorize access="isAuthenticated()">
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/myPersonalData">Mes données personnelles</a>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword">Modifier mot de passe</a>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/feedbackList">Liste des feedbacks</a>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/category">Gestion des Catégories</a>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/product">Gestion des Produits</a>
                             <hr class="dropdown-divider">
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Se déconnecter</a>
                         </sec:authorize>

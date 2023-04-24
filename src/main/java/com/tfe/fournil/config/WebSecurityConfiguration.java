@@ -21,7 +21,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private String[] FREE_URLS =  { "/", "/home", "/register", "/addUser", "/passwordForgot", "/passwordForgot/checkIfEmailExist" };
     private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*"};
     private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu","/feedbackList/delete"};
-    private String[] ADMIN_URLS =  {"/managementCategoryProduct"};
+    private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu"};
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -32,6 +32,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder());
+
         return  provider;
     }
 
@@ -57,5 +58,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .and()
                 .httpBasic();
+
     }
 }

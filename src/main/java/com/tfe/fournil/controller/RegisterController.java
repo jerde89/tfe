@@ -1,7 +1,9 @@
 package com.tfe.fournil.controller;
 
+import com.tfe.fournil.entity.City;
 import com.tfe.fournil.entity.Role;
 import com.tfe.fournil.entity.User;
+import com.tfe.fournil.repository.CityRepository;
 import com.tfe.fournil.repository.RoleRepository;
 import com.tfe.fournil.repository.UserRepository;
 import com.tfe.fournil.service.UserService;
@@ -37,13 +39,19 @@ public class RegisterController {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    CityRepository cityRepository;
+
     @GetMapping("")
-    public String showRegister() {
+    public String showRegister(Model model) {
+        List<City> cityList = cityRepository.findAll();
+        model.addAttribute("cityList", cityList);
         return "register";
     }
 
     @PostMapping(value = "/addUser")
     public String addUser(Model model,@Valid User user, BindingResult bindingResult, HttpSession session) {
+        log.info("test id city " + user.getAddress().getCity().getIdCity() );
         log.info("call send user " + user);
         session.removeAttribute("errors");
         session.removeAttribute("success");
@@ -62,6 +70,8 @@ public class RegisterController {
             user.setUsername(user.getEmail());
             Role role = roleRepository.findByRole("USER");
             user.setRole(role);
+            City city = cityRepository.findById(user.getAddress().getCity().getIdCity()).orElseThrow();
+            user.getAddress().setCity(city);
             userRepository.save(user);
             session.setAttribute("success", "Votre user a été enregistré");
 

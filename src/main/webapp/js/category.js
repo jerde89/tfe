@@ -91,29 +91,25 @@ function toggleCategoryPopup(id) {
     $('#description').val("");
     $('#created').val("");
     $('#update').val("");
-    $('#enable').prop( "checked", true )
+    $('#enable').prop("checked", true)
 
     const isNew = id === -1;
     if (isNew) {
         $("#blockCreated").hide();
         $("#blockUpdated").hide();
-        $("#formCategoryTitleAdd").show();
-        $("#formCategoryTitleModify").hide();
-        $("#formCategory").toggle();
+        $("#formCategory").prop('title', "Nouvelle catégorie");
+        showPopup();
         return;
     }
     $("#blockCreated").show();
     $("#blockUpdated").show();
-    $("#formCategoryTitleAdd").hide();
-    $("#formCategoryTitleModify").show();
-
+    $("#formCategory").prop('title', "Modification catégorie");
 
     categoryDatatable.rows().every(function (rowIdx, tableLoop, rowLoop) {
         var c = this.data();
         if (c.idProductCategory === id) {
             $('#idCategory').val(c.idProductCategory);
             document.getElementById('name').value = c.name;
-            // document.getElementById('nameLabel').innerHTML = c.name;
             document.getElementById('description').value = c.description;
             document.getElementById('created').innerHTML = moment(c.createdAt).format("DD/MM/YYYY HH:mm");
             if (c.updateAt) {
@@ -124,7 +120,8 @@ function toggleCategoryPopup(id) {
             if (c.enable) {
                 document.getElementById('enable').checked = c.enable;
             }
-            $("#formCategory").toggle();
+            // $("#formCategory").toggle();
+            showPopup();
             found = true;
             // return;
         }
@@ -273,4 +270,35 @@ function saveCategoryForm() {
 
 function closePopupCategory() {
     $("#formCategory").toggle();
+}
+
+function showPopup(){
+    $("#formCategory").dialog({
+        modal: true,
+        minWidth: 600,
+        minHeight: 300,
+        open: function() {
+            $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+        },
+        buttons: [
+            {
+                text: "Fermer",
+                icon: "ui-icon-heart",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            },
+            {
+                text: "Enregistrer",
+                icon: "ui-icon-heart",
+                click: function () {
+                    saveCategoryForm();
+                    $(this).dialog("close");
+                }
+            },
+        ]
+    });
 }

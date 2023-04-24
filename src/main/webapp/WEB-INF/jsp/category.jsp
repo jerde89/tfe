@@ -54,21 +54,15 @@
     </div>
 
 
-    <div id="formCategory" class="popup">
+    <div id="formCategory" class="popupDialog">
         <%--        <form method="post"--%>
         <%--              action="${pageContext.request.contextPath}/category"--%>
         <%--              onsubmit="return validateCategoryForm()">--%>
 
         <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
 
-        <div class="pb-1" style="text-align: center">
-            <h3 id="formCategoryTitleAdd">Nouvelle catégorie</h3>
-            <h3 id="formCategoryTitleModify">Modification catégorie</h3>
-        </div>
-        <hr>
-
         <input type="hidden" id="idCategory">
-        <div class="row mx-1">
+        <div class="my-3">
             <div class="col-12">
                 <label class="form-label text-black">Nom :</label>
                 <input type="text" class="form-control" id="name" name="name" onblur="checkNameCategory(this)"/>
@@ -78,7 +72,7 @@
             </div>
         </div>
 
-        <div class="row mx-1">
+        <div class="my-3">
             <div class="col-12">
                 <label class="form-label text-black">Description :</label>
                 <input type="text" class="form-control" id="description" name="description"
@@ -89,42 +83,42 @@
             </div>
         </div>
 
-        <div class="row mx-1">
-            <div class="pb-3">
+        <div class="my-3">
+            <div class="">
                 <label class="form-label text-black">Actif : </label>
                 <input type="checkbox" id="enable" name="enable"/>
             </div>
         </div>
 
-        <div class="row mx-1" id="blockCreated">
+        <div class="my-3" id="blockCreated">
             <div class="col-12">
                 <label class="form-label text-black">Créé le :
-                    <span id="created"></span>
                 </label>
+                <span id="created"></span>
             </div>
         </div>
 
-        <div class="row mx-1" id="blockUpdated">
+        <div class="my-3" id="blockUpdated">
             <div class="col-12">
                 <label class="form-label text-black">Modifié le :
-                    <span id="update"></span>
                 </label>
+                <span id="update"></span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 ms-auto text-center">
-                <button onclick="closePopupCategory()" class="btn btn-primary" style="background-color:#e3b04b">
-                    Annuler
-                </button>
-            </div>
-            <div class="col-md-6 ms-auto text-center">
-                <button type="submit" onclick="saveCategoryForm()" class="btn btn-primary"
-                        style="background-color:#e3b04b">
-                    Enregistrer
-                </button>
-            </div>
+<%--        <div class="rowr">--%>
+<%--            <div class="col-md-6 ms-auto text-center">--%>
+<%--                <button onclick="closePopupCategory()" class="btn btn-primary" style="background-color:#e3b04b">--%>
+<%--                    Annuler--%>
+<%--                </button>--%>
+<%--            </div>--%>
+<%--            <div class="col-md-6 ms-auto text-center">--%>
+<%--                <button type="submit" onclick="saveCategoryForm()" class="btn btn-primary"--%>
+<%--                        style="background-color:#e3b04b">--%>
+<%--                    Enregistrer--%>
+<%--                </button>--%>
+<%--            </div>--%>
 
-        </div>
+<%--        </div>--%>
         <%--        </form>--%>
     </div>
 
