@@ -1,3 +1,57 @@
+function checkName() {
+    var name = $("#InputName").val();
+    if (name == "" || name == null) {
+        document.getElementById("errorNameFeedback").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#InputName").addClass("fieldMistake ");
+        return false;
+    } else if (name.length > 50) {
+        document.getElementById("errorNameFeedback").innerHTML = "Maximun 50 Caractères";
+        $("#inputName").addClass("fieldMistake ");
+        return false;
+    }
+    document.getElementById("errorNameFeedback").innerHTML = "";
+    $("#inputName").removeClass("fieldMistake ");
+    return true;
+}
+
+function checkFirstname() {
+    var firstname = $("#InputFirstname").val();
+    if (firstname == "" || firstname == null) {
+        document.getElementById("errorFirstnameFeedback").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#InputFirstname").addClass("fieldMistake ");
+        return false;
+    } else if (firstname.length > 50) {
+        document.getElementById("errorFirstnameFeedback").innerHTML = "Maximun 50 Caractères";
+        $("#InputFirstname").addClass("fieldMistake ");
+        return false;
+    }
+    document.getElementById("errorFirstnameFeedback").innerHTML = "";
+    $("#inputFirstname").removeClass("fieldMistake ");
+    return true;
+}
+
+function checkEmail() {
+
+    var email = $("#InputEmail").val();
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+    if (email.value == "" || email.value == null) {
+        document.getElementById("errorEmailFeedback").innerHTML = "Veuillez indiquer un caractère";
+        $("#InputEmail").addClass("fieldMistake ");
+        result = false;
+
+    } else if(!email.value.match(validRegex) ) {
+        document.getElementById("errorEmailFeedback").innerHTML = "Veuillez indiquer une adresse valide";
+        $("#InputEmail").addClass("fieldMistake ");
+        result = false;
+
+    } else {
+        document.getElementById("errorEmailFeedback").innerHTML = "";
+        $("#InputEmail").removeClass("fieldMistake ");
+    }
+
+
+}
 
 
 function validateContactFeedback() {

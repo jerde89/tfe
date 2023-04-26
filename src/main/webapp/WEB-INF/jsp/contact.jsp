@@ -171,14 +171,14 @@
                     <div class="row mx-2">
                         <div class="col-6">
                             <label for="InputName" class="form-label text-black">Nom*</label>
-                            <input type="text" class="form-control" id="InputName" name="nameFeedback" placeholder="Nom">
+                            <input type="text" class="form-control" id="InputName" name="nameFeedback" placeholder="Nom" onblur="checkName()">
                             <div class="span-error-div"><span class="span-error4" id="errorNameFeedback"></span></div>
                         </div>
 
                         <div class="col-6">
                             <label for="InputFirstname" class="form-label text-black">Prénom*</label>
                             <input type="text" class="form-control" id="InputFirstname" name="firstnameFeedback"
-                                   placeholder="Prénom">
+                                   placeholder="Prénom" onblur="checkFirstname()">
                             <div class="span-error-div"><span class="span-error4" id="errorFirstnameFeedback"></span></div>
                         </div>
                     </div>
@@ -188,7 +188,7 @@
                         <div class="col-12">
                             <label class="form-label text-black">Adresse email *</label>
                             <input type="text" class="form-control" id="InputEmail" name="emailFeedback"
-                                   placeholder="Email">
+                                   placeholder="Email" onblur="checkEmail()">
                             <div class="span-error-div"><span class="span-error4" id="errorEmailFeedback"></span></div>
                         </div>
                     </div>

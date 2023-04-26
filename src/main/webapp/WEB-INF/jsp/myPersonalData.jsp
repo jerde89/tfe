@@ -54,8 +54,8 @@
 <%--<div class="container align-items-center col-8 ">--%>
 <div class="container align-items-center col-8 ">
     <form class="shadow p-4 bg-white rounded" name="myPersonalDataForm" id="myPersonalDataForm"
-          method="post" action="${pageContext.request.contextPath}/myPersonalData/modifiedUser"  onsubmit="return validateRegisterForm('myPersonalData')">
-
+          method="post" action="${pageContext.request.contextPath}/myPersonalData/modifiedUser" >
+<%--        onsubmit="return validateRegisterForm('myPersonalData')"--%>
         <input type="hidden"
                name="${_csrf.parameterName}"
                value="${_csrf.token}"/>
@@ -142,33 +142,63 @@
         </div>
 
 
+<%--        <div class="row mx-2">--%>
+<%--            <div class="col-6">--%>
+<%--                <label for="inputPostalCode" class="form-label text-black">Code postal*</label>--%>
+<%--                <input type="text" class="form-control" id="inputPostalCode" name="Address.City.postalCode" value="${user.getAddress().getCity().getPostalCode()}" onblur="checkPostalCode()">--%>
+<%--                <div class="col-6">--%>
+<%--                    <div class="span-error-div"><span class="span-error4" id="errorPostalCode"></span></div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
+<%--            <div class="col-6">--%>
+<%--                <label for="inputCityName" class="form-label text-black">Ville*</label>--%>
+<%--                <input type="text" class="form-control" id="inputCityName" name="Address.City.cityName" value="${user.getAddress().getCity().getCityName()}" onblur="checkCity()">--%>
+<%--                <div class="col-6">--%>
+<%--                    <div class="span-error-div">--%>
+<%--                        <span class="span-error4" id="errorCityName"></span>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+<%--    <input type="hidden" name="${idCity}" value="${city.idCity}"/>--%>
         <div class="row mx-2">
             <div class="col-6">
-                <label for="inputPostalCode" class="form-label text-black">Code postal*</label>
-                <input type="text" class="form-control" id="inputPostalCode" name="Address.City.postalCode" value="${user.getAddress().getCity().getPostalCode()}" onblur="checkPostalCode()">
-                <div class="col-6">
-                    <div class="span-error-div"><span class="span-error4" id="errorPostalCode"></span></div>
-                </div>
+                <label class="form-label text-black">Ville*</label>
+                <select  class="form-control" name="Address.City.idCity" id="idCity">
+
+                    <option selected value=""></option>
+                    <%--                        var="category => une nouvelle variable appellée category--%>
+                    <%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
+                    <c:forEach var="city" items="${cityList}">
+                        <c:choose>
+                            <c:when test="${user.address.city.idCity eq city.idCity}">
+                                <option  value="city.idCity" selected>${city.postalCode} - ${city.cityName}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="city.idCity">${city.postalCode} - ${city.cityName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+                <div class="span-error-div"><span class="span-error4" id="errorTva"></span></div>
+
             </div>
 
             <div class="col-6">
-                <label for="inputCityName" class="form-label text-black">Ville*</label>
-                <input type="text" class="form-control" id="inputCityName" name="Address.City.cityName" value="${user.getAddress().getCity().getCityName()}" onblur="checkCity()">
-                <div class="col-6">
-                    <div class="span-error-div">
-                        <span class="span-error4" id="errorCityName"></span>
-                    </div>
-                </div>
+                <label class="form-label text-black">Pays (Uniquement Belgique pour le moment)</label>
+                <input type="email" class="form-control"  value="Belgique"   readonly>
             </div>
         </div>
 
         <%--Procédure Jquery pour afficher les pays en liste déroulante   https://www.jqueryscript.net/form/country-picker-flags.html--%>
-        <div class="row mx-2">
-            <div class="col-12">
-                <label class="form-label text-black">Pays*</label>
-                <input id="country_selector" type="text" class="form-control" name="Address.City.Country.countryName" value="${user.getAddress().getCity().getCountry().getCountryName()}">
-            </div>
-        </div>
+<%--        <div class="row mx-2">--%>
+<%--            <div class="col-12">--%>
+<%--                <label class="form-label text-black">Pays*</label>--%>
+<%--                <input id="country_selector" type="text" class="form-control" name="Address.City.Country.countryName" value="${user.getAddress().getCity().getCountry().getCountryName()}">--%>
+<%--            </div>--%>
+<%--        </div>--%>
 
 
         <div class="form-group" style="text-align:center">

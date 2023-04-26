@@ -1,8 +1,10 @@
 package com.tfe.fournil.controller;
 
 
+import com.tfe.fournil.entity.City;
 import com.tfe.fournil.entity.MyPersonalData;
 import com.tfe.fournil.entity.User;
+import com.tfe.fournil.repository.CityRepository;
 import com.tfe.fournil.repository.UserRepository;
 import com.tfe.fournil.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,8 @@ public class MyPersonalDataController {
     UserRepository userRepository;
     @Autowired
     UserService userService;
+    @Autowired
+    CityRepository cityRepository;
 
     @GetMapping("")
     public String showMyPersonalData(Model model) {
@@ -37,6 +41,8 @@ public class MyPersonalDataController {
         Optional<User> currentUser = userService.getCurrentUser();
         currentUser.ifPresent(user -> model.addAttribute("user", user));
         //Nom de la JSP
+        List<City> cityList = cityRepository.findAll();
+        model.addAttribute("cityList", cityList);
         return "myPersonalData";
     }
 
@@ -66,10 +72,12 @@ public class MyPersonalDataController {
             userDb.getAddress().setStreet(user.getAddress().getStreet());
             userDb.getAddress().setNumber(user.getAddress().getNumber());
             userDb.getAddress().setBox(user.getAddress().getBox());
-            userDb.getAddress().getCity().setPostalCode(user.getAddress().getCity().getPostalCode());
-            userDb.getAddress().getCity().setCityName(user.getAddress().getCity().getCityName());
-            userDb.getAddress().getCity().getCountry().setCountryName(user.getAddress().getCity().getCountry().getCountryName());
+//            userDb.getAddress().getCity().setPostalCode(user.getAddress().getCity().getPostalCode());
+//            userDb.getAddress().getCity().setCityName(user.getAddress().getCity().getCityName());
 
+
+            City city = cityRepository.findById(userDb.getAddress().getCity().getIdCity()).orElseThrow();
+            userDb.getAddress().setCity(city);
             userRepository.save(userDb);
 
 
