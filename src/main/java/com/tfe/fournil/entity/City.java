@@ -22,13 +22,13 @@ public class City {
     @Column(name = "id_city")
     private long idCity;
 
-    @NotBlank (message = "le nom de la ville doit comporter au moins 1 caractère",groups = MyPersonalData.class)
+
     @Size(max = 100, message = "le nom de la ville doit comporter maximun 100 caractères")
     @Column(name = "city_name", nullable = false, length = 100)
     private String cityName;
 
 
-    @NotNull(message = "le code postal doit comporter au moins 1 caractère",groups = MyPersonalData.class)
+
     @Column(name = "postal_code" , nullable = false)
     private String postalCode;
 

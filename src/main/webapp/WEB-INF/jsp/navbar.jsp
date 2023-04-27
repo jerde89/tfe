@@ -22,7 +22,7 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" href="#">Commmander</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/order">Commmander</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link ${pagina.endsWith('/contact') ? 'active' : ''}"

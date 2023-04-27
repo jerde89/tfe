@@ -76,7 +76,7 @@ public class MyPersonalDataController {
 //            userDb.getAddress().getCity().setCityName(user.getAddress().getCity().getCityName());
 
 
-            City city = cityRepository.findById(userDb.getAddress().getCity().getIdCity()).orElseThrow();
+            City city = cityRepository.findById(user.getAddress().getCity().getIdCity()).orElseThrow();
             userDb.getAddress().setCity(city);
             userRepository.save(userDb);
 

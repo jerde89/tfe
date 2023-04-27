@@ -168,16 +168,16 @@
                 <label class="form-label text-black">Ville*</label>
                 <select  class="form-control" name="Address.City.idCity" id="idCity">
 
-                    <option selected value=""></option>
                     <%--                        var="category => une nouvelle variable appellée category--%>
                     <%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
                     <c:forEach var="city" items="${cityList}">
                         <c:choose>
                             <c:when test="${user.address.city.idCity eq city.idCity}">
-                                <option  value="city.idCity" selected>${city.postalCode} - ${city.cityName}</option>
+                                <option  value="${city.idCity}" selected>${city.postalCode} - ${city.cityName}</option>
+
                             </c:when>
                             <c:otherwise>
-                                <option value="city.idCity">${city.postalCode} - ${city.cityName}</option>
+                                <option value=${city.idCity}>${city.postalCode} - ${city.cityName}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
