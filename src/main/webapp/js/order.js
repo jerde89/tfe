@@ -1,11 +1,11 @@
-
-$( document ).ready(function() {
+$(document).ready(function () {
     // Handler for .ready() called.
     // alert("clic");
-    $("#jerome").click(function() {alert("clic");
+    $("#jerome").click(function () {
+        alert("clic");
     });
     // toggle list vs card view
-    $(".option__button").on("click", function() {
+    $(".option__button").on("click", function () {
         $(".option__button").removeClass("selected");
         $(this).addClass("selected");
         if ($(this).hasClass("option--grid")) {
@@ -15,7 +15,7 @@ $( document ).ready(function() {
         }
     });
     //apprearance
-    $("input.variation").on("click", function() {
+    $("input.variation").on("click", function () {
         // if ($(this).val() > 3) {
         //     $("body").css("background", "#111");
         //     $("footer").attr("class", "dark");
@@ -25,3 +25,42 @@ $( document ).ready(function() {
         // }
     });
 });
+
+function addBagProduct(idProduct, maneProduct) {
+    var quantity = parseInt($('#quantity_' + idProduct).val(), 10);
+    var myBag = JSON.parse(localStorage.getItem("myBag"));
+    if (!myBag) {
+        myBag = {
+            total: quantity,
+            record: [{
+                id: idProduct,
+                name: maneProduct,
+                total: quantity
+            }
+            ]
+        };
+        $('#mybBagCount').html(myBag.total);
+        localStorage.setItem("myBag", JSON.stringify(myBag));
+        return;
+    }
+
+    var found = false;
+    myBag.record.forEach(record => {
+        if (record.id === idProduct) {
+            myBag.total += quantity;
+            record.total += quantity;
+            found = true;
+        }
+    });
+    if (!found) {
+        myBag.record.push({
+            id: idProduct,
+            name: maneProduct,
+            total: quantity
+        })
+        myBag.total += quantity;
+    }
+    localStorage.setItem("myBag", JSON.stringify(myBag));
+    $('#mybBagCount').html(myBag.total);
+
+}

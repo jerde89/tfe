@@ -2,7 +2,9 @@ package com.tfe.fournil.repository;
 
 import com.tfe.fournil.entity.ProductCategory;
 import com.tfe.fournil.entity.User;
+import jdk.jfr.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -11,5 +13,9 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
     List<ProductCategory> findByName(String name);
 
     List<ProductCategory> findAll();
+
+    //C. c'est du jpql
+    @Query("select count(c.idProduct) from Product c where c.category.idProductCategory = :idProductCategory group by c.category")
+    int countProductByCategory(long idProductCategory);
 
 }

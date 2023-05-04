@@ -28,7 +28,7 @@
 <label for="pinkaru"></label>
 <main>
     <section class="results-header">
-        <h1>Find dogs near you.</h1>
+        <h1>Nos produits</h1>
         <div class="results-header__option">
             <div class="option__button option--grid selected"><span></span><span></span><span></span><span></span><span>Grid</span></div>
             <div class="option__button option--list"><span></span><span></span><span></span><span>List</span></div>
@@ -49,13 +49,14 @@
                                         class="icon-info"></i></span></div>
                             </label>
                         </div>
-                        <span class="badge status-primary">10</span>
+                        <span class="badge status-primary">${category.countProduct}</span>
                     </div>
                 </c:forEach>
 
             </div>
         </section>
     </div>
+
     <section class="results-section results--grid">
         <c:forEach var="product" items="${productList}">
             <div class="profile">
@@ -66,18 +67,21 @@
                     <p class="profile__info__extra">${product.description}</p>
                 </div>
                 <div class="profile__stats">
-                    <p class="profile__stats__title">Type</p>
-                    <h5 class="profile__stats__info">Puppy</h5>
+                    <p class="profile__stats__title">Catégorie</p>
+                    <h5 class="profile__stats__info">${product.category.name}</h5>
                 </div>
                 <div class="profile__stats">
-                    <p class="profile__stats__title">Size</p>
-                    <h5>Medium</h5>
+                    <p class="profile__stats__title">Prix</p>
+                    <h5>${product.price}</h5>
                 </div>
                 <div class="profile__stats">
-                    <p class="profile__stats__title">Weight</p>
-                    <h5 class="profile__stats__info">45 lbs</h5>
+                    <p class="profile__stats__title">Quantité</p>
+<%--                    <h5 class="profile__stats__info">45 lbs</h5>--%>
+                    <input id="quantity_${product.idProduct}" type="number" value="1" class="quantity">
                 </div>
-                <div class="profile__cta"><a class="button">Adopt Doggo!</a></div>
+                <div class="profile__cta">
+                    <a class="button" onclick="addBagProduct(${product.idProduct},'${product.name}')">Ajouter au panier</a>
+                </div>
             </div>
         </c:forEach>
     </section>

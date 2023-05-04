@@ -1147,3 +1147,7 @@ footer.dark, footer.dark a {
 .profile__cta .button{
     width: 90% !important;
 }
+
+.results--grid .quantity{
+    width: 50px;
+}

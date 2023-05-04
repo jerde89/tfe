@@ -33,6 +33,21 @@ public class OrderController {
 
         List<ProductCategory> categoryList = productCategoryRepository.findAll();
         model.addAttribute("categoryList", categoryList);
+        //
+        for (ProductCategory productCategory: categoryList
+              ) {
+            int CountCategory = 0;
+
+            try {CountCategory=productCategoryRepository.countProductByCategory(productCategory.getIdProductCategory());
+            //si pas de produits liés à une catégorie, il indique 0
+            }catch (Exception exception){
+                CountCategory=0;
+                log.info("Catégorie sans produit " + productCategory.getName());
+            }
+            productCategory.setCountProduct(CountCategory);
+        }
+
+        log.info("Test test test " + productCategoryRepository.countProductByCategory(121));
 
         return "order";
     }

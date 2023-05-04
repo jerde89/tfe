@@ -162,7 +162,7 @@
 <%--            </div>--%>
 <%--        </div>--%>
 
-<%--    <input type="hidden" name="${idCity}" value="${city.idCity}"/>--%>
+
         <div class="row mx-2">
             <div class="col-6">
                 <label class="form-label text-black">Ville*</label>

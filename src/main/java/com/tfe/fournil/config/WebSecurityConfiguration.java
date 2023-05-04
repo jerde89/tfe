@@ -18,10 +18,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private String[] FREE_URLS =  { "/", "/home", "/register", "/addUser", "/passwordForgot", "/passwordForgot/checkIfEmailExist" };
+    private String[] FREE_URLS =  { "/", "/imageProduct/**","/home", "/register", "/addUser", "/passwordForgot", "/passwordForgot/checkIfEmailExist" };
     private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*"};
-    private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu","/feedbackList/delete"};
-    private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu"};
+    private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu","/feedbackList/delete","/category/*"};
+    private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu","/shop"};
 
     @Autowired
     private UserDetailsService userDetailsService;

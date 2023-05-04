@@ -42,4 +42,7 @@ public class ProductCategory {
     @Column(name = "enable", nullable = false, length = 500)
     private Boolean enable=false;
 
+    @Transient
+    private int countProduct;
+
 }

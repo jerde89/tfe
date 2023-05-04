@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -53,8 +54,19 @@ public class ProductController {
     //@RequestBody Product product => va recevoir un objet JSON de type Product appellé product
     //Objet Product va recevoir les champ nom, desription, price, taxRate, category, ... de la js ProductJs d'une requête ajax)
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
+
+        String url = "";
+/*
+        try{
+            url = fileStorageService.save(file, file.getOriginalFilename());
+            product.setImg(url);
+        }catch(Exception e){
+            log.warn("Failed file storege " + file.getOriginalFilename());
+        }*/
+        product.setImg(null);  // a enlever quand jquery fonctionnera
         product.setUpdateAt(new Date());
         product.setCreatedAt(new Date());
+
         //Je crée une variable idProductCategory qui va valoir l'id de la categorie qui a recue
         //getCategory().getIdProductCategory() => clé étrangère
         long idProductCategory = product.getCategory().getIdProductCategory();
@@ -71,6 +83,7 @@ public class ProductController {
             product.setCategory(productCategoryOptional.get());
         }
         productRepository.save(product);
+
         return ResponseEntity.ok(product);
     }
 

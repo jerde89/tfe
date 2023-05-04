@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class FileStorageService {
 
-    private final Path root = Paths.get("images");
+    private final Path root = Paths.get("imageProduct");
 
     /**
      * Init.
