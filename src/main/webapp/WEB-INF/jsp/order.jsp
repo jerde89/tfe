@@ -80,7 +80,7 @@
                     <input id="quantity_${product.idProduct}" type="number" value="1" class="quantity">
                 </div>
                 <div class="profile__cta">
-                    <a class="button" onclick="addBagProduct(${product.idProduct},'${product.name}')">Ajouter au panier</a>
+                    <a class="button" onclick="addBagProduct(${product.idProduct},'${product.name}', '${product.price}')">Ajouter au panier</a>
                 </div>
             </div>
         </c:forEach>

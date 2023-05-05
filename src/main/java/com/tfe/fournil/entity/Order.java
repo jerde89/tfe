@@ -5,11 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.time.LocalDate;
 
 @Entity
-@Table(name ="order")
+@Table(name ="orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,7 +16,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id_order")
-    private long IdOrder;
+    private Long idOrder;
 
     @Column(name = "order_date")
     private LocalDate order_date;
@@ -25,16 +24,20 @@ public class Order {
     @Column(name = "date_of_receipt")
     private LocalDate dateOfReceipt;
 
-    @Column(name = "statut", nullable = false, length = 50)
-    private String statut;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 50)
+    private Status  status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "delivery_mode", nullable = false, length = 50)
+    private DeliveryMode  deliveryMode;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "id_shop")
-    @Valid()
-    private Shop idShop;
+    private Shop shop;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "id_user")
-    @Valid()
-    private User idUser;
+    private User user;
+
 }

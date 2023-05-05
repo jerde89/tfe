@@ -5,5 +5,12 @@ function resetItem(){
 
 $( document ).ready(function() {
     var myBag = JSON.parse(localStorage.getItem("myBag"));
-    $('#mybBagCount').html(myBag.total);
+    // si myBag existe (pas nul ou undefined)
+    if(myBag){
+        $('#mybBagCount').html(myBag.total);
+    }
 });
+
+function goToPageOrderRecap(){
+    location.href="/orderRecap";
+}

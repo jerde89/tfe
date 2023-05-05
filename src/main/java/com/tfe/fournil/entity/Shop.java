@@ -3,6 +3,7 @@ package com.tfe.fournil.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Shop {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -54,15 +54,6 @@ public class ProductController {
     //@RequestBody Product product => va recevoir un objet JSON de type Product appellé product
     //Objet Product va recevoir les champ nom, desription, price, taxRate, category, ... de la js ProductJs d'une requête ajax)
     public ResponseEntity<Product> addProduct(@RequestBody Product product){
-
-        String url = "";
-/*
-        try{
-            url = fileStorageService.save(file, file.getOriginalFilename());
-            product.setImg(url);
-        }catch(Exception e){
-            log.warn("Failed file storege " + file.getOriginalFilename());
-        }*/
         product.setImg(null);  // a enlever quand jquery fonctionnera
         product.setUpdateAt(new Date());
         product.setCreatedAt(new Date());

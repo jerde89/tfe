@@ -26,7 +26,7 @@ $(document).ready(function () {
     });
 });
 
-function addBagProduct(idProduct, maneProduct) {
+function addBagProduct(idProduct, maneProduct, price) {
     var quantity = parseInt($('#quantity_' + idProduct).val(), 10);
     var myBag = JSON.parse(localStorage.getItem("myBag"));
     if (!myBag) {
@@ -35,7 +35,8 @@ function addBagProduct(idProduct, maneProduct) {
             record: [{
                 id: idProduct,
                 name: maneProduct,
-                total: quantity
+                price: price,
+                quantity: quantity
             }
             ]
         };
@@ -48,7 +49,7 @@ function addBagProduct(idProduct, maneProduct) {
     myBag.record.forEach(record => {
         if (record.id === idProduct) {
             myBag.total += quantity;
-            record.total += quantity;
+            record.quantity += quantity;
             found = true;
         }
     });
@@ -56,7 +57,8 @@ function addBagProduct(idProduct, maneProduct) {
         myBag.record.push({
             id: idProduct,
             name: maneProduct,
-            total: quantity
+            price : price,
+            quantity: quantity
         })
         myBag.total += quantity;
     }
