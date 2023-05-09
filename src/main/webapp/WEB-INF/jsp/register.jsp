@@ -183,7 +183,7 @@
                     <label class="form-label text-black">Ville*</label>
                     <select  class="form-control" name="Address.City.idCity" id="idCity">
 
-                        <option selected value=""></option>
+<%--                        <option selected value=""></option>--%>
                         <%--                        var="category => une nouvelle variable appellée category--%>
                         <%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
                         <c:forEach var="city" items="${cityList}">

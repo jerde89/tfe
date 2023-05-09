@@ -133,8 +133,8 @@ function togglePopup(id, tableName) {
         // if (c.feedbackId == id) {
     // feedBackJson.forEach(f => {
         if (f.feedbackId == id) {
-            // document.getElementById('nom').innerHTML = f.nameFeedback;
-            // document.getElementById('prenom').innerHTML = f.firstnameFeedback;
+            document.getElementById('nameFeedback').innerHTML = f.nameFeedback;
+            document.getElementById('firstnameFeedback').innerHTML = f.firstnameFeedback;
             document.getElementById('email').innerHTML = f.emailFeedback;
             document.getElementById('email').href = "mailto:" + f.emailFeedback;
             document.getElementById('phone').innerHTML = f.phoneFeedback;

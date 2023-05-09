@@ -26,8 +26,8 @@ $(document).ready(function () {
                     return data;
                 }
             },
-            {data: 'createdAt', render: DataTable.render.datetime('DD/MM/YYYY HH:mm')},
-            {data: 'updateAt', render: DataTable.render.datetime('DD/MM/YYYY HH:mm')},
+            {data: 'createdAt', render: DataTable.render.datetime('DD/MM/YYYY')},
+            {data: 'updateAt', render: DataTable.render.datetime('DD/MM/YYYY')},
             {data: 'ActionsProduct', render: makeActionProduct},
         ],
         order: [[2, 'desc']],
@@ -114,7 +114,7 @@ function toggleProductPopup(id) {
             //C.name => entity nom d'un élément
             document.getElementById('name').value = c.name;
             document.getElementById('description').value = c.description;
-            document.getElementById('category').value = c.category.idProductCategory;
+            document.getElementById('category').value = c.category.id;
             document.getElementById('img').value = c.img;
             document.getElementById('price').value = c.price;
             document.getElementById('tax_rate').value = c.taxRate;
@@ -161,7 +161,7 @@ function callAjaxModifyProduct() {
     var data = {
         'name': $('#name').val(),
         'description': $('#description').val(),
-        'category': {'idProductCategory':  $('#category').val()},
+        'category': {'id':  $('#category').val()},
         // 'category':  $('#category').val(),
         'img': $('#img').val(),
         'price': $('#price').val(),

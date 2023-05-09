@@ -101,7 +101,7 @@
 <%--                        var="category => une nouvelle variable appellée category--%>
 <%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
                         <c:forEach var="category" items="${categoryList}">
-                        <option value="${category.idProductCategory}"><c:out value="${category.name}"/></option>
+                        <option value="${category.id}"><c:out value="${category.name}"/></option>
                         </c:forEach>
                     </select>
                     <div class="col-12">
@@ -156,17 +156,17 @@
 
             <div class="row mx-1" id="blockCreated">
                 <div class="col-12">
-                    <label class="form-label text-black">Créé le :
+                    <label class="form-label text-black">Créé le :</label>
                         <span id="created"></span>
-                    </label>
+
                 </div>
             </div>
 
             <div class="row mx-1" id="blockUpdated">
                 <div class="col-12">
-                    <label class="form-label text-black">Modifié le :
+                    <label class="form-label text-black">Modifié le :</label>
                         <span id="update"></span>
-                    </label>
+
                 </div>
             </div>
             <div class="row">
@@ -187,6 +187,7 @@
         </div>
 
     </body>
+<c:import url="footer.jsp"/>
 </html>
 
 

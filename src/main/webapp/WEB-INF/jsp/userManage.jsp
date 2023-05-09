@@ -68,7 +68,7 @@
     <div class="my-3">
         <div class="col-12">
             <label class="form-label text-black">Email :</label>
-            <input type="email" class="form-control" id="email" name="email"/>
+            <input type="email" class="form-control" id="email" name="email" readonly="readonly"/>
         </div>
     </div>
 

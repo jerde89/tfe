@@ -11,7 +11,6 @@ $(function () {
 });
 
 
-
 $(document).ready(function () {
     //Permet d'afficher ou non le mot de passe  => oeil
     $("#show_hide_password a").on('click', function (event) {
@@ -51,9 +50,11 @@ function checkEmailUser() {
     if (emailUser == "" || emailUser == null) {
         document.getElementById("errorEmailUser").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputEmail").addClass("fieldMistake ");
+        return false;
     } else if (emailUser.length > 100) {
         document.getElementById("errorEmailUser").innerHTML = "Maximun 100 Caractères";
         $("#inputEmail").addClass("fieldMistake ");
+        return false;
     } else {
         document.getElementById("errorEmailUser").innerHTML = "";
         $("#inputEmail").removeClass("fieldMistake ");
@@ -94,10 +95,12 @@ function checkPassword() {
     if (password.length < 6) {
         document.getElementById("errorPassword").innerHTML = "Veuillez indiquer au moins 6 caractères";
         $("#inputPassword").addClass("fieldMistake ");
+        return false;
 
     } else if (password.length > 50) {
         document.getElementById("errorPassword").innerHTML = "Maximun 50 Caractères";
         $("#inputPassword").addClass("fieldMistake ");
+        return false;
 
     } else {
         document.getElementById("errorPassword").innerHTML = "";
@@ -110,9 +113,10 @@ function checkConfirmPassword() {
     var confirmPassword = $("#inputConfirmPassword").val();
     var password = $("#inputPassword").val();
 
-    if (confirmPassword != password) {
+    if (confirmPassword !== password) {
         document.getElementById("errorConfirmPassword").innerHTML = "Les mots de passe ne sont pas similaires";
         $("#inputConfirmPassword").addClass("fieldMistake ");
+        return false;
 
     } else {
         document.getElementById("errorConfirmPassword").innerHTML = "";
@@ -122,7 +126,7 @@ function checkConfirmPassword() {
 
 function checkNameUser() {
     var nameUser = $("#inputName").val();
-    if (nameUser == "" || nameUser == null) {
+    if (nameUser === "" || nameUser == null) {
         document.getElementById("errorNameUser").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputName").addClass("fieldMistake ");
         return false;
@@ -159,10 +163,12 @@ function checkPhoneUser() {
     if (phoneUser == "" || phoneUser == null) {
         document.getElementById("errorPhoneUser").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputPhone").addClass("fieldMistake ");
+        return false;
 
     } else if (phoneUser.length > 50) {
         document.getElementById("errorPhoneUser").innerHTML = "Maximun 50 Caractères";
         $("#inputPhone").addClass("fieldMistake ");
+        return false;
 
     } else {
         document.getElementById("errorPhoneUser").innerHTML = "";
@@ -177,10 +183,12 @@ function checkStreet() {
     if (street == "" || street == null) {
         document.getElementById("errorStreet").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputStreet").addClass("fieldMistake ");
+        return false;
 
     } else if (street.length > 100) {
         document.getElementById("errorStreet").innerHTML = "Maximun 100 Caractères";
         $("#inputStreet").addClass("fieldMistake ");
+        return false;
 
     } else {
         document.getElementById("errorStreet").innerHTML = "";
@@ -195,10 +203,11 @@ function checkNumber() {
     if (number == "" || number == null) {
         document.getElementById("errorNumber").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputNumber").addClass("fieldMistake ");
-
+        return false;
     } else if (number.length > 10) {
         document.getElementById("errorNumber").innerHTML = "Maximun 10 Caractères";
         $("#inputNumber").addClass("fieldMistake ");
+        return false;
 
     } else {
         document.getElementById("errorNumber").innerHTML = "";
@@ -213,11 +222,11 @@ function checkPostalCode() {
     if (postalCode == "" || postalCode == null) {
         document.getElementById("errorPostalCode").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputPostalCode").addClass("fieldMistake ");
-
+        return false;
     } else if (postalCode.length > 10) {
         document.getElementById("errorPostalCode").innerHTML = "Maximun 10 Caractères";
         $("#inputPostalCode").addClass("fieldMistake ");
-
+        return false;
     } else {
         document.getElementById("errorPostalCode").innerHTML = "";
         $("#inputPostalCode").removeClass("fieldMistake ");
@@ -231,10 +240,12 @@ function checkCity() {
     if (city == "" || city == null) {
         document.getElementById("errorCityName").innerHTML = "Veuillez indiquer au moins un caractère";
         $("#inputCityName").addClass("fieldMistake ");
+        return false;
 
     } else if (city.length > 100) {
         document.getElementById("errorCityName").innerHTML = "Maximun 100 Caractères";
         $("#inputCityName").addClass("fieldMistake ");
+        return false;
 
     } else {
         document.getElementById("errorCityName").innerHTML = "";
@@ -244,33 +255,37 @@ function checkCity() {
 
 // Fonction de vérification des différents champs sur le Onsubmit du formulaire registerForm (register.jsp)
 function validateRegisterForm(origin) {
+    try {
+        //Par défaut, on met que le formulaire est valide (true)
+        let formIsValid = true;
 
-    //Par défaut, on met que le formulaire est valide (true)
-    let formIsValid = true;
+        //checkEmailUser() => on appelle la fonction checkEmailUser
+        //checkEmailUser() === false => SI cette fonction retourne false (conditions ne sont pas réspectées (exemple : champ vide))
+        //? formIsValid = false => ALORS passe formIsValid à false
+        //: formIsValid =formIsValid => SINON (pas utilisé dans ce cas)
 
-    //checkEmailUser() => on appelle la fonction checkEmailUser
-    //checkEmailUser() === false => SI cette fonction retourne false (conditions ne sont pas réspectées (exemple : champ vide))
-    //? formIsValid = false => ALORS passe formIsValid à false
-    //: formIsValid =formIsValid => SINON (pas utilisé dans ce cas)
+        //Revient au même que de faire
+        // if(!checkFirstnameUser()){
+        //     formIsValid = false;
+        // }
+        checkEmailUser() === false ? formIsValid = false : formIsValid = formIsValid;
+        if (origin == "register") {
+            checkPassword() === false ? formIsValid = false : formIsValid = formIsValid;
+        }
 
-    //Revient au même que de faire
-    // if(!checkFirstnameUser()){
-    //     formIsValid = false;
-    // }
-    checkEmailUser() === false ? formIsValid = false: formIsValid=formIsValid;
-    if (origin == "register"){
-        checkPassword() === false ? formIsValid = false: formIsValid=formIsValid;
+        checkNameUser() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkFirstnameUser() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkPhoneUser() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkStreet() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkNumber() === false ? formIsValid = false : formIsValid = formIsValid;
+        // checkPostalCode() === false ? formIsValid = false : formIsValid=formIsValid;
+        //checkCity() ===false ? formIsValid = false : formIsValid=formIsValid;
+
+        //retourne la valeur de formIsValid (true ou false)
+        return formIsValid;
+    } catch (e) {
+        console.error(e);
+        return false;
     }
-
-    checkNameUser() === false ? formIsValid = false: formIsValid=formIsValid;
-    checkFirstnameUser() === false ? formIsValid = false: formIsValid=formIsValid;
-    checkPhoneUser() === false ? formIsValid = false: formIsValid=formIsValid;
-    checkStreet() === false ? formIsValid = false : formIsValid=formIsValid;
-    checkNumber() === false ? formIsValid = false : formIsValid=formIsValid;
-    checkPostalCode() === false ? formIsValid = false : formIsValid=formIsValid;
-    checkCity() ===false ? formIsValid = false : formIsValid=formIsValid;
-
-    //retourne la valeur de formIsValid (true ou false)
-    return formIsValid;
 }
 

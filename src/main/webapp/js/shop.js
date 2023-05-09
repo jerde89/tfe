@@ -109,8 +109,8 @@ function toggleShopPopup(id) {
 
     categoryDatatable.rows().every(function (rowIdx, tableLoop, rowLoop) {
         var c = this.data();
-        if (c.idProductCategory === id) {
-            $('#idCategory').val(c.idProductCategory);
+        if (c.id === id) {
+            $('#idCategory').val(c.id);
             document.getElementById('name').value = c.name;
             document.getElementById('description').value = c.description;
             document.getElementById('created').innerHTML = moment(c.createdAt).format("DD/MM/YYYY HH:mm");

@@ -12,6 +12,9 @@
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/order.css">
     <script src="${pageContext.request.contextPath}/js/order.js"></script>
+        <script type="text/javascript">
+    var pageContextPath = "${pageContext.request.contextPath}";
+        </script>
     <title>Commande</title>
 </head>
 <body>
@@ -42,8 +45,8 @@
                 <c:forEach var="category" items="${categoryList}">
                     <div class="filters__item">
                         <div class="checkbox">
-                            <input id="checkbox-${category.idProductCategory}" type="checkbox"/>
-                            <label for="checkbox-${category.idProductCategory}">${category.name}<span
+                            <input id="checkbox-${category.id}" type="checkbox" name="categoryCheckbox" onclick="findProductByCategory()" value="${category.id}" checked/>
+                            <label for="checkbox-${category.id}">${category.name}<span
                                     class="box"></span>
                                 <div class="tooltip top" data-tooltip="Younger than 18 months."><span><i
                                         class="icon-info"></i></span></div>
@@ -57,7 +60,8 @@
         </section>
     </div>
 
-    <section class="results-section results--grid">
+    <section class="results-section results--grid" id="productList">
+
         <c:forEach var="product" items="${productList}">
             <div class="profile">
                 <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png"

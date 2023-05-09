@@ -44,7 +44,7 @@
 
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/feedbackList">Liste des feedbacks</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/feedbackList">Gestion des feedbacks</a>
             <li class="nav-item">
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/shop">Gestion des magasins</a>

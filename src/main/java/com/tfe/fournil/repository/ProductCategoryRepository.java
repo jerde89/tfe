@@ -15,7 +15,7 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
     List<ProductCategory> findAll();
 
     //C. c'est du jpql
-    @Query("select count(c.idProduct) from Product c where c.category.idProductCategory = :idProductCategory group by c.category")
-    int countProductByCategory(long idProductCategory);
+    @Query("select count(p.idProduct) from Product p where p.category.id = :id and p.enable = true and p.category.enable= true group by p.category")
+    int countProductByCategory(long id);
 
 }

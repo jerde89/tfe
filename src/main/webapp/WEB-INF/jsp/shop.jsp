@@ -157,8 +157,9 @@
         <%--        </form>--%>
     </div>
 
-
 </body>
+
+<c:import url="footer.jsp"/>
 </html>
 
 <%--Pour le popup https://codepen.io/imprakash/pen/GgNMXO --%>

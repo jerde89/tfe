@@ -1,7 +1,5 @@
 package com.tfe.fournil.controller;
 
-import com.google.gson.Gson;
-import com.tfe.fournil.entity.Feedback;
 import com.tfe.fournil.entity.Product;
 import com.tfe.fournil.entity.ProductCategory;
 import com.tfe.fournil.repository.ProductCategoryRepository;
@@ -13,12 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -43,11 +41,19 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/getAll")
     public ResponseEntity<List<Product>> ajaxShowdisplayProduct() {
         List<Product> product = productRepository.findAll();
         return ResponseEntity.ok(product);
+    }
+
+    @GetMapping("/findByCategories")
+    public ResponseEntity<List<Product>> productListByCategories(@RequestParam(value = "categories", required = false) List<Long> categorieIds) {
+        if (categorieIds != null && !categorieIds.isEmpty()) {
+            return ResponseEntity.ok(productRepository.findAllByCategoryIdIn(categorieIds));
+        } else {
+            return ResponseEntity.ok( productRepository.findAll());
+        }
     }
 
     @PostMapping(value = "")
@@ -58,14 +64,14 @@ public class ProductController {
         product.setUpdateAt(new Date());
         product.setCreatedAt(new Date());
 
-        //Je crée une variable idProductCategory qui va valoir l'id de la categorie qui a recue
-        //getCategory().getIdProductCategory() => clé étrangère
-        long idProductCategory = product.getCategory().getIdProductCategory();
+        //Je crée une variable id qui va valoir l'id de la categorie qui a recue
+        //getCategory().getid() => clé étrangère
+        long id = product.getCategory().getId();
 
         //je crée un objet de type ProductCategory nommé productCategoryOptional
-        //productCategoryRepository.findById(idProductCategory) => il va trouvé l'id dans la table productCategory suivant l'id reçu
+        //productCategoryRepository.findById(id) => il va trouvé l'id dans la table productCategory suivant l'id reçu
         //l'optinal productCategoryOptional permet de recuperer le result de la fonction findbyId dans l'optional
-        Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findById(idProductCategory);
+        Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findById(id);
 
 //
         //si l'objet productCategoryOptional est présent, je set la categorie de l'objet product
@@ -88,8 +94,8 @@ public class ProductController {
                     product1.setTaxRate(newProduct.getTaxRate());
                     product1.setUpdateAt(new Date());
                     product1.setEnable(newProduct.getEnable());
-                    long idProductCategory = newProduct.getCategory().getIdProductCategory();
-                    Optional<ProductCategory> productCategory = productCategoryRepository.findById(idProductCategory);
+                    long catId = newProduct.getCategory().getId();
+                    Optional<ProductCategory> productCategory = productCategoryRepository.findById(catId);
                     productCategory.ifPresent(product1::setCategory);
                     return productRepository.save(product1);
                 })

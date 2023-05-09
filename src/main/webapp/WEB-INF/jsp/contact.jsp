@@ -229,9 +229,6 @@
     </div>
 </div>
 
-<div class="containerFooter">
-    <%@include file="footer.jsp" %>
-</div>
 </body>
-
+<%@include file="footer.jsp" %>
 </html>

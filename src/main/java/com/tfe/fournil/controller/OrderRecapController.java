@@ -30,9 +30,9 @@ public class OrderRecapController {
     }
 
     @PostMapping(value = "")
-    //@RequestBody Product product => va recevoir un objet JSON de type Product appellé product
-    //Objet Product va recevoir les champ nom, desription, price, taxRate, category, ... de la js ProductJs d'une requête ajax)
-    public ResponseEntity<Product> addProduct(@RequestBody NewOrderDTO newOrder){
+//    @RequestBody Product product => va recevoir un objet JSON de type Product appellé product
+//    Objet Product va recevoir les champ nom, desription, price, taxRate, category, ... de la js ProductJs d'une requête ajax)
+    public ResponseEntity<Order> addProduct(@RequestBody NewOrderDTO newOrder){
         Order order = new Order();
         order.setOrder_date(newOrder.getDateOfReceipt());
         order.setDeliveryMode(newOrder.getDeliveryMode());
@@ -41,8 +41,9 @@ public class OrderRecapController {
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setPrice(newOrderDetailDto.getPriceUnit());
             orderDetail.setQuantity(newOrderDetailDto.getQuantity());
-            order.set
+//            order.set
         });
         orderService.addOrder(order);
+        return ResponseEntity.ok(order);
     }
 }

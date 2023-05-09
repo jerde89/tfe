@@ -23,6 +23,7 @@
 <div class="container">
 
     <div>
+        <h1 style="text-align: center">Gestion des feedbacks</h1>
         <ul class="nav nav-tabs" role="tablist">
             <li class="active">
                 <a href="#tab-table1" data-toggle="tab">Feedback Non Lu</a>
@@ -68,17 +69,27 @@
     <!--Popup pour voir les feedbacks-->
     <div id ="contentSeeFeedback" class="contentSeeFeedbacks"  title="Feedback"  >
         <div class="pb-3" align="left">
+            <label><b>Nom : </b></label>
+            <a id="nameFeedback"> </a>
+        </div>
+
+        <div class="pb-3" align="left">
+            <label><b>Prénom : </b></label>
+            <a id="firstnameFeedback"> </a>
+        </div>
+
+        <div class="pb-3" align="left">
             <label><b>Email : </b></label>
             <a id="email"> </a>
         </div>
 
         <div class="pb-3" align="left">
-            <label><b>Téléphone : </b><span id="phone"></span></label>
+            <label><b>Téléphone : </b></label>
+            <span id="phone"></span>
         </div>
         <div class="pb-3" align="left">
-            <label><b>Reçu le : </b>
+            <label><b>Reçu le : </b></label>
                 <span id="created"></span>
-            </label>
         </div>
 
         <div class="mb-3 pb-3" align="left">

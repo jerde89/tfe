@@ -57,7 +57,7 @@ public class CategoryController {
                     return productCategoryRepository.save(category);
                 })
                 .orElseGet(() -> {
-                    newCategory.setIdProductCategory(id);
+                    newCategory.setId(id);
                     return productCategoryRepository.save(newCategory);
                 });
         return ResponseEntity.ok(productCategory);

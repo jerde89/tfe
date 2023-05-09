@@ -18,8 +18,8 @@ public class ProductCategory {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id_product_category")
-    private long idProductCategory;
+    @Column(name = "id")
+    private long id;
 
     @NotBlank (message = "le nom de la catégorie doit comporter au moins 1 caractère")
     @Size(max = 50, message = "le nom de la catégorie doit comporter maximun 50 caractères")
