@@ -26,11 +26,12 @@ body{
 }
 
 .span-error4 {
-    text-align: left;
+    /*text-align: left;*/
+    /*color: red;*/
+    /*font-size: 14px;*/
+    /*margin-left: 205px;*/
     color: red;
     font-size: 14px;
-    margin-left: 205px;
-
 }
 
 /*En cas d'érreur, permet de mettre la bordure d'un input du from en rouge*/
@@ -48,9 +49,9 @@ row justify-content-center{
     line-height : 25px;
 }
 
-.containerBody{
-    overflow-y: scroll;!important;
-}
+/*.containerBody{*/
+/*    overflow-y: scroll;!important;*/
+/*}*/
 .container{
     padding-left: 5px;
 }
@@ -82,3 +83,15 @@ row justify-content-center{
     border: 1px solid transparent;
     background: #e3b04b;
     color: #fff; }
+
+.form-group{
+    margin-top: 30px;
+}
+
+.col-12{
+    margin-bottom: 5px;
+}
+
+.col-6{
+    margin-bottom: 5px;
+}

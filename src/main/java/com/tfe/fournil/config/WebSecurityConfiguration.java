@@ -19,7 +19,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private String[] FREE_URLS =  { "/", "/imageProduct/**","/home", "/register", "/addUser", "/passwordForgot", "/passwordForgot/checkIfEmailExist" };
-    private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*"};
+    private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*", "/orderRecap"};
     private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu","/feedbackList/delete","/category/*"};
     private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu","/shop"};
 

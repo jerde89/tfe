@@ -21,29 +21,29 @@ public class Feedback {
     @Column(name = "feedback_id")
     private long feedbackId;
 
-    @NotBlank (message = "le prénom de l'utilisateur du formulaire de contact doit comporter au moins 1 caractère")
-    @Size(max = 50, message = "le prénom de l'utilisateur du formulaire de contact doit comporter maximun 50 caractères")
+    @NotBlank (message = "Le prénom doit comporter au moins 1 caractère")
+    @Size(max = 50, message = "Le prénom doit comporter maximun 50 caractères")
     @Column(name = "firstname_feedback", nullable = false, length = 50)
     private String firstnameFeedback;
 
-    @NotBlank (message = "le nom de l'utilisateur du formulaire de contact doit comporter au moins 1 caractère")
-    @Size(max = 50, message = "le nom de l'utilisateur du formulaire de contact doit comporter maximun 50 caractères")
+    @NotBlank (message = "Le nom doit comporter au moins 1 caractère")
+    @Size(max = 50, message = "Le nom doit comporter maximun 50 caractères")
     @Column(name = "name_feedback", nullable = false, length = 50)
     private String nameFeedback;
 
-    @NotBlank (message = "l'email de l'utilisateur du formulaire de contact doit comporter au moins 1 caractère")
-    @Size(max = 50, message = "l'email de l'utilisateur du formulaire de contact doit comporter maximun 50 caractères")
-    @Email (message = "l'email de formulaire de contact doit être un pattern.")
+    @NotBlank (message = "L'email doit comporter au moins 1 caractère")
+    @Size(max = 50, message = "L'email doit comporter maximun 50 caractères")
+    @Email (message = "L'email de formulaire de contact doit être un pattern.")
     @Column(name = "email_feedback", nullable = false, length = 50)
     private String emailFeedback;
 
-    @NotBlank (message = "le téléphone de l'utilisateur du formulaire de contact doit comporter au moins 1 caractère")
-    @Size(max = 15, message = "le téléphone de l'utilisateur du formulaire de contact doit comporter maximun 50 caractères")
+    @NotBlank (message = "Le téléphone doit comporter au moins 1 caractère")
+    @Size(max = 15, message = "Le téléphone doit comporter maximun 15 caractères")
     @Column(name = "phone_feedback", nullable = false, length = 15)
     private String phoneFeedback;
 
-    @NotBlank (message = "le commentaire de l'utilisateur du formulaire de contact doit comporter au moins 1 caractère")
-    @Size(max = 500, message = "le commentaire de l'utilisateur du formulaire de contact doit comporter maximun 500 caractères")
+    @NotBlank (message = "Le commentaire doit comporter au moins 1 caractère")
+    @Size(max = 500, message = "Le commentaire doit comporter maximun 500 caractères")
     @Column(name = "comment_feedback", nullable = false, length = 500)
     private String commentFeedback;
 

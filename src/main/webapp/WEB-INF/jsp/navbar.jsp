@@ -7,7 +7,7 @@
 <script src="${pageContext.request.contextPath}/js/navbar.js"></script>
 
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #522110">
+<nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: #522110">
 
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">

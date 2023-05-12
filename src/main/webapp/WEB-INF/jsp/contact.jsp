@@ -102,8 +102,8 @@
 
                     <div class="col-6 pe-5 text-end">
                         <div>07:00 - 18:00</div>
-                        <div>07:00 - 18:00</div>
-                        <div>07:00 - 18:00</div>
+                        <div>--- Fermé ---</div>
+                        <div>--- Fermé ---</div>
                         <div>--- Fermé ---</div>
                         <div>07:00 - 18:00</div>
                         <div>07:00 - 18:00</div>
@@ -197,7 +197,7 @@
                         <div class="col-12">
                             <label class="form-label text-black">Téléphone*</label>
                             <input type="text" class="form-control" id="InputPhone" name="phoneFeedback"
-                                   placeholder="Téléphone">
+                                   placeholder="Téléphone" onblur="checkPhone()">
                             <div class="span-error-div"><span class="span-error4" id="errorPhoneFeedback"></span></div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@
                         <div class="col-12">
                             <label class="form-label">Commentaire*</label>
                             <textarea class="form-control" id="InputCommentFeedback" name="commentFeedback" rows="3"
-                                      placeholder="Commentaire"></textarea>
+                                      placeholder="Commentaire" onblur="checkComment()"></textarea>
                             <div class="span-error-div"><span class="span-error4" id="errorCommentFeedback"></span></div>
                         </div>
                     </div>

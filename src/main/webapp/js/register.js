@@ -215,43 +215,7 @@ function checkNumber() {
     }
 }
 
-function checkPostalCode() {
 
-    var postalCode = $("#inputPostalCode").val();
-
-    if (postalCode == "" || postalCode == null) {
-        document.getElementById("errorPostalCode").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputPostalCode").addClass("fieldMistake ");
-        return false;
-    } else if (postalCode.length > 10) {
-        document.getElementById("errorPostalCode").innerHTML = "Maximun 10 Caractères";
-        $("#inputPostalCode").addClass("fieldMistake ");
-        return false;
-    } else {
-        document.getElementById("errorPostalCode").innerHTML = "";
-        $("#inputPostalCode").removeClass("fieldMistake ");
-    }
-}
-
-function checkCity() {
-
-    var city = $("#inputCityName").val();
-
-    if (city == "" || city == null) {
-        document.getElementById("errorCityName").innerHTML = "Veuillez indiquer au moins un caractère";
-        $("#inputCityName").addClass("fieldMistake ");
-        return false;
-
-    } else if (city.length > 100) {
-        document.getElementById("errorCityName").innerHTML = "Maximun 100 Caractères";
-        $("#inputCityName").addClass("fieldMistake ");
-        return false;
-
-    } else {
-        document.getElementById("errorCityName").innerHTML = "";
-        $("#inputCityName").removeClass("fieldMistake ");
-    }
-}
 
 // Fonction de vérification des différents champs sur le Onsubmit du formulaire registerForm (register.jsp)
 function validateRegisterForm(origin) {
@@ -278,8 +242,7 @@ function validateRegisterForm(origin) {
         checkPhoneUser() === false ? formIsValid = false : formIsValid = formIsValid;
         checkStreet() === false ? formIsValid = false : formIsValid = formIsValid;
         checkNumber() === false ? formIsValid = false : formIsValid = formIsValid;
-        // checkPostalCode() === false ? formIsValid = false : formIsValid=formIsValid;
-        //checkCity() ===false ? formIsValid = false : formIsValid=formIsValid;
+
 
         //retourne la valeur de formIsValid (true ou false)
         return formIsValid;
