@@ -169,7 +169,6 @@ function callAjaxModifyCategory() {
 }
 
 function successSaveCategory() {
-    // console.log("successModifyCategory");
     categoryDatatable.ajax.reload();
     $.toast(
         {
@@ -182,7 +181,6 @@ function successSaveCategory() {
         }
     );
     $("#formCategory").toggle();
-
 }
 
 function fail(e) {

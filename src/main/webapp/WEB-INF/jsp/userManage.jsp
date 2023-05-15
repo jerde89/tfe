@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/userManage.css">
     <script src="${pageContext.request.contextPath}/js/userManage.js"></script>
     <script type="text/javascript">
+        var pageContextPath = "${pageContext.request.contextPath}";
         var isAdmin = false;
         <sec:authorize  access="hasAnyAuthority('ADMIN')">
         isAdmin = true;
@@ -51,97 +52,92 @@
     <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
 
     <input type="hidden" id="idUser">
-    <div class="my-3">
-        <div class="col-12">
-            <label class="form-label text-black">Nom :</label>
-            <input type="text" class="form-control" id="lastname" name="lastname"/>
-        </div>
+
+    <div class="row ">
+            <div class="col-6  px-5 py-2">
+                <label class="form-label text-black">Nom :</label>
+                <input type="text" class="form-control" id="lastname" name="lastname"/>
+            </div>
+            <div class="col-6 px-5 py-2">
+                <label class="form-label text-black">Prénom :</label>
+                <input type="text" class="form-control" id="firstname" name="firstname"/>
+            </div>
     </div>
 
-    <div class="my-3">
-        <div class="col-12">
-            <label class="form-label text-black">Prénom :</label>
-            <input type="text" class="form-control" id="firstname" name="firstname"/>
-        </div>
-    </div>
+    <div class="row">
 
-    <div class="my-3">
-        <div class="col-12">
+        <div class="col-6 px-5 py-2">
             <label class="form-label text-black">Email :</label>
             <input type="email" class="form-control" id="email" name="email" readonly="readonly"/>
         </div>
-    </div>
-
-    <div class="my-3">
-        <div class="col-12">
+        <div class="col-6 px-5 py-2">
             <label class="form-label text-black">Téléphonne :</label>
             <input type="text" class="form-control" id="phone" name="phone"/>
         </div>
     </div>
 
-    <div class="my-3">
-        <div class="col-12">
+    <div class="row">
+        <div class= "col-12 px-5 py-2">
             <label class="form-label text-black">Rue :</label>
             <input type="text" class="form-control" id="street" name="street"/>
         </div>
     </div>
 
     <div class="row">
-
-
-            <div class="col-6">
+             <div class= "col-6 px-5 py-2">
                 <label class="form-label text-black">Numéro :</label>
                 <input type="text" class="form-control" id="number" name="number"/>
             </div>
-            <div class="col-6">
+            <div class= "col-6 px-5 py-2">
                 <label class="form-label text-black">Boîte :</label>
                 <input type="text" class="form-control" id="box" name="box"/>
             </div>
-
-
     </div>
 
-    <div class="my-3">
-        <div class="col-12">
-            <label class="form-label text-black">Code postal :</label>
-            <input type="text" class="form-control" id="postalCode" name="postalCode"/>
+   <div class="row">
+        <div class= "col-12 px-5 py-2">
+            <div>
+                <label class="form-label text-black">Villetest*</label>
+                <select  class="form-control" name="Address.City.idCity" id="idCity">
+                    <c:forEach var="city" items="${cityList}">
+                        <c:choose>
+                            <c:when test="${user.address.city.idCity eq city.idCity}">
+                                <option  value="${city.idCity}" selected>${city.postalCode} - ${city.cityName}</option>
+
+                            </c:when>
+                            <c:otherwise>
+                                <option value=${city.idCity}>${city.postalCode} - ${city.cityName}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+                <div class="span-error-div"><span class="span-error4" id="errorTva"></span></div>
+            </div>
+    </div>
+    </div>
+
+    <div class="row">
+          <div class= "col-6 px-5 py-2">
+                <label class="form-label text-black">Pays :</label>
+                <input type="text" class="form-control" id="countryName" name="countryName" readonly="readonly"/>
+          </div>
+
+          <div class= "col-6 px-5 py-2">
+                <label class="form-label text-black">Rôle :</label>
+                <select  class="form-control" name="role" id="role">
+                    <c:forEach var="roletest" items="${roleList}">
+                        <option value="${roletest.idRole}"><c:out value="${roletest.role}"/></option>
+                    </c:forEach>
+                </select>
+          </div>
+    </div>
+
+        <div class="row">
+            <div class="col-12 px-5 py-2">
+                <label class="form-label text-black">Actif : </label>
+                <input type="checkbox" id="enabled" name="enabled"/>
+            </div>
         </div>
-    </div>
-
-    <div class="my-3">
-        <div class="col-12">
-            <label class="form-label text-black">Ville :</label>
-            <input type="text" class="form-control" id="cityName" name="cityName"/>
-        </div>
-    </div>
-
-    <div class="my-3">
-        <div class="col-12">
-            <label class="form-label text-black">Pays :</label>
-            <input type="text" class="form-control" id="countryName" name="countryName"/>
-        </div>
-    </div>
-
-    <div class="my-3">
-        <div class="col-12">
-            <label class="form-label text-black">Rôle :</label>
-            <select  class="form-control" name="role" id="role">
-<%--                <option value=""></option>--%>
-                <%--                        var="role => une nouvelle variable appellée role--%>
-                <%--                        Items => reçu du controller UserManageController de la focntion showUserManage--%>
-                <c:forEach var="roletest" items="${roleList}">
-                    <option value="${roletest.idRole}"><c:out value="${roletest.role}"/></option>
-                </c:forEach>
-            </select>
-        </div>
-    </div>
-
-    <div class="my-3">
-        <div class="">
-            <label class="form-label text-black">Actif : </label>
-            <input type="checkbox" id="enabled" name="enabled"/>
-        </div>
-    </div>
 
 
 </div>

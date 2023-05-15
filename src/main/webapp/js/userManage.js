@@ -12,11 +12,11 @@ $(document).ready(function () {
             {data: 'firstname'},
             {data: 'email', render: transformToMail10},
             {data: 'phone'},
-            {data: 'address.street', render : minText15},
+            {data: 'address.street', render: minText15},
             {data: 'address.number'},
             {data: 'address.box'},
             {data: 'address.city.cityName'},
-            {data: 'makeActionUser', render :makeActionUser},
+            {data: 'makeActionUser', render: makeActionUser},
 
         ],
         order: [[1, 'asc']],
@@ -61,11 +61,10 @@ $(document).ready(function () {
     }
 
 
-
 });
 
 
-function toggleUserPopup(id){
+function toggleUserPopup(id) {
     if (!id) {
         $("#formUserInfo").toggle();
         return;
@@ -85,14 +84,13 @@ function toggleUserPopup(id){
             document.getElementById('street').value = c.address.street;
             document.getElementById('number').value = c.address.number;
             document.getElementById('box').value = c.address.box;
-            document.getElementById('postalCode').value = c.address.city.postalCode;
-            document.getElementById('cityName').value = c.address.city.cityName;
+            document.getElementById('idCity').value = c.address.city.idCity;
             document.getElementById('countryName').value = c.address.city.country.countryName;
             document.getElementById('role').value = c.role.idRole;
-            document.getElementById('enabled').value = c.enabled;
+            $('#enabled').prop('checked', c.enabled);
 
             //permet de mettre les champs en lecture seul pour tous les acteurs qui ne sont pas admin
-            if(!isAdmin) {
+            if (!isAdmin) {
                 $('#lastname').prop('disabled', true);
                 $('#firstname').prop('disabled', true);
                 $('#email').prop('disabled', true);
@@ -100,8 +98,7 @@ function toggleUserPopup(id){
                 $('#street').prop('disabled', true);
                 $('#number').prop('disabled', true);
                 $('#box').prop('disabled', true);
-                $('#postalCode').prop('disabled', true);
-                $('#cityName').prop('disabled', true);
+                $('#idCity').prop('disabled', true);
                 $('#countryName').prop('disabled', true);
                 $('#role').prop('disabled', true);
                 $('#enabled').prop('disabled', true);
@@ -115,7 +112,7 @@ function toggleUserPopup(id){
                         $(this).dialog("close");
                     }
                 }];
-            if(isAdmin) {
+            if (isAdmin) {
                 btn.push({
                     text: "Enregistrer",
                     icon: "ui-icon-heart",
@@ -129,9 +126,9 @@ function toggleUserPopup(id){
             // $("#formCategory").toggle();
             $("#formUserInfo").dialog({
                 modal: true,
-                minWidth: 700,
-                minHeight: 300,
-                open: function() {
+                minWidth: 1200,
+                minHeight: 100,
+                open: function () {
                     $(this).closest(".ui-dialog")
                         .find(".ui-dialog-titlebar-close")
                         .removeClass("ui-dialog-titlebar-close")
@@ -146,4 +143,57 @@ function toggleUserPopup(id){
     if (!found) {
         $("#formUserInfo").toggle();
     }
+}
+
+function modifiedUser() {
+    var data = {
+        lastname: $('#lastname').val(),
+        firstname: $('#firstname').val(),
+        email: $('#email').val(),
+        phone: $('#phone').val(),
+        address: {
+            street: $('#street').val(),
+            number: $('#number').val(),
+            box: $('#box').val(),
+            city: {
+                idCity: $('#idCity').val(),
+            },
+        },
+        role: {
+            idRole: $('#role').val(),
+        },
+        enabled: $('#enabled').is(':checked')
+    }
+    $.ajax({
+        contentType: 'application/json',
+        type: 'PUT',
+        url: pageContextPath + "/userManage/modifiedUser",
+        data: JSON.stringify(data),
+        success: successSaveUser,
+        fail: fail,
+        dataType: "json",
+        headers: {'X-CSRF-Token': $('#_csrf').val()}
+
+    });
+}
+
+function successSaveUser() {
+    userManageDatatable.ajax.reload();
+    $.toast(
+        {
+            heading: 'Félicitations',
+            text: 'Votre utilisateur a été modifié.',
+            showHideTransition: 'slide',
+            icon: 'success',
+            position: 'top-right',
+            stack: false
+        }
+    );
+    // $("#formCategory").toggle();
+}
+
+function fail(e) {
+    console.log(e);
+    alert("fail: " + e);
+
 }

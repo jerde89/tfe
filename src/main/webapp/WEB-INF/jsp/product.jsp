@@ -22,16 +22,15 @@
 <div>
     <%@include file="navbar.jsp" %>
 
-        <h1 style="text-align: center">Gestion des produits
-            <button onclick="toggleProductPopup(-1)"  data-toggle="tooltip" data-placement="top" title="ajouter un produit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-node-plus" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M11 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6.025 7.5a5 5 0 1 1 0 1H4A1.5 1.5 0 0 1 2.5 10h-1A1.5 1.5 0 0 1 0 8.5v-1A1.5 1.5 0 0 1 1.5 6h1A1.5 1.5 0 0 1 4 7.5h2.025zM11 5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 11 5zM1.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
-                </svg>
-            </button>
-        </h1>
-    
-
-
+    <h4 style="text-align: center">Gestion des produits
+        <button onclick="toggleProductPopup(-1)" data-toggle="tooltip" data-placement="top" title="ajouter un produit">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-node-plus"
+                 viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M11 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6.025 7.5a5 5 0 1 1 0 1H4A1.5 1.5 0 0 1 2.5 10h-1A1.5 1.5 0 0 1 0 8.5v-1A1.5 1.5 0 0 1 1.5 6h1A1.5 1.5 0 0 1 4 7.5h2.025zM11 5a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 11 5zM1.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+            </svg>
+        </button>
+    </h4>
     <div class="container">
         <div>
             <div class="tab-pane active m-4" id="tab-table1">
@@ -58,82 +57,79 @@
 
     </div>
 
-    <div id="formProduct" class="popup">
-            <%--        <form method="post"--%>
-            <%--              action="${pageContext.request.contextPath}/category"--%>
-            <%--              onsubmit="return validateCategoryForm()">--%>
+
+
+    <%--        <div id="formProductTEST" class="popup">--%>
+    <%--            <form method="post" action="${pageContext.request.contextPath}/product/test" enctype="multipart/form-data">--%>
+    <div id="formProduct" class="popupDialog">
+        <form method="post" id="form-data" enctype="multipart/form-data">
 
             <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
 
-            <div class="pb-1" style="text-align: center">
-                <h3 id="formProductTitleAdd">Nouveau produit</h3>
-                <h3 id="formProductTitleModify">Modification produit</h3>
-            </div>
-            <hr>
+<%--            <div class="pb-1" style="text-align: center">--%>
+<%--                <h3 id="formProductTitleAdd">Nouveau produit</h3>--%>
+<%--                <h3 id="formProductTitleModify">Modification produit</h3>--%>
+<%--            </div>--%>
+<%--            <hr>--%>
 
             <input type="hidden" id="idProduct">
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Nom :</label>
-                    <input type="text" class="form-control" id="name" name="name" onblur="checkNameProduct(this)"/>
-                    <div class="col-12">
-                        <div class="span-error-div"><span class="span-error4" id="errorName"></span></div>
-                    </div>
+                    <input type="text" class="form-control" id="name" name="name" "/>
+
                 </div>
             </div>
 
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Description :</label>
-                    <input type="text" class="form-control" id="description" name="description"
-                           onblur="checkDescriptionProduct()"/>
-                    <div class="col-12">
-                        <div class="span-error-div"><span class="span-error4" id="errorDescription"></span></div>
-                    </div>
+                    <input type="text" class="form-control" id="description" name="description"/>
+
                 </div>
             </div>
 
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Catégorie :</label>
-                    <select  class="form-control" name="category" id="category">
+                    <select class="form-control" name="category" id="category">
                         <option value=""></option>
-<%--                        var="category => une nouvelle variable appellée category--%>
-<%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
+                        <%--                        var="category => une nouvelle variable appellée category--%>
+                        <%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
                         <c:forEach var="category" items="${categoryList}">
-                        <option value="${category.id}"><c:out value="${category.name}"/></option>
+                            <option value="${category.id}"><c:out value="${category.name}"/></option>
                         </c:forEach>
                     </select>
-                    <div class="col-12">
-                        <div class="span-error-div"><span class="span-error4" id="errorTva"></span></div>
-                    </div>
+
                 </div>
             </div>
 
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Image :</label>
-                    <input type="file" class="form-control" id="img" name="img"/>
-                </div>
-            </div>
-
-            <div class="row mx-1">
-                <div class="col-12">
-                    <label class="form-label text-black">HTVA :</label>
-                    <input type="text" class="form-control" id="price" name="price"
-                           onblur="checkPriceProduct()"/>
-                    <div class="col-12">
-                        <div class="span-error-div"><span class="span-error4" id="errorPrice"></span></div>
+                    <input type="file" class="form-control" id="file" name="file"/>
+                    <div  id="imgUrlDiv">
+                        <span>Chemin actuel:</span>
+                        <span id="imgUrl"></span>
                     </div>
                 </div>
             </div>
 
             <div class="row mx-1">
                 <div class="col-12">
+                    <label class="form-label text-black">Prix :</label>
+                    <input type="text" class="form-control" id="price" name="price"
+                           onblur="checkPriceProduct()"/>
+
+                </div>
+            </div>
+
+            <div class="row mx-1">
+                <div class="col-12">
                     <label class="form-label text-black">Taux de TVA :</label>
-<%--                    <input type="text" class="form-control" id="tva" name="tva"--%>
-<%--                           onblur="checkTvaProduct()"/>--%>
-                    <select  class="form-control" name="tax_rate" id="tax_rate" onblur="checkTaxRateProduct()">
+                    <%--                    <input type="text" class="form-control" id="tva" name="tva"--%>
+                    <%--                           onblur="checkTvaProduct()"/>--%>
+                    <select class="form-control" name="tax_rate" id="tax_rate" onblur="checkTaxRateProduct()">
                         <option value=""></option>
                         <option value="0">0</option>
                         <option value="6">6</option>
@@ -147,7 +143,7 @@
             </div>
 
 
-                <div class="row mx-1">
+            <div class="row mx-1">
                 <div class="pb-3">
                     <label class="form-label text-black">Actif : </label>
                     <input type="checkbox" id="enable" name="enable"/>
@@ -157,7 +153,7 @@
             <div class="row mx-1" id="blockCreated">
                 <div class="col-12">
                     <label class="form-label text-black">Créé le :</label>
-                        <span id="created"></span>
+                    <span id="created"></span>
 
                 </div>
             </div>
@@ -165,28 +161,15 @@
             <div class="row mx-1" id="blockUpdated">
                 <div class="col-12">
                     <label class="form-label text-black">Modifié le :</label>
-                        <span id="update"></span>
+                    <span id="update"></span>
 
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 ms-auto text-center">
-                    <button onclick="closePopupProduct()" class="btn btn-primary" style="background-color:#e3b04b">
-                        Annuler
-                    </button>
-                </div>
-                <div class="col-md-6 ms-auto text-center">
-                    <button type="submit" onclick="saveProductForm()" class="btn btn-primary"
-                            style="background-color:#e3b04b">
-                        Enregistrer
-                    </button>
-                </div>
+        </form>
+    </div>
+    <%--        </div>--%>
 
-            </div>
-            <%--        </form>--%>
-        </div>
-
-    </body>
+</body>
 <c:import url="footer.jsp"/>
 </html>
 

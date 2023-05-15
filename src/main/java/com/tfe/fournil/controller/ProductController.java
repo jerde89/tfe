@@ -11,12 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -33,9 +32,8 @@ public class ProductController {
     ProductCategoryRepository productCategoryRepository;
 
     @GetMapping("")
-    public String showCategoryList(Model model)
-    {
-        List<ProductCategory> category =productCategoryRepository.findAll();
+    public String showCategoryList(Model model) {
+        List<ProductCategory> category = productCategoryRepository.findAll();
         model.addAttribute("categoryList", category);
         return "product";
     }
@@ -52,55 +50,88 @@ public class ProductController {
         if (categorieIds != null && !categorieIds.isEmpty()) {
             return ResponseEntity.ok(productRepository.findAllByCategoryIdIn(categorieIds));
         } else {
-            return ResponseEntity.ok( productRepository.findAll());
+            return ResponseEntity.ok(productRepository.findAll());
         }
     }
 
     @PostMapping(value = "")
     //@RequestBody Product product => va recevoir un objet JSON de type Product appellé product
     //Objet Product va recevoir les champ nom, desription, price, taxRate, category, ... de la js ProductJs d'une requête ajax)
-    public ResponseEntity<Product> addProduct(@RequestBody Product product){
-        product.setImg(null);  // a enlever quand jquery fonctionnera
-        product.setUpdateAt(new Date());
-        product.setCreatedAt(new Date());
-
-        //Je crée une variable id qui va valoir l'id de la categorie qui a recue
-        //getCategory().getid() => clé étrangère
-        long id = product.getCategory().getId();
-
-        //je crée un objet de type ProductCategory nommé productCategoryOptional
-        //productCategoryRepository.findById(id) => il va trouvé l'id dans la table productCategory suivant l'id reçu
-        //l'optinal productCategoryOptional permet de recuperer le result de la fonction findbyId dans l'optional
-        Optional<ProductCategory> productCategoryOptional = productCategoryRepository.findById(id);
-
-//
-        //si l'objet productCategoryOptional est présent, je set la categorie de l'objet product
-        //Equivalent => productCategoryOptional.ifPresent(product::setCategory);
-        if(productCategoryOptional.isPresent()){
-            product.setCategory(productCategoryOptional.get());
+//    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> addProduct(@RequestParam("name") String name,
+                                              @RequestParam("description") String description,
+                                              @RequestParam("category") long category,
+                                              @RequestParam(value = "file", required = false) MultipartFile file,
+                                              @RequestParam("price") float price,
+                                              @RequestParam("tax_rate") int tax_rate,
+                                              @RequestParam("enable") boolean enable) {
+        Product product = new Product();
+        product.setName(name);
+        product.setDescription(description);
+        product.setPrice(price);
+        product.setEnable(enable);
+        product.setTaxRate(tax_rate);
+        ProductCategory productCategory = productCategoryRepository.findById(category).orElseThrow();
+        if (productCategory != null) {
+            product.setCategory(productCategory);
         }
-        productRepository.save(product);
+        String message;
+        String url;
 
+        try {
+            if (!file.isEmpty()) {
+                url = fileStorageService.save(file, file.getOriginalFilename());
+                product.setImg(url);
+                message = "Uploaded the file successfully: " + file.getOriginalFilename();
+                log.info(message + "URL : " + url);
+            } else {
+                log.info("coucou m'chou");
+                product.setImg("istockphoto-1341411204-612x612.jpg");
+            }
+
+        } catch (Exception e) {
+            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+            log.error(message);
+        }
+
+
+        productRepository.save(product);
         return ResponseEntity.ok(product);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Product> modifyProduct(@RequestBody Product newProduct, @PathVariable long id) {
+    public ResponseEntity<Product> modifyProduct(@RequestParam("name") String name,
+                                                 @RequestParam("description") String description,
+                                                 @RequestParam("category") long category,
+                                                 @RequestParam(value = "file", required = false) MultipartFile file,
+                                                 @RequestParam("price") float price,
+                                                 @RequestParam("tax_rate") int tax_rate,
+                                                 @RequestParam("enable") boolean enable, @PathVariable long id) {
+
+
         Product product = productRepository.findById(id)
                 .map(product1 -> {
-                    product1.setName(newProduct.getName());
-                    product1.setDescription(newProduct.getDescription());
-                    product1.setPrice(newProduct.getPrice());
-                    product1.setTaxRate(newProduct.getTaxRate());
+                    product1.setName(name);
+                    product1.setDescription(description);
+                    product1.setPrice(price);
+                    product1.setTaxRate(tax_rate);
                     product1.setUpdateAt(new Date());
-                    product1.setEnable(newProduct.getEnable());
-                    long catId = newProduct.getCategory().getId();
-                    Optional<ProductCategory> productCategory = productCategoryRepository.findById(catId);
+                    product1.setEnable(enable);
+                    Optional<ProductCategory> productCategory = productCategoryRepository.findById(category);
                     productCategory.ifPresent(product1::setCategory);
                     return productRepository.save(product1);
                 })
                 .orElseGet(() -> {
-                    newProduct.setIdProduct(id);
+                    Product newProduct = new Product();
+                    newProduct.setName(name);
+                    newProduct.setDescription(description);
+                    newProduct.setPrice(price);
+                    newProduct.setEnable(enable);
+                    newProduct.setTaxRate(tax_rate);
+                    ProductCategory productCategory = productCategoryRepository.findById(category).orElseThrow();
+                    if (productCategory != null) {
+                        newProduct.setCategory(productCategory);
+                    }
                     return productRepository.save(newProduct);
                 });
         return ResponseEntity.ok(product);

@@ -13,7 +13,15 @@ $(document).ready(function () {
             {data: 'name'},
             {data: 'description'},
             {data: 'category.name'},
-            {data: 'img'},
+            {data: 'img', render: function (data, type, row) {
+                    if (data !== "" && data !== null) {
+                        return '<img class="img24" src="'+pageContextPath+'/imageProduct/'+data+'">';
+                    } else {
+                        return '<img class="img24" src="'+pageContextPath+'/imageProduct/istockphoto-1341411204-612x612.jpg">';
+                    }
+                    return data;
+                }
+                },
             {data: 'price'},
             {data: 'taxRate'},
             {
@@ -67,7 +75,15 @@ $(document).ready(function () {
         strReturn += data.length > 9 ? '...' : '';
         return strReturn;
     }
+    $('form').on('submit', function(e) {
+        // alert('submit');
+        e.preventDefault();
+    });
 
+    $('button').on('click', function(e) {
+        e.preventDefault();
+        // alert('clicked');
+    });
 
 
 })
@@ -89,14 +105,17 @@ function toggleProductPopup(id) {
     $('#created').val("");
     $('#update').val("");
     $('#enable').prop( "checked", true )
-
+    $("#file").val(null);
     const isNew = id === -1;
     if (isNew) {
         $("#blockCreated").hide();
         $("#blockUpdated").hide();
         $("#formProductTitleAdd").show();
         $("#formProductTitleModify").hide();
-        $("#formProduct").toggle();
+        $("#imgUrlDiv").hide();
+        $("#tax_rate").val(6);
+        $("#formProduct").prop('title', "Ajout d'un produit");
+        showPopup();
         return;
     }
     $("#blockCreated").show();
@@ -104,38 +123,37 @@ function toggleProductPopup(id) {
     $("#formProductTitleAdd").hide();
     $("#formProductTitleModify").show();
 
+
     productDatatable.rows().every(function (rowIdx, tableLoop, rowLoop) {
         var c = this.data();
-        if (c.idProduct == id) {
+        if (c.idProduct === id) {
             $('#idProduct').val(c.idProduct);
-
             //Dans la popup de modification des produits => va recupérer les info sur le produit pour les afficher
             //elemendId => id de l'input de jsp
             //C.name => entity nom d'un élément
             document.getElementById('name').value = c.name;
             document.getElementById('description').value = c.description;
             document.getElementById('category').value = c.category.id;
-            document.getElementById('img').value = c.img;
+            $('#imgUrl').html(c.img);
             document.getElementById('price').value = c.price;
             document.getElementById('tax_rate').value = c.taxRate;
-
-
             document.getElementById('created').innerHTML = moment(c.createdAt).format("DD/MM/YYYY HH:mm");
             if (c.updateAt) {
                 document.getElementById('update').innerHTML = moment(c.updateAt).format("DD/MM/YYYY HH:mm");
-
             }
             // si enable est à true, la checkbox est cochée
             if (c.enable) {
                 document.getElementById('enable').checked = c.enable;
             }
-            $("#formProduct").toggle();
+            $("#formProduct").prop('title', "Mdofication d'un produit");
+            showPopup();
             found = true;
             // return;
         }
     });
     if (!found) {
-        $("#formProduct").toggle();
+        $("#formProduct").prop('title', "Ajout d'un produit");
+        showPopup();
     }
 }
 
@@ -155,8 +173,15 @@ function toggleProductPopup(id) {
 // }
 
 function callAjaxModifyProduct() {
+
     const id = $('#idProduct').val();
     console.log($('#idProduct').val());
+
+    var form = $("#formData");
+    // var formData = new FormData(form[0]);
+    const formData = new FormData($('#form-data')[0]);
+    console.log(formData);
+
 
     var data = {
         'name': $('#name').val(),
@@ -168,6 +193,7 @@ function callAjaxModifyProduct() {
         'taxRate': $('#tax_rate').val(),
 
         'enable': $('#enable').is(':checked'),
+        // 'formData': $('#file').file[0]
     };
 
     const isNew = id === "";
@@ -181,18 +207,25 @@ function callAjaxModifyProduct() {
         ajax = {
             type: "PUT",
             url: pageContextPath + "/product/" + id,
+
         }
     }
 
     $.ajax({
-        contentType: 'application/json',
+
+        // contentType: 'application/json',
         type: ajax.type,
         url: ajax.url,
-        data: JSON.stringify(data),
+        // data: JSON.stringify(data),
+        data: formData,
         success: successSaveProduct,
         fail: fail,
-        dataType: "json",
-        headers: {'X-CSRF-Token': $('#_csrf').val()}
+        // dataType: "json",
+        headers: {'X-CSRF-Token': $('#_csrf').val()},
+
+        cache: false,
+        contentType: false,
+        processData: false
 
     });
 }
@@ -291,8 +324,8 @@ function checkTaxRateProduct() {
 
 function validateProductForm(isNew) {
     let formIsValid = true;
-    checkNameProduct(isNew) === false ? formIsValid = false : formIsValid = formIsValid;
-    checkDescriptionProduct() === false ? formIsValid = false : formIsValid = formIsValid;
+    // checkNameProduct(isNew) === false ? formIsValid = false : formIsValid = formIsValid;
+    // checkDescriptionProduct() === false ? formIsValid = false : formIsValid = formIsValid;
     return formIsValid;
 }
 
@@ -309,4 +342,35 @@ function saveProductForm() {
 
 function closePopupProduct() {
     $("#formProduct").toggle();
+}
+
+function showPopup(){
+    $("#formProduct").dialog({
+        modal: true,
+        minWidth: 600,
+        minHeight: 300,
+        open: function() {
+            $(this).closest(".ui-dialog")
+                .find(".ui-dialog-titlebar-close")
+                .removeClass("ui-dialog-titlebar-close")
+                .html("<span class='ui-button-icon-primary ui-icon ui-icon-closethick'></span>");
+        },
+        buttons: [
+            {
+                text: "Fermer",
+                icon: "ui-icon-heart",
+                click: function () {
+                    $(this).dialog("close");
+                }
+            },
+            {
+                text: "Enregistrer",
+                icon: "ui-icon-heart",
+                click: function () {
+                    saveProductForm();
+                    $(this).dialog("close");
+                }
+            },
+        ]
+    });
 }

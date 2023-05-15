@@ -32,22 +32,23 @@
             <li class="nav-item">
                 <sec:authorize access="hasAnyAuthority('ADMIN', 'EMPLOYEE')">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/category">Gestion des Catégories</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/category">Catégories</a>
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/product">Gestion des Produits</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/product">Produits</a>
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/userManage">Gestion des Utilisateurs</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/userManage">Utilisateurs</a>
             <li class="nav-item">
                 </sec:authorize>
 
                 <sec:authorize access="hasAnyAuthority('ADMIN')">
+            <li class="nav-item text-warning pt-4">|</li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/feedbackList">Gestion des feedbacks</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/feedbackList">Feedbacks</a>
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/shop">Gestion des magasins</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/shop">Magasins</a>
             <li class="nav-item">
                 </sec:authorize>
             </li>

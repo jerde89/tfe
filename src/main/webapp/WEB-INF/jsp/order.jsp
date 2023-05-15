@@ -64,7 +64,9 @@
 
         <c:forEach var="product" items="${productList}">
             <div class="profile">
-                <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png"
+<%--                https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png--%>
+                <div class="profile__image"><img src="http://localhost:8080/imageProduct/${product.img}"
+
                                                  alt="Doggo"/></div>
                 <div class="profile__info">
                     <h3>${product.name}</h3>
