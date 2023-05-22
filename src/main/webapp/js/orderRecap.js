@@ -1,23 +1,39 @@
+let deliveryPicker = null;
+$(document).ready(function () {
+    documentLoaded();
+    $('input[type=radio][name=delivery_mode]').change(function () {
+        if (this.value == 'HOME') {
+            console.log(deliveryPicker);
+            $("#datepicker").datepicker("option", "beforeShowDay", renderCalendarCallback);
+        }
+    });
+});
+
+function renderCalendarCallback(date) {
+    var day = date.getDay();
+    if($('input[name="delivery_mode"]:checked').val() === 'HOME'){
+        return [(day === 0)];
+    };
+    return [(day !== 2 && day !== 3 && day !== 4)];
+}
+
 function documentLoaded() {
-    console.log($('#myBagNav'));
-    $('#myBagNav').hide();
+    // console.log($('#myBagNav'));
+    // $('#myBagNav').hide();
     showMyBag();
-    $("#datepicker").datepicker({
-        beforeShowDay: function(d) {
-            var day = d.getDay();
-            return [(day !== 2 && day !== 3 && day !== 4)];
-        },
+    deliveryPicker = $("#datepicker").datepicker({
+        beforeShowDay: renderCalendarCallback,
         closeText: 'Fermer',
         prevText: '&#x3c;Préc',
         nextText: 'Suiv&#x3e;',
         currentText: 'Aujourd\'hui',
-        monthNames: ['Janvier','Fevrier','Mars','Avril','Mai','Juin',
-            'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
-        monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun',
-            'Jul','Aou','Sep','Oct','Nov','Dec'],
-        dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-        dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-        dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+        monthNames: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin',
+            'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Avr', 'Mai', 'Jun',
+            'Jul', 'Aou', 'Sep', 'Oct', 'Nov', 'Dec'],
+        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
+        dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
         weekHeader: 'Sm',
         dateFormat: 'dd-mm-yy',
         firstDay: 1,
@@ -35,6 +51,7 @@ function documentLoaded() {
 function showMyBag() {
 
     var myBag = JSON.parse(localStorage.getItem("myBag"));
+    console.log(myBag);
     if (!myBag) {
         return;
     }
@@ -42,43 +59,94 @@ function showMyBag() {
         return;
     }
     myBag.record.forEach(record => {
-        var totalPrice = parseFloat(record.price) * parseFloat(record.quantity);
-        var htmlDiv = "<tr>\n" +
+        if (record.quantity === 0) {
+            return;
+        }
+        const productPriceTva = parseFloat(record.price) * (1 + (record.rateTVA / 100));
+        const totalPrice = Number((record.quantity * productPriceTva).toFixed(2));
+
+        var htmlDiv = "<tr id='product_row_" + record.id + "'>\n" +
             "            <th scope=\"row\">" + record.name + "</th>\n" +
             "            <td>" +
-            "               <input id='quantity_"+record.id+"' type='number' value='" + record.quantity + "' " +
-            "                   onchange='changeQuantity(" + record.id + ", this, " + record.price + ")'></td>\n" +
-            "            <td>" + record.price + "€</td>\n" +
-            "            <td><span class='totalPriceByProduct' id='totalPrice_" + record.id + "'>" + totalPrice + "€</span></td>\n" +
+            "               <input id='quantity_" + record.id + "' class='w-100' type='number' min='0' value='" + record.quantity + "' " +
+            "                   onchange='changeQuantity(" + record.id + ", this, " + productPriceTva + ")'></td>\n" +
+            "            <td>" + Number(productPriceTva).toFixed(2) + "€</td>\n" +
+            "            <td>" +
+            "                   <span class='totalPriceByProduct' id='totalPrice_" + record.id + "'>" + totalPrice + "€</span>" +
+            "            </td>\n" +
+            "            <td> " +
+            "           <span  data-toggle='tooltip' data-placement='top' title='supprimer' onclick='deleteProduct(" + record.id + ")'>\n" +
+            "               <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' className='bi bi-trash' viewBox='0 0 16 16'>\n" +
+            "                     <path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z'/>\n" +
+            "                    <path d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z'/>\n" +
+            "               </svg>\n" +
+            "           </span>\n" +
+            "            </td>\n" +
             "        </tr>"
 
         $("#orderList").append(htmlDiv);
     });
-    $("#orderList").append("<tr>\n" +
+    $("#orderList").append("<tr class='border-none'><td></td></tr>" +
+        "           <tr class='border-none'>\n" +
         "            <td></td>\n" +
         "            <td></td>\n" +
         "            <td>Total :</td>\n" +
         "            <td><span id=\"totalOrders\"></span></td>\n" +
+        "            <td></td>\n" +
         "        </tr>");
 
-    calculTotalOrders();
+    calculationTotalOrders();
 }
 
 function changeQuantity(id, element, priceUnit) {
     var newQuantity = parseInt(element.value, 10);
     var newTotalPrice = Number((newQuantity * priceUnit).toFixed(2));
     $("#totalPrice_" + id).html(newTotalPrice + "€");
-    calculTotalOrders();
+    updateMyBag(id, newQuantity);
+    calculationTotalOrders();
 }
 
-function calculTotalOrders() {
+function updateMyBag(productId, newQuantity) {
+    var myBag = JSON.parse(localStorage.getItem("myBag"));
+    if (!myBag) {
+        return;
+    }
+    if (!myBag.record) {
+        return;
+    }
+    let diff = 0;
+    myBag.record.forEach(product => {
+        if (product.id === productId) {
+            diff = newQuantity - product.quantity;
+            product.quantity = newQuantity;
+        }
+    });
+    myBag.total += diff;
+    $('#mybBagCount').html(myBag.total);
+
+    localStorage.setItem("myBag", JSON.stringify(myBag));
+}
+
+function resetBag() {
+    localStorage.removeItem("myBag");
+    $('#mybBagCount').html(0);
+}
+
+function deleteProduct(productId) {
+    $("#product_row_" + productId).remove();
+    updateMyBag(productId, 0);
+    calculationTotalOrders();
+
+}
+
+function calculationTotalOrders() {
     var totalOrders = 0;
     //$('.totalPriceByProduct') => permet de recupérer tous les éléments dans la class est CSS est totalPriceByProduct
     //.each => peremet de parcourir tous les résultats
     $('.totalPriceByProduct').each(function () {
         totalOrders += parseFloat($(this).html());
     });
-    $("#totalOrders").html(totalOrders + "€");
+    $("#totalOrders").html(Number(totalOrders).toFixed(2) + "€");
 }
 
 function sendOrder() {
@@ -92,23 +160,22 @@ function sendOrder() {
     let order = {
         dateOfReceipt: $("#datepicker").val(),
         total: $("#totalOrders").html().replace('€', '').trim(),
-        deliveryMode:$('input[name="delivery_mode"]:checked').val(),
-        oderDetails: [
-        ]
+        deliveryMode: $('input[name="delivery_mode"]:checked').val(),
+        oderDetails: []
     }
     myBag.record.forEach(product => {
         var oderDetail = {
             id: product.id,
             unitPrice: product.price,
-            quantity: $("#quantity_"+product.id).val,
-            total: $("#totalPrice_"+product.id).html().replace('€', '').trim()
+            quantity: $("#quantity_" + product.id).val,
+            total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
         }
         order.oderDetails.push(oderDetail);
     });
     $.ajax({
         contentType: 'application/json',
         type: "POST",
-        url:  pageContextPath + "/order",
+        url: pageContextPath + "/order",
         data: JSON.stringify(order),
         success: successSaveCategory,
         fail: fail,
@@ -121,6 +188,8 @@ function sendOrder() {
 
 function successSaveCategory() {
     alert('ben jouki biloute');
-}function fail() {
+}
+
+function fail() {
     alert('ben jouki biloute');
 }

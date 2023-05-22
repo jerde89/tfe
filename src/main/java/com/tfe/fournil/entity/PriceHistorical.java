@@ -10,16 +10,16 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name ="ProductPriceHistorical")
+@Table(name ="PriceHistorical")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductPriceHistorical {
+public class PriceHistorical {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id_product_price_historical")
-    private long IdProductPriceHistorical;
+    @Column(name = "id")
+    private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "begin_date_hour", nullable = false)

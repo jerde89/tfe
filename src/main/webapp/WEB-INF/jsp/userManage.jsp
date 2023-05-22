@@ -56,11 +56,17 @@
     <div class="row ">
             <div class="col-6  px-5 py-2">
                 <label class="form-label text-black">Nom :</label>
-                <input type="text" class="form-control" id="lastname" name="lastname"/>
+                <input type="text" class="form-control" id="lastname" name="lastname" onblur="checkLastname()"/>
+                <div class="col-6">
+                    <div class="span-error-div"><span class="span-error4" id="errorLastname"></span></div>
+                </div>
             </div>
             <div class="col-6 px-5 py-2">
                 <label class="form-label text-black">Prénom :</label>
-                <input type="text" class="form-control" id="firstname" name="firstname"/>
+                <input type="text" class="form-control" id="firstname" name="firstname" onblur="checkFirstnameUser()"/>
+                <div class="col-6">
+                    <div class="span-error-div"><span class="span-error4" id="errorFirstnameUser"></span></div>
+                </div>
             </div>
     </div>
 
@@ -72,21 +78,31 @@
         </div>
         <div class="col-6 px-5 py-2">
             <label class="form-label text-black">Téléphonne :</label>
-            <input type="text" class="form-control" id="phone" name="phone"/>
+            <input type="text" class="form-control" id="phone" name="phone" onblur="checkPhoneUser()"/>
+            <div class="col-6">
+                <div class="span-error-div"><span class="span-error4" id="errorPhoneUser"></span></div>
+            </div>
         </div>
+
     </div>
 
     <div class="row">
         <div class= "col-12 px-5 py-2">
             <label class="form-label text-black">Rue :</label>
-            <input type="text" class="form-control" id="street" name="street"/>
+            <input type="text" class="form-control" id="street" name="street" onblur="checkStreet()"/>
+            <div class="col-6">
+                <div class="span-error-div"><span class="span-error4" id="errorStreet"></span></div>
+            </div>
         </div>
     </div>
 
     <div class="row">
              <div class= "col-6 px-5 py-2">
                 <label class="form-label text-black">Numéro :</label>
-                <input type="text" class="form-control" id="number" name="number"/>
+                <input type="text" class="form-control" id="number" name="number" onblur="checkNumber()"/>
+                 <div class="col-6">
+                     <div class="span-error-div"><span class="span-error4" id="errorNumber"></span></div>
+                 </div>
             </div>
             <div class= "col-6 px-5 py-2">
                 <label class="form-label text-black">Boîte :</label>

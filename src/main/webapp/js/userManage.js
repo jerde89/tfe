@@ -116,7 +116,7 @@ function toggleUserPopup(id) {
                 btn.push({
                     text: "Enregistrer",
                     icon: "ui-icon-heart",
-                    click: function () {
+                    click: function validateUserManageForm() {
                         modifiedUser();
                         $(this).dialog("close");
                     }
@@ -196,4 +196,124 @@ function fail(e) {
     console.log(e);
     alert("fail: " + e);
 
+}
+
+function checkLastname() {
+    var lastname = $("#lastname").val();
+    if (lastname === "" || lastname == null) {
+        document.getElementById("errorLastname").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#lastname").addClass("fieldMistake ");
+        return false;
+    } else if (lastname.length > 50) {
+        document.getElementById("errorLastname").innerHTML = "Maximun 50 Caractères";
+        $("#lastname").addClass("fieldMistake ");
+        return false;
+    }
+    document.getElementById("errorLastname").innerHTML = "";
+    $("#lastname").removeClass("fieldMistake ");
+    return true;
+}
+
+function checkFirstnameUser() {
+    var firstnameUser = $("#firstname").val();
+    if (firstnameUser == "" || firstnameUser == null) {
+        document.getElementById("errorFirstnameUser").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#firstname").addClass("fieldMistake ");
+        return false;
+    } else if (firstnameUser.length > 50) {
+        document.getElementById("errorFirstnameUser").innerHTML = "Maximun 50 Caractères";
+        $("#firstname").addClass("fieldMistake ");
+        return false;
+    }
+    document.getElementById("errorFirstnameUser").innerHTML = "";
+    $("#firstname").removeClass("fieldMistake ");
+    return true;
+}
+
+function checkPhoneUser() {
+
+    var phoneUser = $("#phone").val();
+
+    if (phoneUser == "" || phoneUser == null) {
+        document.getElementById("errorPhoneUser").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#phone").addClass("fieldMistake ");
+        return false;
+
+    } else if (phoneUser.length > 50) {
+        document.getElementById("errorPhoneUser").innerHTML = "Maximun 50 Caractères";
+        $("#phone").addClass("fieldMistake ");
+        return false;
+
+    } else {
+        document.getElementById("errorPhoneUser").innerHTML = "";
+        $("#phone").removeClass("fieldMistake ");
+    }
+}
+
+function checkStreet() {
+
+    var street = $("#street").val();
+
+    if (street == "" || street == null) {
+        document.getElementById("errorStreet").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#street").addClass("fieldMistake ");
+        return false;
+
+    } else if (street.length > 100) {
+        document.getElementById("errorStreet").innerHTML = "Maximun 100 Caractères";
+        $("#street").addClass("fieldMistake ");
+        return false;
+
+    } else {
+        document.getElementById("errorStreet").innerHTML = "";
+        $("#street").removeClass("fieldMistake ");
+    }
+}
+
+function checkNumber() {
+
+    var number = $("#number").val();
+
+    if (number == "" || number == null) {
+        document.getElementById("errorNumber").innerHTML = "Veuillez indiquer au moins un caractère";
+        $("#number").addClass("fieldMistake ");
+        return false;
+    } else if (number.length > 10) {
+        document.getElementById("errorNumber").innerHTML = "Maximun 10 Caractères";
+        $("#number").addClass("fieldMistake ");
+        return false;
+
+    } else {
+        document.getElementById("errorNumber").innerHTML = "";
+        $("#number").removeClass("fieldMistake ");
+    }
+}
+
+function validateUserManageForm() {
+    try {
+        //Par défaut, on met que le formulaire est valide (true)
+        let formIsValid = true;
+
+        //checkEmailUser() => on appelle la fonction checkEmailUser
+        //checkEmailUser() === false => SI cette fonction retourne false (conditions ne sont pas réspectées (exemple : champ vide))
+        //? formIsValid = false => ALORS passe formIsValid à false
+        //: formIsValid =formIsValid => SINON (pas utilisé dans ce cas)
+
+        //Revient au même que de faire
+        // if(!checkFirstnameUser()){
+        //     formIsValid = false;
+        // }
+        checkLastname() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkFirstnameUser() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkPhoneUser() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkStreet() === false ? formIsValid = false : formIsValid = formIsValid;
+        checkNumber() === false ? formIsValid = false : formIsValid = formIsValid;
+
+
+        //retourne la valeur de formIsValid (true ou false)
+        return formIsValid;
+    } catch (e) {
+        console.error(e);
+        return false;
+    }
 }

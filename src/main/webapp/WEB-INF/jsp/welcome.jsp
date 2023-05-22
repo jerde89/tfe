@@ -14,7 +14,7 @@
     <%@include file="navbar.jsp" %>
 
 
-    <h1 style="text-align: center">Bienvenue au Fournil des gonceries</h1>
+    <h1 style="text-align: center">Bienvenue au Fournil des Gonceries</h1>
 
     <div class="container align-items-center col-8" >
 

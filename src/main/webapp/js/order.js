@@ -1,9 +1,4 @@
 $(document).ready(function () {
-    // Handler for .ready() called.
-    // alert("clic");
-    $("#jerome").click(function () {
-        alert("clic");
-    });
     // toggle list vs card view
     $(".option__button").on("click", function () {
         $(".option__button").removeClass("selected");
@@ -14,19 +9,11 @@ $(document).ready(function () {
             $(".results-section").attr("class", "results-section results--list");
         }
     });
-    //apprearance
-    $("input.variation").on("click", function () {
-        // if ($(this).val() > 3) {
-        //     $("body").css("background", "#111");
-        //     $("footer").attr("class", "dark");
-        // } else {
-        //     $("body").css("background", "#f9f9f9");
-        //     $("footer").attr("class", "");
-        // }
-    });
+    $('.toHide').hide();
+    findProductByCategory();
 });
 
-function addBagProduct(idProduct, maneProduct, price) {
+function addBagProduct(idProduct, maneProduct, price, rateTVA) {
     var quantity = parseInt($('#quantity_' + idProduct).val(), 10);
     var myBag = JSON.parse(localStorage.getItem("myBag"));
     if (!myBag) {
@@ -36,7 +23,8 @@ function addBagProduct(idProduct, maneProduct, price) {
                 id: idProduct,
                 name: maneProduct,
                 price: price,
-                quantity: quantity
+                quantity: quantity,
+                rateTVA: rateTVA
             }
             ]
         };
@@ -57,8 +45,9 @@ function addBagProduct(idProduct, maneProduct, price) {
         myBag.record.push({
             id: idProduct,
             name: maneProduct,
-            price : price,
-            quantity: quantity
+            price: price,
+            quantity: quantity,
+            rateTVA: rateTVA
         })
         myBag.total += quantity;
     }
@@ -68,42 +57,45 @@ function addBagProduct(idProduct, maneProduct, price) {
 
 
 function findProductByCategory() {
-    var checkedVals = $('input[name="categoryCheckbox"]:checked').map(function() {
+    var checkedVals = $('input[name="categoryCheckbox"]:checked').map(function () {
         console.log(this);
-        return parseInt(this.value,10);
+        return parseInt(this.value, 10);
     }).get();
     console.log(checkedVals);
     $.ajax({
         type: "GET",
         url: pageContextPath + "/product/findByCategories?categories=" + checkedVals,
         success: function (response) {
-            console.log(response);
             $('#productList').html('');
             response.forEach(product => {
-
-                console.log(product);
-                var productDiv= ' <div class="profile">\n' +
-                    '                <div class="profile__image"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png"\n' +
-                    '                                                 alt="Doggo"/></div>\n' +
+                let productImg = product.img;
+                if (!product.img) {
+                    productImg = "istockphoto-1341411204-612x612.jpg";
+                }
+                const imgSrc = "http://localhost:8080/imageProduct/" + productImg;
+                const priceWithTVA = parseFloat(product.price) * (1 + (product.taxRate / 100));
+                var productDiv = ' <div class="profile">\n' +
+                    '                <div class="profile__image">' +
+                    '                   <img src="' + imgSrc + '" alt="' + product.name + '"/>' +
+                    '                  </div>\n' +
                     '                <div class="profile__info">\n' +
-                    '                    <h3>'+product.name +'</h3>\n' +
-                    '                    <p class="profile__info__extra">'+product.description +'</p>\n' +
+                    '                    <h3>' + product.name + '</h3>\n' +
+                    '                    <p class="profile__info__extra">' + product.description + '</p>\n' +
                     '                </div>\n' +
                     '                <div class="profile__stats">\n' +
                     '                    <p class="profile__stats__title">Catégorie</p>\n' +
-                    '                    <h5 class="profile__stats__info">'+product.category.name +'</h5>\n' +
+                    '                    <h5 class="profile__stats__info">' + product.category.name + '</h5>\n' +
                     '                </div>\n' +
                     '                <div class="profile__stats">\n' +
                     '                    <p class="profile__stats__title">Prix</p>\n' +
-                    '                    <h5>'+product.price +'</h5>\n' +
+                    '                    <h5>' + priceWithTVA + '</h5>\n' +
                     '                </div>\n' +
                     '                <div class="profile__stats">\n' +
                     '                    <p class="profile__stats__title">Quantité</p>\n' +
-                    '<%--                    <h5 class="profile__stats__info">45 lbs</h5>--%>\n' +
-                    '                    <input id="quantity_${product.idProduct}" type="number" value="1" class="quantity">\n' +
+                    '                    <input id="quantity_' + product.idProduct + '" type="number" value="1" class="quantity">\n' +
                     '                </div>\n' +
                     '                <div class="profile__cta">\n' +
-                    '                    <a class="button" onclick="addBagProduct('+product.idProduct +',\'${product.name}\', \'${product.price}\')">Ajouter au panier</a>\n' +
+                    '                    <a class="button" onclick="addBagProduct(' + product.idProduct + ',\'' + product.name + '\', ' + product.price + ', ' + product.taxRate + ')">Ajouter au panier</a>\n' +
                     '                </div>\n' +
                     '            </div>';
                 $('#productList').append(productDiv);

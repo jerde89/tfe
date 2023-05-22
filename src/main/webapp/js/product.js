@@ -11,19 +11,25 @@ $(document).ready(function () {
         ajax: {url: '/product/getAll', dataSrc: ""},
         columns: [
             {data: 'name'},
-            {data: 'description'},
+            // {data: 'description'},
             {data: 'category.name'},
-            {data: 'img', render: function (data, type, row) {
+            {
+                data: 'img', render: function (data, type, row) {
                     if (data !== "" && data !== null) {
-                        return '<img class="img24" src="'+pageContextPath+'/imageProduct/'+data+'">';
+                        return '<img class="img24" src="' + pageContextPath + '/imageProduct/' + data + '">';
                     } else {
-                        return '<img class="img24" src="'+pageContextPath+'/imageProduct/istockphoto-1341411204-612x612.jpg">';
+                        return '<img class="img24" src="' + pageContextPath + '/imageProduct/istockphoto-1341411204-612x612.jpg">';
                     }
                     return data;
                 }
-                },
+            },
             {data: 'price'},
             {data: 'taxRate'},
+            {
+                data: 'priceTVA', render: function (data, type, row) {
+                    return (row.price * row.taxRate) + "€";
+                }
+            },
             {
                 data: 'enable', render: function (data, type, row) {
                     if (data == true) {
@@ -54,10 +60,7 @@ $(document).ready(function () {
     }
 
     // fonction permetant de gérer les actions sur un produit
-    function makeActionProduct(data, type, full, meta) {
-        console.log(data);
-        console.log(type);
-        console.log(full);
+    function makeActionProduct(data, type, full) {
         return '<div class="row"><div class="col-4 text-center">\n' +
             '                                         <button onclick="toggleProductPopup(' + full.idProduct + ')" data-toggle="tooltip" data-placement="top" title="Modifier" >\n' +
             '                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">\n' +
@@ -75,12 +78,13 @@ $(document).ready(function () {
         strReturn += data.length > 9 ? '...' : '';
         return strReturn;
     }
-    $('form').on('submit', function(e) {
+
+    $('form').on('submit', function (e) {
         // alert('submit');
         e.preventDefault();
     });
 
-    $('button').on('click', function(e) {
+    $('button').on('click', function (e) {
         e.preventDefault();
         // alert('clicked');
     });
@@ -104,7 +108,7 @@ function toggleProductPopup(id) {
     $('#tax_rate').val("");
     $('#created').val("");
     $('#update').val("");
-    $('#enable').prop( "checked", true )
+    $('#enable').prop("checked", true)
     $("#file").val(null);
     const isNew = id === -1;
     if (isNew) {
@@ -186,7 +190,7 @@ function callAjaxModifyProduct() {
     var data = {
         'name': $('#name').val(),
         'description': $('#description').val(),
-        'category': {'id':  $('#category').val()},
+        'category': {'id': $('#category').val()},
         // 'category':  $('#category').val(),
         'img': $('#img').val(),
         'price': $('#price').val(),
@@ -344,12 +348,12 @@ function closePopupProduct() {
     $("#formProduct").toggle();
 }
 
-function showPopup(){
+function showPopup() {
     $("#formProduct").dialog({
         modal: true,
         minWidth: 600,
         minHeight: 300,
-        open: function() {
+        open: function () {
             $(this).closest(".ui-dialog")
                 .find(".ui-dialog-titlebar-close")
                 .removeClass("ui-dialog-titlebar-close")

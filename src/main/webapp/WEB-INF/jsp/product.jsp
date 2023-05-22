@@ -38,15 +38,16 @@
                     <thead>
                     <tr>
                         <th>Nom</th>
-                        <th>Description</th>
+<%--                        <th>Description</th>--%>
                         <th>Catégorie</th>
                         <th>Image</th>
-                        <th>Prix</th>
-                        <th>taux</th>
+                        <th>HTVA</th>
+                        <th>Taux</th>
+                        <th>TVAC</th>
                         <th>Actif</th>
                         <th>Créée le</th>
                         <th>Modifiée le</th>
-                        <th>Modifier</th>
+                        <th>Action</th>
                     </tr>
                     </thead>
                 </table>
@@ -117,7 +118,7 @@
 
             <div class="row mx-1">
                 <div class="col-12">
-                    <label class="form-label text-black">Prix :</label>
+                    <label class="form-label text-black">HTVA :</label>
                     <input type="text" class="form-control" id="price" name="price"
                            onblur="checkPriceProduct()"/>
 

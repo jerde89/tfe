@@ -247,8 +247,11 @@ function callAjaxIsNotReadFeedback(id) {
     var data = {};
     data.feedbackId = id;
     $.ajax({
-        type: "POST", url: pageContextPath + "/feedbackList/statutNonlu",
-        data: data, success: successIsNotRead, fail: fail
+        type: "POST",
+        url: pageContextPath + "/feedbackList/statutNonlu",
+        data: data,
+        success: successIsNotRead, fail: fail,
+        headers: {'X-CSRF-Token': $('input[name=csrf]').val()}
     });
 }
 
@@ -256,7 +259,7 @@ function successIsNotRead() {
     reloadAllDatatable();
     $.toast(
         {
-            heading: 'Youpppppiiiiii',
+            heading: 'Félicitations',
             text: 'Votre formulaire a été marqué comme non lu.',
             showHideTransition: 'slide',
             icon: 'success',

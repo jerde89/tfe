@@ -12,28 +12,31 @@
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/order.css">
     <script src="${pageContext.request.contextPath}/js/order.js"></script>
-        <script type="text/javascript">
-    var pageContextPath = "${pageContext.request.contextPath}";
-        </script>
+    <script type="text/javascript">
+        var pageContextPath = "${pageContext.request.contextPath}";
+    </script>
     <title>Commande</title>
 </head>
 <body>
 <%@include file="navbar.jsp" %> <!-- Start DEMO HTML (Use the following code into your project)-->
-<input class="variation" id="bluepurple" type="radio" value="1" name="color" checked="checked"/>
-<label for="bluepurple"></label>
-<input class="variation" id="sunset" type="radio" value="2" name="color"/>
-<label for="sunset"></label>
-<input class="variation" id="godiva" type="radio" value="3" name="color"/>
-<label for="godiva"></label>
-<input class="variation" id="dark" type="radio" value="4" name="color"/>
-<label for="dark"></label>
-<input class="variation" id="pinkaru" type="radio" value="5" name="color"/>
-<label for="pinkaru"></label>
+<%--<div id="color-theme">--%>
+    <input class="variation" id="bluepurple" type="radio" value="1" name="color"/>
+    <label for="bluepurple" class="toHide"></label>
+    <input class="variation" id="sunset" type="radio" value="2" name="color" checked="checked"/>
+    <label for="sunset" class="toHide"></label>
+    <input class="variation" id="godiva" type="radio" value="3" name="color"/>
+    <label for="godiva" class="toHide"></label>
+    <input class="variation" id="dark" type="radio" value="4" name="color"/>
+    <label for="dark" class="toHide"></label>
+    <input class="variation" id="pinkaru" type="radio" value="5" name="color"/>
+    <label for="pinkaru" class="toHide" ></label>
+<%--</div>--%>
 <main>
     <section class="results-header">
         <h1>Nos produits</h1>
         <div class="results-header__option">
-            <div class="option__button option--grid selected"><span></span><span></span><span></span><span></span><span>Grid</span></div>
+            <div class="option__button option--grid selected"><span></span><span></span><span></span><span></span><span>Grid</span>
+            </div>
             <div class="option__button option--list"><span></span><span></span><span></span><span>List</span></div>
         </div>
     </section>
@@ -45,7 +48,8 @@
                 <c:forEach var="category" items="${categoryList}">
                     <div class="filters__item">
                         <div class="checkbox">
-                            <input id="checkbox-${category.id}" type="checkbox" name="categoryCheckbox" onclick="findProductByCategory()" value="${category.id}" checked/>
+                            <input id="checkbox-${category.id}" type="checkbox" name="categoryCheckbox"
+                                   onclick="findProductByCategory()" value="${category.id}" checked/>
                             <label for="checkbox-${category.id}">${category.name}<span
                                     class="box"></span>
                                 <div class="tooltip top" data-tooltip="Younger than 18 months."><span><i
@@ -62,34 +66,35 @@
 
     <section class="results-section results--grid" id="productList">
 
-        <c:forEach var="product" items="${productList}">
-            <div class="profile">
-<%--                https://s3-us-west-2.amazonaws.com/s.cdpn.io/567707/dog.png--%>
-                <div class="profile__image"><img src="http://localhost:8080/imageProduct/${product.img}"
-
-                                                 alt="Doggo"/></div>
-                <div class="profile__info">
-                    <h3>${product.name}</h3>
-                    <p class="profile__info__extra">${product.description}</p>
-                </div>
-                <div class="profile__stats">
-                    <p class="profile__stats__title">Catégorie</p>
-                    <h5 class="profile__stats__info">${product.category.name}</h5>
-                </div>
-                <div class="profile__stats">
-                    <p class="profile__stats__title">Prix</p>
-                    <h5>${product.price}</h5>
-                </div>
-                <div class="profile__stats">
-                    <p class="profile__stats__title">Quantité</p>
-<%--                    <h5 class="profile__stats__info">45 lbs</h5>--%>
-                    <input id="quantity_${product.idProduct}" type="number" value="1" class="quantity">
-                </div>
-                <div class="profile__cta">
-                    <a class="button" onclick="addBagProduct(${product.idProduct},'${product.name}', '${product.price}')">Ajouter au panier</a>
-                </div>
-            </div>
-        </c:forEach>
+<%--        <c:forEach var="product" items="${productList}">--%>
+<%--            <div class="profile">--%>
+<%--                <div class="profile__image">--%>
+<%--                    <img src="http://localhost:8080/imageProduct/${product.img}" alt="${product.name}"/>--%>
+<%--                </div>--%>
+<%--                <div class="profile__info">--%>
+<%--                    <h3>${product.name}</h3>--%>
+<%--                    <p class="profile__info__extra">${product.description}</p>--%>
+<%--                </div>--%>
+<%--                <div class="profile__stats">--%>
+<%--                    <p class="profile__stats__title">Catégorie</p>--%>
+<%--                    <h5 class="profile__stats__info">${product.category.name}</h5>--%>
+<%--                </div>--%>
+<%--                <div class="profile__stats">--%>
+<%--                    <p class="profile__stats__title">Prix</p>--%>
+<%--                    <h5>${product.price}</h5>--%>
+<%--                </div>--%>
+<%--                <div class="profile__stats">--%>
+<%--                    <p class="profile__stats__title">Quantité</p>--%>
+<%--                        &lt;%&ndash;                    <h5 class="profile__stats__info">45 lbs</h5>&ndash;%&gt;--%>
+<%--                    <input id="quantity_${product.idProduct}" type="number" value="1" class="quantity">--%>
+<%--                </div>--%>
+<%--                <div class="profile__cta">--%>
+<%--                    <a class="button"--%>
+<%--                       onclick="addBagProduct(${product.idProduct},'${product.name}', '${product.price}', '${product.taxRate}')">Ajouter--%>
+<%--                        au panier</a>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </c:forEach>--%>
     </section>
 
 </main>

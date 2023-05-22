@@ -5,3 +5,10 @@
     width: 70%;
     margin-left: 50px;
 }
+
+.border-none td {
+    border: none!important;
+}
+.w-100 {
+    width: 100px !important;
+}
