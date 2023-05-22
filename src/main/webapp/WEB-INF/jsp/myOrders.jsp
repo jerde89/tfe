@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="java.time.format.DateTimeFormatter" %>
 <html>
 <head>
     <title>Mes commandes</title>
@@ -19,36 +19,38 @@
 
 <div class="container">
     <div class="col-md-12">
-<%--        <div class="panel panel-default">--%>
-<%--            <div class="panel-heading">--%>
-<%--                Employee--%>
-<%--            </div>--%>
-            <div class="panel-body">
-                <table class="table table-condensed table-striped">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Numéro de commande</th>
-                        <th>Date de la commande</th>
-                        <th>Prix total </th>
-                        <th>Etat</th>
+        <%--        <div class="panel panel-default">--%>
+        <%--            <div class="panel-heading">--%>
+        <%--                Employee--%>
+        <%--            </div>--%>
+        <div class="panel-body">
+            <table class="table table-condensed table-striped">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Numéro de commande</th>
+                    <th>Date de reception commande</th>
+                    <th>Prix total</th>
+                    <th>Etat</th>
+                </tr>
+                </thead>
 
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                        <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                        <td>1</td>
-                        <td>31/12/2023</td>
-                        <td>25€</td>
-                        <td>Terminé</td>
-
+                <tbody>
+                <c:forEach var="order" items="${myOrders}">
+                    <tr data-toggle="collapse" data-target="#demo${order.idOrder}" class="accordion-toggle">
+                        <td>
+                            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span>
+                            </button>
+                        </td>
+                        <td>${order.idOrder}</td>
+                        <td>${order.dateOfReceipt.format( DateTimeFormatter.ofPattern("dd/MM/yyyy"))}</td>
+                        <td>${order.total}</td>
+                        <td>${order.status}</td>
                     </tr>
 
                     <tr>
                         <td colspan="12" class="hiddenRow">
-                            <div class="accordian-body collapse  px-5" id="demo1">
+                            <div class="accordian-body collapse  px-5" id="demo${order.idOrder}">
                                 <table class="table table-striped">
                                     <thead>
                                     <tr class="info">
@@ -59,50 +61,23 @@
                                     </thead>
 
                                     <tbody>
-
-                                    <tr data-toggle="collapse"  class="accordion-toggle" data-target="#demo10">
-                                        <td>Pains</td>
-                                        <td>Pain de campagne</td>
-                                        <td>10</td>
-
-                                    </tr>
-
-
-                                    <tr>
-                                        <td>Patisserie</td>
-                                        <td>Tarte aux fraises</td>
-                                        <td>1</td>
-
-                                    </tr>
-
-
+                                    <c:forEach var="orderDetail" items="${order.orderDetails}">
+                                        <tr data-toggle="collapse" class="accordion-toggle"
+                                            data-target="#demo${order.idOrder}0">
+                                            <td>${orderDetail.product.category.name}</td>
+                                            <td>${orderDetail.product.name}</td>
+                                            <td>${orderDetail.quantity}</td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
-
                             </div>
                         </td>
                     </tr>
-
-
-
-                    <tr data-toggle="collapse" data-target="#demo2" class="accordion-toggle">
-                        <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                        <td>32</td>
-                        <td>11/11/2022</td>
-                        <td>14,5</td>
-                        <td>Terminé</td>
-
-                    </tr>
-                    <tr>
-                        <td colspan="6" class="hiddenRow"><div id="demo2" class="accordian-body collapse">Demo2</div></td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-
-<%--        </div>--%>
-
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

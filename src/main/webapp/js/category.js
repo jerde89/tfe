@@ -116,9 +116,11 @@ function toggleCategoryPopup(id) {
                 document.getElementById('update').innerHTML = moment(c.updateAt).format("DD/MM/YYYY HH:mm");
 
             }
+            $( "#enable" ).prop( "checked", false );
             // si enable est à true, la checkbox est cochée
             if (c.enable) {
-                document.getElementById('enable').checked = c.enable;
+                $( "#enable" ).prop( "checked", c.enable );
+                // document.getElementById('enable').checked = c.enable;
             }
             // $("#formCategory").toggle();
             showPopup();

@@ -45,17 +45,22 @@
             </div>
             <div>
                 <input type="radio" id="delivery" name="delivery_mode" value="HOME">
-                <label for="delivery">Livraison à domicile </label><span>(2€ supplémentaire, uniquement le dimanche)</span>
+                <label for="delivery">Livraison à
+                    domicile </label><span>(2€ supplémentaire, uniquement le dimanche)</span>
             </div>
         </div>
     </div>
     <div>
         <h3>Date de la commande/livraison</h3>
-        <input type="text" id="datepicker">
+        <div class="m-3">
+            <input type="text" id="datepicker">
+        </div>
     </div>
-    <div class="m-5">
+    <div class="m-5  ">
+        <div class="w-25  ">
         <input type="submit" value="Valider ma commande" class="form-control btn btn-primary rounded submit px-3"
-               onclick="sendOrder()">
+               onclick="sendOrder()" >
+        </div>
     </div>
     <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
 </div>

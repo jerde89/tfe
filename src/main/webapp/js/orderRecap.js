@@ -159,25 +159,28 @@ function sendOrder() {
     }
     let order = {
         dateOfReceipt: $("#datepicker").val(),
-        total: $("#totalOrders").html().replace('€', '').trim(),
+        // total: $("#totalOrders").html().replace('€', '').trim(),
         deliveryMode: $('input[name="delivery_mode"]:checked').val(),
-        oderDetails: []
+        orderDetails: []
     }
     myBag.record.forEach(product => {
         var oderDetail = {
             id: product.id,
-            unitPrice: product.price,
-            quantity: $("#quantity_" + product.id).val,
-            total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
+            price: product.price,
+            quantity: parseInt($("#quantity_" + product.id).val(),10),
+            // total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
+            product :{
+                idProduct: product.id
+            }
         }
-        order.oderDetails.push(oderDetail);
+        order.orderDetails.push(oderDetail);
     });
     $.ajax({
         contentType: 'application/json',
         type: "POST",
         url: pageContextPath + "/order",
         data: JSON.stringify(order),
-        success: successSaveCategory,
+        success: successSaveOrder,
         fail: fail,
         dataType: "json",
         headers: {'X-CSRF-Token': $('#_csrf').val()}
@@ -186,8 +189,9 @@ function sendOrder() {
 
 }
 
-function successSaveCategory() {
-    alert('ben jouki biloute');
+function successSaveOrder() {
+    resetBag();
+    location.href="/order";
 }
 
 function fail() {

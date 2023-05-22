@@ -20,7 +20,11 @@ public class OrderDetail {
     private  float price;
     private int quantity;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn (name = "id_order")
-    private Order order;
+//    @ManyToOne(cascade=CascadeType.ALL)
+//    @JoinColumn (name = "id_order", nullable = false)
+//    private Order order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id_product")
+    private Product product;
 }
