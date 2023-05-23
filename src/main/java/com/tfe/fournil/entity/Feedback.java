@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.util.Date;
 
@@ -59,4 +60,8 @@ public class Feedback {
     private Date updateAtFeedback;
 
     private String commentShort;
+
+    @ManyToOne(cascade=CascadeType.ALL)
+    @JoinColumn (name = "id_user")
+    private User user;
 }

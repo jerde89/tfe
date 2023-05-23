@@ -73,7 +73,7 @@ function findProductByCategory() {
                     productImg = "istockphoto-1341411204-612x612.jpg";
                 }
                 const imgSrc = "http://localhost:8080/imageProduct/" + productImg;
-                const priceWithTVA = parseFloat(product.price) * (1 + (product.taxRate / 100));
+                const priceWithTVA = parseFloat((product.price) * (1 + (product.taxRate / 100))).toFixed(2);
                 var productDiv = ' <div class="profile">\n' +
                     '                <div class="profile__image">' +
                     '                   <img src="' + imgSrc + '" alt="' + product.name + '"/>' +

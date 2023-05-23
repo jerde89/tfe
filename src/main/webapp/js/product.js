@@ -27,7 +27,8 @@ $(document).ready(function () {
             {data: 'taxRate'},
             {
                 data: 'priceTVA', render: function (data, type, row) {
-                    return (row.price * row.taxRate) + "€";
+                    return (row.price * (1+row.taxRate/100)).toFixed(2) + "€";
+                    // return (row.price * row.taxRate) + "€";
                 }
             },
             {
