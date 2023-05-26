@@ -42,7 +42,10 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/userManage">Utilisateurs</a>
             <li class="nav-item">
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/orderManageController">Commandes</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/orderPreparation">Préparations</a>
+            <li class="nav-item">
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/orderManage">Gestion des commandes</a>
             <li class="nav-item">
                 </sec:authorize>
 

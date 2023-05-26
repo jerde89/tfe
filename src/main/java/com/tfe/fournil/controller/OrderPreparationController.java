@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Slf4j
 @Controller
-@RequestMapping("/orderManage")
-public class OrderManageController {
+@RequestMapping("/orderPreparation")
+public class OrderPreparationController {
     @GetMapping("")
     public String showOrderManage() {
-        return "orderManage";
+        return "orderPreparation";
     }
 }

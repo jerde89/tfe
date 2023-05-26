@@ -33,9 +33,9 @@ public class Feedback {
     private String nameFeedback;
 
     @NotBlank (message = "L'email doit comporter au moins 1 caractère")
-    @Size(max = 50, message = "L'email doit comporter maximun 50 caractères")
+    @Size(max = 50, message = "L'email doit comporter maximun 100 caractères")
     @Email (message = "L'email de formulaire de contact doit être un pattern.")
-    @Column(name = "email_feedback", nullable = false, length = 50)
+    @Column(name = "email_feedback", nullable = false, length = 100)
     private String emailFeedback;
 
     @NotBlank (message = "Le téléphone doit comporter au moins 1 caractère")

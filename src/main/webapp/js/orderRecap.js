@@ -40,7 +40,7 @@ function documentLoaded() {
         isRTL: false,
         showMonthAfterYear: false,
         yearSuffix: '',
-        minDate: '+2D',
+        minDate: '+3D',
         maxDate: '+2M +0D',
         numberOfMonths: 1,
         showButtonPanel: true
@@ -158,7 +158,7 @@ function sendOrder() {
         return;
     }
     let order = {
-        dateOfReceipt: $("#datepicker").val(),
+        deliveryDate: $("#datepicker").val(),
         // total: $("#totalOrders").html().replace('€', '').trim(),
         deliveryMode: $('input[name="delivery_mode"]:checked').val(),
         orderDetails: []

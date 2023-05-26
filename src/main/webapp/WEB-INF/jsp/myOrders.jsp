@@ -43,7 +43,7 @@
                             </button>
                         </td>
                         <td>${order.idOrder}</td>
-                        <td>${order.dateOfReceipt.format( DateTimeFormatter.ofPattern("dd/MM/yyyy"))}</td>
+                        <td>${order.deliveryDate.format( DateTimeFormatter.ofPattern("dd/MM/yyyy"))}</td>
                         <td>${order.total}</td>
                         <td>${order.status}</td>
                     </tr>

@@ -1,24 +1,27 @@
 package com.tfe.fournil.controller;
 
 import com.tfe.fournil.entity.Order;
-import com.tfe.fournil.entity.ProductCategory;
 import com.tfe.fournil.entity.OrderStatus;
+import com.tfe.fournil.entity.ProductCategory;
 import com.tfe.fournil.repository.OrderRepository;
 import com.tfe.fournil.repository.ProductCategoryRepository;
 import com.tfe.fournil.repository.ProductRepository;
+import com.tfe.fournil.service.OrderByDateDTO;
+import com.tfe.fournil.service.OrderService;
 import com.tfe.fournil.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,6 +34,8 @@ public class OrderController {
     ProductCategoryRepository productCategoryRepository;
     @Autowired
     UserService userService;
+    @Autowired
+    OrderService orderService;
 
     @Autowired
     OrderRepository orderRepository;
@@ -41,13 +46,13 @@ public class OrderController {
         List<ProductCategory> categoryList = productCategoryRepository.findAll().stream()
                 .filter(ProductCategory::getEnable)
                 .collect(Collectors.toList());
-        for (ProductCategory productCategory: categoryList
-              ) {
+        for (ProductCategory productCategory : categoryList
+        ) {
             int countCategory = 0;
             try {
                 countCategory = productCategoryRepository.countProductByCategory(productCategory.getId());
                 //si pas de produits liés à une catégorie, il indique 0
-            }catch (Exception exception){
+            } catch (Exception exception) {
                 log.info("Catégorie sans produit " + productCategory.getName());
             }
             productCategory.setCountProduct(countCategory);
@@ -57,10 +62,33 @@ public class OrderController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Order> modifiedUser(@RequestBody Order order, HttpSession session) {
+    public ResponseEntity<Order> createOrder(@RequestBody Order order, HttpSession session) {
         userService.getCurrentUser().ifPresent(order::setUser);
         order.setStatus(OrderStatus.WAITING);
-        orderRepository.save(order);
-        return ResponseEntity.ok(order);
+        order.setCreationDate(LocalDate.now());
+        Order orderSaved = orderRepository.save(order);
+        return ResponseEntity.ok(orderSaved);
+    }
+
+
+    @GetMapping("waitingByDeliveryDate")
+    public ResponseEntity<List<OrderByDateDTO>> showOrderStatusWaitingByDeliveryDate() {
+        Map<LocalDate, OrderByDateDTO> allByOrderByCreationDateDesc = this.orderService.findStatusWaitingByDeliveryDateDesc();
+        return ResponseEntity.ok(new ArrayList<>(allByOrderByCreationDateDesc.values()));
+    }
+
+    @GetMapping("InProgressByDeliveryDate")
+    public ResponseEntity<List<OrderByDateDTO>> showOrderStatusInProgressByDeliveryDate() {
+        Map<LocalDate, OrderByDateDTO> allByOrderByCreationDateDesc = this.orderService.findStatusInProgressByDeliveryDateDesc();
+        return ResponseEntity.ok(new ArrayList<>(allByOrderByCreationDateDesc.values()));
+    }
+
+    @PutMapping("statusToInProgress")
+    public ResponseEntity<Boolean> statusToInProgress(@RequestParam String orderIds){
+        List<Long> collect = Arrays.stream(orderIds.split(","))
+                .map(s -> Long.parseLong(s.trim()))
+                .collect(Collectors.toList());
+        orderService.updateStatusToInProgress(collect);
+        return ResponseEntity.ok(true);
     }
 }

@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Entity
-@Table(name ="orders")
+@Table(name = "orders")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,12 +22,12 @@ public class Order {
     @Column(name = "id_order")
     private Long idOrder;
 
-    @Column(name = "order_date")
-    private LocalDate order_date;
+    @Column(name = "creation_date")
+    private LocalDate creationDate;
 
-    @Column(name = "date_of_receipt")
+    @Column(name = "delivery_Date")
     @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDate dateOfReceipt;
+    private LocalDate deliveryDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 50)
@@ -35,25 +35,19 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "delivery_mode", nullable = false, length = 50)
-    private DeliveryMode  deliveryMode;
+    private DeliveryMode deliveryMode;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn (name = "id_shop")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_shop")
     private Shop shop;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn (name = "id_user")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_user")
     private User user;
-//
-//    @OneToMany
-//    @JoinColumn(name = "id_order_detail", nullable = false)
-//    private List<OrderDetail> orderDetails;
-//mappedBy = "post"
-    //, mappedBy = "POST"
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-            )
-    private Set<OrderDetail> orderDetails = new HashSet<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id_order")
+    private List<OrderDetail> orderDetails = new ArrayList<>();
 
     private float total;
 
@@ -64,5 +58,9 @@ public class Order {
             totalOrder.updateAndGet(v -> v + productPrice);
         });
         return totalOrder.get();
+    }
+
+    public int getTotalProduct(){
+        return this.getOrderDetails().stream().mapToInt(OrderDetail::getQuantity).sum();
     }
 }
