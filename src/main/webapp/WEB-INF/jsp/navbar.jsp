@@ -5,22 +5,29 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
 <script src="${pageContext.request.contextPath}/js/navbar.js"></script>
+<%--<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>--%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>--%>
+<%--<link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>--%>
+<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
+<%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
 
+<nav class="navbar navbar-expand-sm navbar-dark sticky-top" style="background-color: #522110">
+    <div class="container-fluid">
+        <li class="nav-item">
+            <a class="navbar-brand" style="padding-top: 0px" href="#"> <img
+                    src="${pageContext.request.contextPath}/image/logo.jpg" alt="logo"
+                    width="40" height="40" class="d-inline-block align-text-top">
+            </a>
+        </li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-<nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: #522110">
-
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="navbar-brand" style="padding-top: 5px" href="#"> <img
-                        src="${pageContext.request.contextPath}/image/logo.jpg" alt="logo"
-                        width="40" height="40" class="d-inline-block align-text-top">
-                </a>
+                <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath}/">Accueil</a>
             </li>
-
-            <li class="nav-item"><a class="nav-link"
-                                    aria-current="page" href="${pageContext.request.contextPath}/">Accueil</a></li>
-
 
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/order">Commmander</a>
@@ -54,9 +61,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/feedbackList">Feedbacks</a>
             <li class="nav-item">
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/shop">Magasins</a>
-            <li class="nav-item">
+<%--            <li class="nav-item">--%>
+<%--                <a class="nav-link" href="${pageContext.request.contextPath}/shop">Magasins</a>--%>
+<%--            <li class="nav-item">--%>
                 </sec:authorize>
             </li>
 
@@ -98,5 +105,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </nav>

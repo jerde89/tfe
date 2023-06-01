@@ -83,6 +83,11 @@ public class OrderController {
         return ResponseEntity.ok(new ArrayList<>(allByOrderByCreationDateDesc.values()));
     }
 
+    @GetMapping("afterStatusInProgress")
+    public ResponseEntity<List<Order>> showOrderAfterStatusInProgress() {
+        return ResponseEntity.ok(this.orderService.findByStatus());
+    }
+
     @PutMapping("statusToInProgress")
     public ResponseEntity<Boolean> statusToInProgress(@RequestParam String orderIds){
         List<Long> collect = Arrays.stream(orderIds.split(","))
@@ -90,5 +95,7 @@ public class OrderController {
                 .collect(Collectors.toList());
         orderService.updateStatusToInProgress(collect);
         return ResponseEntity.ok(true);
+
+
     }
 }

@@ -37,18 +37,19 @@
                 <table class="table table-striped table-bordered" id="feedback_non_lus_ajax" cellspacing="0"
                        width="100%">
                     <thead>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Téléphone</th>
-                        <th>Commentaire</th>
-                        <th>Date creation</th>
-                        <th>Actions</th>
-                    </tr>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Commentaire</th>
+                            <th>Date creation</th>
+                            <th>Actions</th>
+                        </tr>
                     </thead>
                 </table>
             </div>
+
             <div class="tab-pane m-4" id="tab-table2">
                 <table class="table table-striped table-bordered" id="feedback_lus_ajax" cellspacing="0" width="100%">
                     <thead>

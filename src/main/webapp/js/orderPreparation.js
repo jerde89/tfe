@@ -17,7 +17,6 @@ function format(d) {
     // d.productDetailDTOMap.forEach(el => {
 
         var el = d.productDetailDTOMap[productObj];
-        console.log(el);
         subTableHtml += '<tr>' +
             "<td>" + el.product.name + "</td>" +
             "<td>" + el.productQuantity + "</td>" +
@@ -37,7 +36,7 @@ $(document).ready(function () {
                 data: null,
                 defaultContent: '',
             },
-            {data: 'deliveryDate'},
+            {data: 'deliveryDate', render: DataTable.render.datetime('DD/MM/YYYY')},
             {data: 'order', render: makeOrderCount},
             {data: 'productQuantity'},
             {data: 'status' , render: makeActionDone},
@@ -56,7 +55,7 @@ $(document).ready(function () {
                 data: null,
                 defaultContent: '',
             },
-            {data: 'deliveryDate'},
+            {data: 'deliveryDate', render: DataTable.render.datetime('DD/MM/YYYY')},
             {data: 'order', render: makeOrderCount},
             {data: 'productQuantity'},
         ],
@@ -101,31 +100,27 @@ function manageExpand () {
 
 }
 function makeActionDone(data, type, full, meta) {
-    console.log(data);
-    console.log(type);
-    console.log(full);
-    console.log();
     return '<input type="checkbox" onclick="orderReady(\''+full.orderIds.join(",")+'\')">';
 }
 
 function makeOrderCount(data, type, full, meta) {
     return full.orderIds.length;
 }
-function orderReady(orderIds) {
-    alert(orderIds);
 
+function orderReady(orderIds) {
+    // alert(orderIds);
     var data = {};
     data.orderIds = orderIds;
     $.ajax({
         type: "PUT",
         url: pageContextPath + "/order/statusToInProgress",
-        data: data,
-        success: successToInProgress, fail: fail,
+        data: data, success: successToInProgress, fail: fail,
         headers: {'X-CSRF-Token': $('input[name=csrf]').val()}
     });
 }
 
 function successToInProgress(){
+    reloadAllDatatable();
     $.toast(
         {
             heading: 'Commande',
@@ -136,6 +131,11 @@ function successToInProgress(){
             stack: false
         }
     )
+}
+
+function reloadAllDatatable() {
+    tableWaiting.ajax.reload();
+    tableInProgress.ajax.reload();
 }
 function fail(e) {
     console.log(e);

@@ -59,7 +59,7 @@ public class Feedback {
     @Column(name = "update_at_feedback", nullable = true)
     private Date updateAtFeedback;
 
-    private String commentShort;
+//    private String commentShort;
 
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn (name = "id_user")

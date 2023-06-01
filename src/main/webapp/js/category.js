@@ -44,9 +44,6 @@ $(document).ready(function () {
     }
 
     function makeActionCategories(data, type, full, meta) {
-        console.log(data);
-        console.log(type);
-        console.log(full);
         return '<div class="row"><div class="col-4 text-center">\n' +
             '                                         <button onclick="toggleCategoryPopup(' + full.id + ')" data-toggle="tooltip" data-placement="top" title="Modifier" >\n' +
             '                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil" viewBox="0 0 16 16">\n' +
@@ -97,13 +94,12 @@ function toggleCategoryPopup(id) {
     if (isNew) {
         $("#blockCreated").hide();
         $("#blockUpdated").hide();
-        $("#formCategory").prop('title', "Nouvelle catégorie");
         showPopup();
+        $('#formCategory').dialog('option', 'title', 'Nouvelle catégorie');
         return;
     }
     $("#blockCreated").show();
     $("#blockUpdated").show();
-    $("#formCategory").prop('title', "Modification catégorie");
 
     categoryDatatable.rows().every(function (rowIdx, tableLoop, rowLoop) {
         var c = this.data();
@@ -124,6 +120,7 @@ function toggleCategoryPopup(id) {
             }
             // $("#formCategory").toggle();
             showPopup();
+            $('#formCategory').dialog('option', 'title', 'Modification catégorie');
             found = true;
             // return;
         }
@@ -188,7 +185,6 @@ function successSaveCategory() {
 function fail(e) {
     console.log(e);
     alert("fail: " + e);
-
 }
 
 function checkNameCategory(isNew) {
@@ -207,32 +203,31 @@ function checkNameCategory(isNew) {
     if (!isNew) {
         return;
     }
-    // $.ajax({
-    //     type: "GET",
-    //     url: pageContextPath + "/category/nameIsUnique/" + nameCategory,
-    //     success: function (response) {
-    //         if (response === false) {
-    //             document.getElementById("errorName").innerHTML = "La catégorie existe déja dans notre système";
-    //             $("#name").addClass("fieldMistake ");
-    //             nameAlreadyExist = true;
-    //         } else {
-    //             nameAlreadyExist = false;
-    //         }
-    //     },
-    //     fail: function () {
-    //         console.log("fail");
-    //         $.toast(
-    //             {
-    //                 heading: 'Erreur',
-    //                 text: 'Erreur lors de la vérification de la catégorie ',
-    //                 showHideTransition: 'slide',
-    //                 icon: 'error',
-    //                 position: 'top-right',
-    //                 stack: false
-    //             }
-    //         )
-    //     }
-    // });
+    $.ajax({
+        type: "GET",
+        url: pageContextPath + "/category/nameIsUnique/" + nameCategory,
+        success: function (response) {
+            if (response === false) {
+                document.getElementById("errorName").innerHTML = "La catégorie existe déja dans notre système";
+                $("#name").addClass("fieldMistake ");
+                nameAlreadyExist = true;
+            } else {
+                nameAlreadyExist = false;
+            }
+        },
+        fail: function () {
+            $.toast(
+                {
+                    heading: 'Erreur',
+                    text: 'Erreur lors de la vérification de la catégorie ',
+                    showHideTransition: 'slide',
+                    icon: 'error',
+                    position: 'top-right',
+                    stack: false
+                }
+            )
+        }
+    });
 }
 
 

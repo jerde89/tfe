@@ -122,7 +122,11 @@ function toggleUserPopup(id) {
                     }
                 });
             }
-
+            checkLastname();
+            checkFirstnameUser();
+            checkPhoneUser() ;
+            checkStreet();
+            checkNumber();
             // $("#formCategory").toggle();
             $("#formUserInfo").dialog({
                 modal: true,

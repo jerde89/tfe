@@ -8,7 +8,10 @@
     <%@include file="head.jsp" %>
     <title>Récapitulatif</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderRecap.css">
+<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css" />--%>
     <script src="${pageContext.request.contextPath}/js/orderRecap.js"></script>
+<%--    <script src="https://js.stripe.com/v3/"></script>--%>
+<%--    <script src="${pageContext.request.contextPath}/js/checkout.js" defer></script>--%>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
     </script>
@@ -56,13 +59,34 @@
             <input type="text" id="datepicker">
         </div>
     </div>
-    <div class="m-5  ">
-        <div class="w-25  ">
-        <input type="submit" value="Valider ma commande" class="form-control btn btn-primary rounded submit px-3"
-               onclick="sendOrder()" >
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <input id="btnSendOrder" type="submit" value="Valider ma commande"
+                       class="form-control btn btn-primary rounded submit px-3"
+                       onclick="sendOrder()" >
+            </div>
+            <div class="col-sm">
+            </div>
         </div>
     </div>
     <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
+<%--    <!-- Display a payment form -->--%>
+<%--    <form id="payment-form">--%>
+<%--        <div id="link-authentication-element">--%>
+<%--            <!--Stripe.js injects the Link Authentication Element-->--%>
+<%--        </div>--%>
+<%--        <div id="payment-element">--%>
+<%--            <!--Stripe.js injects the Payment Element-->--%>
+<%--        </div>--%>
+<%--        <button id="submit">--%>
+<%--            <div class="spinner hidden" id="spinner"></div>--%>
+<%--            <span id="button-text">Pay now</span>--%>
+<%--        </button>--%>
+<%--        <div id="payment-message" class="hidden"></div>--%>
+<%--    </form>--%>
 </div>
 </body>
 </html>

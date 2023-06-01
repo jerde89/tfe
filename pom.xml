@@ -8,6 +8,7 @@
         <version>2.7.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.tfe.fournil</groupId>
     <artifactId>tfe</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -103,7 +104,11 @@
         <!--            <artifactId>tomcat-embed-jasper</artifactId>-->
         <!--            <version>9.0.69</version>-->
         <!--        </dependency>-->
-
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>22.21.0</version>
+        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -126,6 +131,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

@@ -67,6 +67,7 @@ $(document).ready(function () {
         return '<a href="mailto:' + data + '"/>' + data + '</a>';
     }
 
+
     feedbackLusAjax = $('#feedback_lus_ajax').DataTable({
         ajax: {url: '/feedbackList/read', dataSrc: ""},
         columns: [

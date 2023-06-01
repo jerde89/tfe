@@ -12,3 +12,11 @@
 .w-100 {
     width: 100px !important;
 }
+
+#btnSendOrder:disabled {
+    background-color: red;
+}
+
+#btnSendOrder {
+    width: 250px;
+}

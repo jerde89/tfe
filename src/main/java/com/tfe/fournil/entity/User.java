@@ -30,7 +30,7 @@ public class User {
     private Long idUser;
 
 
-    @Column(name = "username", nullable = false, length = 50)
+    @Column(name = "username", nullable = false, length = 100)
     private String username;
 
     @NotBlank(message = "le nom doit comporter au moins 1 caractère")
@@ -59,6 +59,7 @@ public class User {
     private LocalDate dateOfBirth;
 
     @NotBlank(message = "le mot de passe doit comporter au moins 1 caractère")
+
 
     @Column(name = "password", nullable = false)
     private String password;

@@ -34,6 +34,9 @@ public class PriceHistorical {
     @Column(name = "price", nullable = false)
     private float Price;
 
+    @Column(name = "tax_rate", nullable = false, length = 2)
+    private int taxRate;
+
     @ManyToOne
     @JoinColumn (name = "id_product")
     private Product product;

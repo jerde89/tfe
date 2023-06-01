@@ -3,21 +3,34 @@ $(document).ready(function () {
     documentLoaded();
     $('input[type=radio][name=delivery_mode]').change(function () {
         if (this.value == 'HOME') {
-            console.log(deliveryPicker);
             $("#datepicker").datepicker("option", "beforeShowDay", renderCalendarCallback);
+            const val = $("#totalOrders").html().replace("€", "").trim();
+            const totalOrders = Number(val) + 2;
+            $("#totalOrders").html(totalOrders.toFixed(2) + "€");
+        } else {
+            const val = $("#totalOrders").html().replace("€", "").trim();
+            let totalOrders = Number(val) - 2;
+            if (totalOrders < 0) {
+                totalOrders = 0;
+            }
+            $("#totalOrders").html(totalOrders.toFixed(2) + "€");
         }
     });
+    // deliveryDate
+    // btnSendOrder
 });
 
 function renderCalendarCallback(date) {
     var day = date.getDay();
-    if($('input[name="delivery_mode"]:checked').val() === 'HOME'){
+    if ($('input[name="delivery_mode"]:checked').val() === 'HOME') {
         return [(day === 0)];
-    };
+    }
+    ;
     return [(day !== 2 && day !== 3 && day !== 4)];
 }
 
 function documentLoaded() {
+    $("#btnSendOrder").prop("disabled", true);
     // console.log($('#myBagNav'));
     // $('#myBagNav').hide();
     showMyBag();
@@ -35,7 +48,7 @@ function documentLoaded() {
         dayNamesShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
         dayNamesMin: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
         weekHeader: 'Sm',
-        dateFormat: 'dd-mm-yy',
+        dateFormat: 'dd/mm/yy',
         firstDay: 1,
         isRTL: false,
         showMonthAfterYear: false,
@@ -43,15 +56,24 @@ function documentLoaded() {
         minDate: '+3D',
         maxDate: '+2M +0D',
         numberOfMonths: 1,
-        showButtonPanel: true
+        showButtonPanel: true,
+        onSelect: function (dateText) {
+            $("#btnSendOrder").prop("disabled", false);
+            console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+        }
     });
+    $("#datepicker").change(function (a, b, c) {
+        if ($("#datepicker").val()) {
+            $("#btnSendOrder").prop("disabled", false);
+        } else {
+            $("#btnSendOrder").prop("disabled", true);
+        }
+    })
 }
 
 
 function showMyBag() {
-
     var myBag = JSON.parse(localStorage.getItem("myBag"));
-    console.log(myBag);
     if (!myBag) {
         return;
     }
@@ -167,15 +189,15 @@ function sendOrder() {
         var oderDetail = {
             id: product.id,
             price: product.price,
-            quantity: parseInt($("#quantity_" + product.id).val(),10),
+            quantity: parseInt($("#quantity_" + product.id).val(), 10),
             // total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
-            product :{
+            product: {
                 idProduct: product.id
             }
         }
         order.orderDetails.push(oderDetail);
     });
-    $.ajax({
+    const request = $.ajax({
         contentType: 'application/json',
         type: "POST",
         url: pageContextPath + "/order",
@@ -186,12 +208,15 @@ function sendOrder() {
         headers: {'X-CSRF-Token': $('#_csrf').val()}
 
     });
+    request.fail(function (jqXHR, textStatus) {
+        alert("Request failed: " + textStatus);
+    });
 
 }
 
 function successSaveOrder() {
     resetBag();
-    location.href="/order";
+    location.href = "/order";
 }
 
 function fail() {

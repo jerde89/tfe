@@ -1,5 +1,5 @@
 var productDatatable;
-
+var popup;
 
 $(document).ready(function () {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -119,14 +119,15 @@ function toggleProductPopup(id) {
         $("#formProductTitleModify").hide();
         $("#imgUrlDiv").hide();
         $("#tax_rate").val(6);
-        $("#formProduct").prop('title', "Ajout d'un produit");
         showPopup();
+        $('#formProduct').dialog('option', 'title', 'Ajout d\'un produit');
         return;
     }
     $("#blockCreated").show();
     $("#blockUpdated").show();
     $("#formProductTitleAdd").hide();
     $("#formProductTitleModify").show();
+    $("#imgUrlDiv").show();
 
 
     productDatatable.rows().every(function (rowIdx, tableLoop, rowLoop) {
@@ -150,14 +151,15 @@ function toggleProductPopup(id) {
             if (c.enable) {
                 document.getElementById('enable').checked = c.enable;
             }
-            $("#formProduct").prop('title', "Mdofication d'un produit");
             showPopup();
+            $('#formProduct').dialog('option', 'title', 'Mofication d\'un produit');
+
             found = true;
             // return;
         }
     });
     if (!found) {
-        $("#formProduct").prop('title', "Ajout d'un produit");
+        $('#formProduct').dialog('option', 'title', 'Ajout d\'un produit');
         showPopup();
     }
 }
@@ -350,7 +352,7 @@ function closePopupProduct() {
 }
 
 function showPopup() {
-    $("#formProduct").dialog({
+    popup = $("#formProduct").dialog({
         modal: true,
         minWidth: 600,
         minHeight: 300,
