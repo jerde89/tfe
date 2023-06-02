@@ -40,3 +40,7 @@
     border: 1px solid transparent;
     background: #e3b04b;
     color: #fff; }
+
+div.dataTables_wrapper div.dataTables_length select {
+    line-height: unset;
+}

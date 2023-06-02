@@ -18,7 +18,6 @@ public class OrderDetail {
     @Column(name = "id_order_detail")
     private Long idOrderDetail;
 
-    private float price;
     private int quantity;
 
     @JsonIgnore
@@ -26,6 +25,6 @@ public class OrderDetail {
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id_product")
-    private Product product;
+    @JoinColumn(name = "product_version_id")
+    private ProductVersion productVersion;
 }

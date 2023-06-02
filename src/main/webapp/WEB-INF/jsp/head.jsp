@@ -50,3 +50,5 @@
 <script src="${pageContext.request.contextPath}/js/datatableCustom.js"></script>
 
 <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">--%>
+<link href='${pageContext.request.contextPath}/css/jquery-confirm.min.css' rel='stylesheet'/>
+<script src="${pageContext.request.contextPath}/js/jquery-confirm.min.js"></script>

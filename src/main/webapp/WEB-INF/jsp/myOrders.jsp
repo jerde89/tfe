@@ -8,6 +8,10 @@
     <meta charset="UTF-8">
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/myOrders.css">
+    <script type="text/javascript">
+        var pageContextPath = "${pageContext.request.contextPath}";
+    </script>
+    <script src="${pageContext.request.contextPath}/js/myOrders.js"></script>
 </head>
 <body>
 <div class="containerHeader">
@@ -24,7 +28,7 @@
         <%--                Employee--%>
         <%--            </div>--%>
         <div class="panel-body">
-            <table class="table table-condensed table-striped">
+            <table class="table table-condensed table-striped" id="orderGrid">
                 <thead>
                 <tr>
                     <th></th>
@@ -34,48 +38,6 @@
                     <th>Etat</th>
                 </tr>
                 </thead>
-
-                <tbody>
-                <c:forEach var="order" items="${myOrders}">
-                    <tr data-toggle="collapse" data-target="#demo${order.idOrder}" class="accordion-toggle">
-                        <td>
-                            <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span>
-                            </button>
-                        </td>
-                        <td>${order.idOrder}</td>
-                        <td>${order.deliveryDate.format( DateTimeFormatter.ofPattern("dd/MM/yyyy"))}</td>
-                        <td>${order.total}</td>
-                        <td>${order.status}</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="12" class="hiddenRow">
-                            <div class="accordian-body collapse  px-5" id="demo${order.idOrder}">
-                                <table class="table table-striped">
-                                    <thead>
-                                    <tr class="info">
-                                        <th>Catégories</th>
-                                        <th>Produits</th>
-                                        <th>Quantité</th>
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-                                    <c:forEach var="orderDetail" items="${order.orderDetails}">
-                                        <tr data-toggle="collapse" class="accordion-toggle"
-                                            data-target="#demo${order.idOrder}0">
-                                            <td>${orderDetail.product.category.name}</td>
-                                            <td>${orderDetail.product.name}</td>
-                                            <td>${orderDetail.quantity}</td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
             </table>
         </div>
     </div>

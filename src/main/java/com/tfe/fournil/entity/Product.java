@@ -1,12 +1,17 @@
 package com.tfe.fournil.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.CollectionUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 
 @Entity
@@ -14,6 +19,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(value = { "product", "productVersion" })
 public class Product {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,4 +60,21 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn (name = "id_product_category")
     private ProductCategory category;
+
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn (name = "id_product")
+   // @JsonIgnore
+    private List<ProductVersion> productVersion;
+
+//    @JsonIgnore
+    public ProductVersion getCurrentVersion() throws Exception {
+        if(CollectionUtils.isEmpty(this.productVersion)){
+            return null;
+        }
+        return this.productVersion.stream()
+                .filter(v -> v.getEndDate() == null)
+                .findFirst()
+                .orElseThrow(() -> new Exception("can not find verison for this product"));
+    }
 }

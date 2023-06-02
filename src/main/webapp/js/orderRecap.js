@@ -16,8 +16,6 @@ $(document).ready(function () {
             $("#totalOrders").html(totalOrders.toFixed(2) + "€");
         }
     });
-    // deliveryDate
-    // btnSendOrder
 });
 
 function renderCalendarCallback(date) {
@@ -81,6 +79,7 @@ function showMyBag() {
         return;
     }
     myBag.record.forEach(record => {
+        console.log(record);
         if (record.quantity === 0) {
             return;
         }
@@ -187,12 +186,12 @@ function sendOrder() {
     }
     myBag.record.forEach(product => {
         var oderDetail = {
-            id: product.id,
-            price: product.price,
+            //id: product.id,
+            //price: product.price,
             quantity: parseInt($("#quantity_" + product.id).val(), 10),
             // total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
-            product: {
-                idProduct: product.id
+            product_version: {
+                id: product.id
             }
         }
         order.orderDetails.push(oderDetail);

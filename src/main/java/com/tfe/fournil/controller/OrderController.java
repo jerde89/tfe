@@ -42,7 +42,6 @@ public class OrderController {
 
     @GetMapping("")
     public String showOrder(Model model) {
-
         List<ProductCategory> categoryList = productCategoryRepository.findAll().stream()
                 .filter(ProductCategory::getEnable)
                 .collect(Collectors.toList());
@@ -59,6 +58,11 @@ public class OrderController {
         }
         model.addAttribute("categoryList", categoryList);
         return "order";
+    }
+
+    @GetMapping("/forCurrentUser")
+    public ResponseEntity<List<Order>> findOrderForCurrentUser() {
+        return ResponseEntity.ok(orderService.findOrderForCurrentUser());
     }
 
     @PostMapping("")
@@ -95,7 +99,12 @@ public class OrderController {
                 .collect(Collectors.toList());
         orderService.updateStatusToInProgress(collect);
         return ResponseEntity.ok(true);
+    }
 
-
+    @PutMapping("changeStatus")
+    public ResponseEntity<Boolean> changeStatus(@RequestParam Long orderId,
+                                                @RequestParam OrderStatus status){
+        orderService.updateStatus(orderId, status);
+        return ResponseEntity.ok(true);
     }
 }

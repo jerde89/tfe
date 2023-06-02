@@ -1,3 +1,4 @@
-div.dataTables_wrapper div.dataTables_length select {
-    line-height: unset;
+
+.c-pointer {
+    cursor: pointer;
 }

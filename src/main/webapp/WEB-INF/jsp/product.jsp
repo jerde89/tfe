@@ -77,8 +77,10 @@
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Nom :</label>
-                    <input type="text" class="form-control" id="name" name="name" "/>
-
+                    <input type="text" class="form-control" id="name" name="name"/>
+                    <div class="col-12">
+                        <div class="span-error-div"><span class="span-error4" id="errorName"></span></div>
+                    </div>
                 </div>
             </div>
 
@@ -86,7 +88,9 @@
                 <div class="col-12">
                     <label class="form-label text-black">Description :</label>
                     <input type="text" class="form-control" id="description" name="description"/>
-
+                    <div class="col-12">
+                        <div class="span-error-div"><span class="span-error4" id="errorDescription"></span></div>
+                    </div>
                 </div>
             </div>
 
@@ -101,7 +105,9 @@
                             <option value="${category.id}"><c:out value="${category.name}"/></option>
                         </c:forEach>
                     </select>
-
+                    <div class="col-12">
+                        <div class="span-error-div"><span class="span-error4" id="errorTva"></span></div>
+                    </div>
                 </div>
             </div>
 
@@ -121,7 +127,9 @@
                     <label class="form-label text-black">HTVA :</label>
                     <input type="text" class="form-control" id="price" name="price"
                            onblur="checkPriceProduct()"/>
-
+                    <div class="col-12">
+                        <div class="span-error-div"><span class="span-error4" id="errorPrice"></span></div>
+                    </div>
                 </div>
             </div>
 

@@ -2,9 +2,12 @@ package com.tfe.fournil.controller;
 
 import com.tfe.fournil.entity.Product;
 import com.tfe.fournil.entity.ProductCategory;
+import com.tfe.fournil.entity.ProductVersion;
 import com.tfe.fournil.repository.ProductCategoryRepository;
 import com.tfe.fournil.repository.ProductRepository;
+import com.tfe.fournil.repository.ProductVersionRepository;
 import com.tfe.fournil.service.FileStorageService;
+import com.tfe.fournil.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,9 @@ public class ProductController {
 
     @Autowired
     FileStorageService fileStorageService;
+
+    @Autowired
+    ProductService productService;
 
     @Autowired
     ProductRepository productRepository;
@@ -94,8 +100,8 @@ public class ProductController {
             log.error(message);
         }
 
-
         productRepository.save(product);
+        productService.updateProductVersion(product, price, tax_rate);
         return ResponseEntity.ok(product);
     }
 
@@ -105,35 +111,12 @@ public class ProductController {
                                                  @RequestParam("category") long category,
                                                  @RequestParam(value = "file", required = false) MultipartFile file,
                                                  @RequestParam("price") float price,
-                                                 @RequestParam("tax_rate") int tax_rate,
-                                                 @RequestParam("enable") boolean enable, @PathVariable long id) {
+                                                 @RequestParam("tax_rate") int taxRate,
+                                                 @RequestParam("enable") boolean enable,
+                                                 @PathVariable long id) {
 
-
-        Product product = productRepository.findById(id)
-                .map(product1 -> {
-                    product1.setName(name);
-                    product1.setDescription(description);
-                    product1.setPrice(price);
-                    product1.setTaxRate(tax_rate);
-                    product1.setUpdateAt(new Date());
-                    product1.setEnable(enable);
-                    Optional<ProductCategory> productCategory = productCategoryRepository.findById(category);
-                    productCategory.ifPresent(product1::setCategory);
-                    return productRepository.save(product1);
-                })
-                .orElseGet(() -> {
-                    Product newProduct = new Product();
-                    newProduct.setName(name);
-                    newProduct.setDescription(description);
-                    newProduct.setPrice(price);
-                    newProduct.setEnable(enable);
-                    newProduct.setTaxRate(tax_rate);
-                    ProductCategory productCategory = productCategoryRepository.findById(category).orElseThrow();
-                    if (productCategory != null) {
-                        newProduct.setCategory(productCategory);
-                    }
-                    return productRepository.save(newProduct);
-                });
+        Product product = productService.updateProduct(id, name, description, category, price, taxRate, enable);
         return ResponseEntity.ok(product);
+
     }
 }

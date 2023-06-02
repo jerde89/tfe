@@ -66,7 +66,7 @@
             <div class="col-sm">
                 <input id="btnSendOrder" type="submit" value="Valider ma commande"
                        class="form-control btn btn-primary rounded submit px-3"
-                       onclick="sendOrder()" >
+                       onclick="sendOrder()" > *
             </div>
             <div class="col-sm">
             </div>

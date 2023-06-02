@@ -73,7 +73,8 @@ function findProductByCategory() {
                     productImg = "istockphoto-1341411204-612x612.jpg";
                 }
                 const imgSrc = "http://localhost:8080/imageProduct/" + productImg;
-                const priceWithTVA = parseFloat((product.price) * (1 + (product.taxRate / 100))).toFixed(2);
+                console.log(product);
+                const priceWithTVA = parseFloat((product.currentVersion.price) * (1 + (product.currentVersion.taxRate / 100))).toFixed(2);
                 var productDiv = ' <div class="profile">\n' +
                     '                <div class="profile__image">' +
                     '                   <img src="' + imgSrc + '" alt="' + product.name + '"/>' +
@@ -92,10 +93,10 @@ function findProductByCategory() {
                     '                </div>\n' +
                     '                <div class="profile__stats">\n' +
                     '                    <p class="profile__stats__title">Quantité</p>\n' +
-                    '                    <input id="quantity_' + product.idProduct + '" type="number" value="1" class="quantity">\n' +
+                    '                    <input id="quantity_' + product.currentVersion.id + '" type="number" value="1" class="quantity">\n' +
                     '                </div>\n' +
                     '                <div class="profile__cta">\n' +
-                    '                    <a class="button" onclick="addBagProduct(' + product.idProduct + ',\'' + product.name + '\', ' + product.price + ', ' + product.taxRate + ')">Ajouter au panier</a>\n' +
+                    '                    <a class="button" onclick="addBagProduct(' + product.currentVersion.id + ',\'' + product.name + '\', ' + product.currentVersion.price + ', ' + product.currentVersion.taxRate + ')">Ajouter au panier</a>\n' +
                     '                </div>\n' +
                     '            </div>';
                 $('#productList').append(productDiv);

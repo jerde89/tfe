@@ -8,8 +8,11 @@
     <title>Gestion des commandes</title>
     <meta charset="UTF-8">
     <%@include file="head.jsp" %>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderManage.css">
     <script src="${pageContext.request.contextPath}/js/orderManage.js"></script>
-
+    <script type="text/javascript">
+        var pageContextPath = "${pageContext.request.contextPath}";
+    </script>
 </head>
 
 <body>
@@ -26,7 +29,7 @@
 
     <div class="tab-content">
         <div class="tab-pane active m-4" id="tab-table1">
-            <table class="table table-striped table-bordered" id="orderGrid" cellspacing="0"
+            <table class="table table-striped table-bordered hover table-hover" id="orderGrid" cellspacing="0"
                    width="100%">
                 <thead>
                 <tr>
@@ -44,6 +47,6 @@
     </div>
 </div>
 
-
+<input type="hidden" id='_csrf' name="csrf" value="${_csrf.token}">
 </body>
 </html>

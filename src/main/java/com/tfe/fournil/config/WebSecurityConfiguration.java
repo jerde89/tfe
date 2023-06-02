@@ -20,7 +20,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private String[] FREE_URLS =  { "/", "/imageProduct/**","/home", "/register", "/addUser", "/passwordForgot", "/passwordForgot/checkIfEmailExist" };
     private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*", "/orderRecap"};
-    private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu","/feedbackList/delete","/category/*"};
+    private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu",
+            "/feedbackList/delete","/category/*", "/orderManage", "/orderPreparation"};
     private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu","/shop"};
 
     @Autowired
@@ -58,6 +59,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .and()
                 .httpBasic();
+//        http.headers()
+//                .xssProtection()
+//                .and()
+//                .contentSecurityPolicy("script-src 'self'");
 
     }
 }

@@ -1,9 +1,8 @@
 package com.tfe.fournil.service;
 
 import com.tfe.fournil.entity.Order;
-import com.tfe.fournil.entity.OrderDetail;
 import com.tfe.fournil.entity.OrderStatus;
-import com.tfe.fournil.entity.Product;
+import com.tfe.fournil.entity.User;
 import com.tfe.fournil.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +17,15 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
+    @Autowired
+    UserService userService;
+
+
     public void addOrder(Order order) {
         orderRepository.save(order);
     }
-//*****
+
+    //*****
     public Map<LocalDate, OrderByDateDTO> findStatusWaitingByDeliveryDateDesc() {
         List<Order> orders = orderRepository.findByStatus(OrderStatus.WAITING);
         return mapOrderByDeliveryDate(orders);
@@ -41,7 +45,7 @@ public class OrderService {
     public void updateStatusToInProgress(List<Long> orderIds) {
         orderIds.forEach(id -> {
             Optional<Order> oderOptional = this.orderRepository.findById(id);
-            if(oderOptional.isPresent()){
+            if (oderOptional.isPresent()) {
                 Order order = oderOptional.get();
                 order.setStatus(OrderStatus.IN_PROGRESS);
                 this.orderRepository.save(order);
@@ -67,5 +71,28 @@ public class OrderService {
             map.put(order.getDeliveryDate(), orderByDate);
         });
         return map;
+    }
+
+    public void updateStatus(Long id, OrderStatus status) {
+        Optional<Order> oderOptional = this.orderRepository.findById(id);
+        if (oderOptional.isEmpty()) {
+            return;
+        }
+        Order order = oderOptional.get();
+        order.setStatus(status);
+        orderRepository.save(order);
+    }
+
+    public List<Order> findOrderForCurrentUser() {
+        Optional<User> currentUser = userService.getCurrentUser();
+        if(currentUser.isEmpty()) {
+            return new ArrayList<>();
+        }
+        User user = currentUser.get();
+        List<Order> allByUserIdUser = this.orderRepository.findAllByUserIdUser(user.getIdUser());
+        return allByUserIdUser;
+
+
+
     }
 }

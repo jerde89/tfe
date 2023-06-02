@@ -40,6 +40,7 @@ public class Order {
     @Enumerated(EnumType.STRING)
     @Column(name = "delivery_mode", nullable = false, length = 50)
     private DeliveryMode deliveryMode;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_shop")
@@ -58,7 +59,7 @@ public class Order {
     public Float getTotal(){
         AtomicReference<Float> totalOrder = new AtomicReference<>((float) 0);
         this.getOrderDetails().forEach(orderDetail ->  {
-            float productPrice = (orderDetail.getPrice() * orderDetail.getQuantity()) * (((float) orderDetail.getProduct().getTaxRate()/100)+1);
+            float productPrice = (orderDetail.getProductVersion().getPrice() * orderDetail.getQuantity()) * (((float) orderDetail.getProductVersion().getTaxRate()/100)+1);
             totalOrder.updateAndGet(v -> v + productPrice);
         });
         return totalOrder.get();

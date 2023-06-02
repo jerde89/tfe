@@ -61,14 +61,14 @@ public class OrderByDateDTO {
     }
 
     public void addProductDetailDTO(OrderDetail orderDetail) {
-        long idProduct = orderDetail.getProduct().getIdProduct();
+        long idProduct = orderDetail.getProductVersion().getProduct().getIdProduct();
         ProductDetailDTO ProductDetailDTO;
         if (ProductDetailDTOMap.containsKey(idProduct)) {
             ProductDetailDTO = ProductDetailDTOMap.get(idProduct);
 
         } else {
             ProductDetailDTO = new ProductDetailDTO();
-            ProductDetailDTO.setProduct(orderDetail.getProduct());
+            ProductDetailDTO.setProduct(orderDetail.getProductVersion().getProduct());
         }
         ProductDetailDTO.addProductQuantity(orderDetail.getQuantity());
         ProductDetailDTOMap.put(idProduct, ProductDetailDTO);
