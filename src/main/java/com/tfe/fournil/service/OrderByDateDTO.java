@@ -2,6 +2,7 @@ package com.tfe.fournil.service;
 
 import com.tfe.fournil.entity.OrderDetail;
 import com.tfe.fournil.entity.OrderStatus;
+import com.tfe.fournil.entity.ProductVersion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -62,16 +63,22 @@ public class OrderByDateDTO {
 
     public void addProductDetailDTO(OrderDetail orderDetail) {
         long idProduct = orderDetail.getProductVersion().getProduct().getIdProduct();
-        ProductDetailDTO ProductDetailDTO;
+        ProductDetailDTO productDetailDTO;
         if (ProductDetailDTOMap.containsKey(idProduct)) {
-            ProductDetailDTO = ProductDetailDTOMap.get(idProduct);
+            productDetailDTO = ProductDetailDTOMap.get(idProduct);
 
         } else {
-            ProductDetailDTO = new ProductDetailDTO();
-            ProductDetailDTO.setProduct(orderDetail.getProductVersion().getProduct());
+            productDetailDTO = new ProductDetailDTO();
+            ProductVersion productVersion = orderDetail.getProductVersion();
+            productDetailDTO.setProduct(productVersion.getProduct());
+            ProductVersionDTO productVersionDTO = new ProductVersionDTO();
+            productVersionDTO.setId(productVersion.getId());
+            productVersionDTO.setPrice(productVersion.getPrice());
+            productVersionDTO.setTaxRate(productVersion.getTaxRate());
+            productDetailDTO.setProductVersion(productVersionDTO);
         }
-        ProductDetailDTO.addProductQuantity(orderDetail.getQuantity());
-        ProductDetailDTOMap.put(idProduct, ProductDetailDTO);
+        productDetailDTO.addProductQuantity(orderDetail.getQuantity());
+        ProductDetailDTOMap.put(idProduct, productDetailDTO);
     }
 
     public void addToto2(ProductDetailDTO toto3) {

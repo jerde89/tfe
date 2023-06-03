@@ -10,7 +10,7 @@ $(document).ready(function () {
                 data: null,
                 defaultContent: '',
             },
-            {data: 'idOrder'},
+            {data: 'id'},
             {data: 'deliveryDate', render: DataTable.render.datetime('DD/MM/YYYY', 'DD/MM/YYYY', 'fr')},
             {data: 'total', render: renderTotalPrice, className: "text-right"},
             {data: 'status', render: renderDeliveryStatus, className: 'dt-body-center'},
@@ -47,13 +47,11 @@ $(document).ready(function () {
             '</thead>' +
             '';
 
-        d.orderDetails.forEach(el => {
+        d.orderDetailDTOs.forEach(el => {
             console.log(el);
             subTableHtml += '<tr>' +
-                //"<td>" + el.productVersion.product.category.name + "</td>" +
-                "<td>" + el.productVersion.id + "</td>" +
-                // "<td>" + el.productVersion.product.name + "</td>" +
-                 "<td>" + el.productVersion.id + "</td>" +
+                "<td>" + el.productVersion.product.category.name + "</td>" +
+                 "<td>" + el.productVersion.product.name + "</td>" +
                 "<td>" + el.quantity + "</td>" +
                 "</tr>";
         });

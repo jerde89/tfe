@@ -57,7 +57,6 @@ function documentLoaded() {
         showButtonPanel: true,
         onSelect: function (dateText) {
             $("#btnSendOrder").prop("disabled", false);
-            console.log("Selected date: " + dateText + "; input's current value: " + this.value);
         }
     });
     $("#datepicker").change(function (a, b, c) {
@@ -190,7 +189,7 @@ function sendOrder() {
             //price: product.price,
             quantity: parseInt($("#quantity_" + product.id).val(), 10),
             // total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
-            product_version: {
+            productVersion: {
                 id: product.id
             }
         }

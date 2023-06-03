@@ -6,6 +6,8 @@ public class ProductDetailDTO {
     private Product product;
     private int productQuantity = 0;
 
+    private ProductVersionDTO productVersion;
+
     public Product getProduct() {
         return product;
     }
@@ -24,5 +26,13 @@ public class ProductDetailDTO {
 
     public void setProductQuantity(int productQuantity) {
         this.productQuantity = productQuantity;
+    }
+
+    public ProductVersionDTO getProductVersion() {
+        return productVersion;
+    }
+
+    public void setProductVersion(ProductVersionDTO productVersion) {
+        this.productVersion = productVersion;
     }
 }

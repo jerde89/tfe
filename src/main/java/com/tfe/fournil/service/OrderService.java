@@ -1,8 +1,6 @@
 package com.tfe.fournil.service;
 
-import com.tfe.fournil.entity.Order;
-import com.tfe.fournil.entity.OrderStatus;
-import com.tfe.fournil.entity.User;
+import com.tfe.fournil.entity.*;
 import com.tfe.fournil.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +34,45 @@ public class OrderService {
         return mapOrderByDeliveryDate(orders);
     }
 
-    public List<Order> findByStatus() {
+    public List<OrderDTO> findByStatus() {
         List<Order> orders = orderRepository.findByStatusIn(Arrays.asList(OrderStatus.IN_PROGRESS, OrderStatus.PACKAGED, OrderStatus.DONE));
-        return orders;
+        return mapOrder(orders);
+    }
+
+    private List<OrderDTO> mapOrder(List<Order> orders) {
+        List<OrderDTO> orderDTOS = new ArrayList<>();
+        orders.forEach(order -> {
+            OrderDTO orderDTO = new OrderDTO();
+            orderDTO.setId(order.getIdOrder());
+            orderDTO.setCreationDate(order.getCreationDate());
+            orderDTO.setDeliveryMode(order.getDeliveryMode());
+            orderDTO.setUser(userService.mapToUserDTO(order.getUser()));
+            orderDTO.setDeliveryDate(order.getDeliveryDate());
+            orderDTO.setOrderDetailDTOs(mapToOderDetailDto(order.getOrderDetails()));
+            orderDTO.setTotal(order.getTotal());
+            orderDTO.setStatus(order.getStatus());
+            orderDTOS.add(orderDTO);
+        });
+        return orderDTOS;
+    }
+
+    private List<OrderDetailDTO> mapToOderDetailDto(List<OrderDetail>orderDetails) {
+        List<OrderDetailDTO> dtos = new ArrayList<>();
+        orderDetails.forEach(orderDetail -> {
+            OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
+            orderDetailDTO.setIdOrderDetail(orderDetail.getIdOrderDetail());
+            orderDetailDTO.setQuantity(orderDetail.getQuantity());
+            ProductVersion productVersion = orderDetail.getProductVersion();
+            ProductVersionDTO productVersionDTO = new ProductVersionDTO();
+            productVersionDTO.setId(productVersion.getId());
+            productVersionDTO.setPrice(productVersion.getPrice());
+            productVersionDTO.setTaxRate(productVersion.getTaxRate());
+            productVersionDTO.setProduct(productVersion.getProduct());
+            orderDetailDTO.setProductVersion(productVersionDTO);
+            dtos.add(orderDetailDTO);
+        });
+        return dtos;
+
     }
 
 
@@ -83,16 +117,14 @@ public class OrderService {
         orderRepository.save(order);
     }
 
-    public List<Order> findOrderForCurrentUser() {
+    public List<OrderDTO> findOrderForCurrentUser() {
         Optional<User> currentUser = userService.getCurrentUser();
         if(currentUser.isEmpty()) {
             return new ArrayList<>();
         }
         User user = currentUser.get();
         List<Order> allByUserIdUser = this.orderRepository.findAllByUserIdUser(user.getIdUser());
-        return allByUserIdUser;
 
-
-
+        return mapOrder(allByUserIdUser);
     }
 }

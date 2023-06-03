@@ -7,6 +7,7 @@ import com.tfe.fournil.repository.OrderRepository;
 import com.tfe.fournil.repository.ProductCategoryRepository;
 import com.tfe.fournil.repository.ProductRepository;
 import com.tfe.fournil.service.OrderByDateDTO;
+import com.tfe.fournil.service.OrderDTO;
 import com.tfe.fournil.service.OrderService;
 import com.tfe.fournil.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -61,17 +62,17 @@ public class OrderController {
     }
 
     @GetMapping("/forCurrentUser")
-    public ResponseEntity<List<Order>> findOrderForCurrentUser() {
+    public ResponseEntity<List<OrderDTO>> findOrderForCurrentUser() {
         return ResponseEntity.ok(orderService.findOrderForCurrentUser());
     }
 
     @PostMapping("")
-    public ResponseEntity<Order> createOrder(@RequestBody Order order, HttpSession session) {
+    public ResponseEntity<Boolean> createOrder(@RequestBody Order order, HttpSession session) {
         userService.getCurrentUser().ifPresent(order::setUser);
         order.setStatus(OrderStatus.WAITING);
         order.setCreationDate(LocalDate.now());
-        Order orderSaved = orderRepository.save(order);
-        return ResponseEntity.ok(orderSaved);
+        orderRepository.save(order);
+        return ResponseEntity.ok(true);
     }
 
 
@@ -88,7 +89,7 @@ public class OrderController {
     }
 
     @GetMapping("afterStatusInProgress")
-    public ResponseEntity<List<Order>> showOrderAfterStatusInProgress() {
+    public ResponseEntity<List<OrderDTO>> showOrderAfterStatusInProgress() {
         return ResponseEntity.ok(this.orderService.findByStatus());
     }
 

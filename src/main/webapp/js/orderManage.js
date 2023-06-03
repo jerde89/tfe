@@ -10,7 +10,7 @@ $(document).ready(function () {
                 defaultContent: '',
             },
             {data: 'deliveryDate', render: DataTable.render.datetime('DD/MM/YYYY', 'DD/MM/YYYY', 'fr')},
-            {data: 'user.lastname', render: makeUser},
+            {data: 'user', render: makeUser},
             {data: 'deliveryMode', render: renderDeliveryMode, className: 'dt-body-center'},
             {data: 'total', render: renderTotalPrice, className: "text-right"},
             {data: 'status', render: renderDeliveryStatus, className: 'dt-body-center'},
@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
 
     function makeUser(data, type, full) {
-        return full.user.lastname + ' ' + full.user.firstname;
+        return full.user.lastName + ' ' + full.user.firstName;
     }
 
     function renderDeliveryMode(data, type, full) {
@@ -58,7 +58,7 @@ $(document).ready(function () {
 
     function renderDeliveryStatus(data, type, full) {
         if (data === "PACKAGED") {
-            return '<span title="Emballée" class="c-pointer" onclick="changeOrderStatus(' + full.idOrder + ', \'DONE\', \'' + full.user.lastname + ' ' + full.user.firstname + '\')" class="cursor-pointer">' +
+            return '<span title="Emballée" class="c-pointer" onclick="changeOrderStatus(' + full.id + ', \'DONE\', \'' + full.user.lastName + ' ' + full.user.firstName + '\')" class="cursor-pointer">' +
                 '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">\n' +
                 '  <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2l-2.218-.887zm3.564 1.426L5.596 5 8 5.961 14.154 3.5l-2.404-.961zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923l6.5 2.6zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464L7.443.184z"/>\n' +
                 '</svg></span>';
@@ -70,7 +70,7 @@ $(document).ready(function () {
                 '</svg>'+
                 '</span>';
         } else if (data === "IN_PROGRESS") {
-            return '<span title="En cours" class="c-pointer" onclick="changeOrderStatus(' + full.idOrder + ', \'PACKAGED\', \'' + full.user.lastname + ' ' + full.user.firstname + '\')">' +
+            return '<span title="En cours" class="c-pointer" onclick="changeOrderStatus(' + full.id + ', \'PACKAGED\', \'' + full.user.lastName + ' ' + full.user.firstName + '\')">' +
                 '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-journal-arrow-up" viewBox="0 0 16 16">\n' +
                 '  <path fill-rule="evenodd" d="M8 11a.5.5 0 0 0 .5-.5V6.707l1.146 1.147a.5.5 0 0 0 .708-.708l-2-2a.5.5 0 0 0-.708 0l-2 2a.5.5 0 1 0 .708.708L7.5 6.707V10.5a.5.5 0 0 0 .5.5z"/>\n' +
                 '  <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>\n' +
@@ -93,11 +93,10 @@ function format(d) {
         '</thead>' +
         '';
 
-    d.orderDetails.forEach(el => {
+    d.orderDetailDTOs.forEach(el => {
         console.log(el);
         subTableHtml += '<tr>' +
-            //"<td>" + el.productVersion.product.name + "</td>" +
-            "<td>" + el.productVersion.id + "</td>" +
+            "<td>" + el.productVersion.product.name + "</td>" +
             "<td>" + el.quantity + "</td>" +
             "</tr>";
     });

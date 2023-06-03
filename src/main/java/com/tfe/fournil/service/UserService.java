@@ -89,4 +89,11 @@ public class UserService {
         }
     }
 
+    public UserDTO mapToUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setFirstName(user.getFirstname());
+        userDTO.setLastName(user.getLastname());
+        return userDTO;
+    }
+
 }

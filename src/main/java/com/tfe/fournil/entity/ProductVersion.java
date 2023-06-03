@@ -1,16 +1,12 @@
 package com.tfe.fournil.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name ="ProductVersion")
@@ -32,13 +28,14 @@ public class ProductVersion {
     private LocalDate EndDate;
 
     @Column(name = "price", nullable = false)
-    private float Price;
+    private float price;
 
     @Column(name = "tax_rate", nullable = false, length = 2)
     private int taxRate;
 
     @ManyToOne
     @JoinColumn (name = "id_product")
+    @JsonIgnore
     private Product product;
 
 }
