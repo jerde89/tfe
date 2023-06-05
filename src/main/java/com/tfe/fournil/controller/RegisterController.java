@@ -24,24 +24,45 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Register controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping(value ="/register")
 public class RegisterController {
 
-    //injecte la classe
+    /**
+     * The User repository.
+     */
+//injecte la classe
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * The Role repository.
+     */
     @Autowired
     RoleRepository roleRepository;
 
+    /**
+     * The City repository.
+     */
     @Autowired
     CityRepository cityRepository;
 
+    /**
+     * Show register string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("")
     public String showRegister(Model model) {
         List<City> cityList = cityRepository.findAll();
@@ -49,6 +70,15 @@ public class RegisterController {
         return "register";
     }
 
+    /**
+     * Add user string.
+     *
+     * @param model         the model
+     * @param user          the user
+     * @param bindingResult the binding result
+     * @param session       the session
+     * @return the string
+     */
     @PostMapping(value = "/addUser")
     public String addUser(Model model,@Valid User user, BindingResult bindingResult, HttpSession session) {
         log.info("test id city " + user.getAddress().getCity().getIdCity() );
@@ -79,8 +109,15 @@ public class RegisterController {
         return "redirect:/register";
     }
 
+    /**
+     * Check email unique response entity.
+     *
+     * @param email the email
+     * @return the response entity
+     */
     @GetMapping("/emailIsUnique/{email}")
     public ResponseEntity<Boolean> checkEmailUnique(@PathVariable("email") String email) {
         return ResponseEntity.ok(userService.checkIfEmailIsUnique(email));
     }
 }
+

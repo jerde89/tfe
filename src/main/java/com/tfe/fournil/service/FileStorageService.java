@@ -19,6 +19,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
+/**
+ * The type File storage service.
+ */
 @Service
 @Slf4j
 public class FileStorageService {

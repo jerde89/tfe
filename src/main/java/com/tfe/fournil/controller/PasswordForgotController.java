@@ -13,22 +13,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * The type Password forgot controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping(value = "/passwordForgot")
 public class PasswordForgotController {
 
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * Show password forgot string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String showPasswordForgot(){
         return "passwordForgot";
     }
 
+    /**
+     * Check email unique string.
+     *
+     * @param email   the email
+     * @param session the session
+     * @return the string
+     */
     @PostMapping("/checkIfEmailExist")
     public String checkEmailUnique( String email, HttpSession session) {
 //        try{
@@ -55,3 +76,4 @@ public class PasswordForgotController {
     }
 
 }
+

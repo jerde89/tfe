@@ -6,6 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+/**
+ * The interface Product version repository.
+ */
 public interface ProductVersionRepository extends JpaRepository<ProductVersion,Long> {
     List<ProductVersion> findAll();
 

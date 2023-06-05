@@ -7,14 +7,17 @@
 <head>
     <%@include file="head.jsp" %>
     <title>Récapitulatif</title>
+    <script type="text/javascript" src="https://js.stripe.com/v3/"</script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderRecap.css">
-<%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css" />--%>
+    <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/checkout.css" />--%>
     <script src="${pageContext.request.contextPath}/js/orderRecap.js"></script>
-<%--    <script src="https://js.stripe.com/v3/"></script>--%>
-<%--    <script src="${pageContext.request.contextPath}/js/checkout.js" defer></script>--%>
+    <%--    <script src="https://js.stripe.com/v3/"></script>--%>
+    <%--    <script src="${pageContext.request.contextPath}/js/checkout.js" defer></script>--%>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
     </script>
+
 
 </head>
 <body>
@@ -73,20 +76,20 @@
         </div>
     </div>
     <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
-<%--    <!-- Display a payment form -->--%>
-<%--    <form id="payment-form">--%>
-<%--        <div id="link-authentication-element">--%>
-<%--            <!--Stripe.js injects the Link Authentication Element-->--%>
-<%--        </div>--%>
-<%--        <div id="payment-element">--%>
-<%--            <!--Stripe.js injects the Payment Element-->--%>
-<%--        </div>--%>
-<%--        <button id="submit">--%>
-<%--            <div class="spinner hidden" id="spinner"></div>--%>
-<%--            <span id="button-text">Pay now</span>--%>
-<%--        </button>--%>
-<%--        <div id="payment-message" class="hidden"></div>--%>
-<%--    </form>--%>
+    <%--    <!-- Display a payment form -->--%>
+    <%--    <form id="payment-form">--%>
+    <%--        <div id="link-authentication-element">--%>
+    <%--            <!--Stripe.js injects the Link Authentication Element-->--%>
+    <%--        </div>--%>
+    <%--        <div id="payment-element">--%>
+    <%--            <!--Stripe.js injects the Payment Element-->--%>
+    <%--        </div>--%>
+    <%--        <button id="submit">--%>
+    <%--            <div class="spinner hidden" id="spinner"></div>--%>
+    <%--            <span id="button-text">Pay now</span>--%>
+    <%--        </button>--%>
+    <%--        <div id="payment-message" class="hidden"></div>--%>
+    <%--    </form>--%>
 </div>
 </body>
 </html>

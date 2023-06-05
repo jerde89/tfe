@@ -59,3 +59,7 @@ div.dataTables_wrapper div.dataTables_length select {
 .col-6{
     margin-bottom: 5px;
 }
+
+body{
+    margin-bottom: 100px;
+}

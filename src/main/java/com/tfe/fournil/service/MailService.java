@@ -8,15 +8,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+/**
+ * The type Mail service.
+ */
 @Service
 @Slf4j
 public class MailService {
     @Autowired
     private JavaMailSender mailSender;
-    /**     * Send email.     *
+
+    /**
+     * Send email.     *
      * * @param toEmail the to email
      * * @param subject the subject
-     * * @param body    the body     */
+     * * @param body    the body      @param toEmail the to email
+     *
+     * @param subject the subject
+     * @param body    the body
+     */
     public void sendEmail(String toEmail, String subject, String body)
     {
         SimpleMailMessage message = new SimpleMailMessage();

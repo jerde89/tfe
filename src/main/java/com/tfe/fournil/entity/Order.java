@@ -40,6 +40,9 @@ public class Order {
     @Column(name = "delivery_mode", nullable = false, length = 50)
     private DeliveryMode deliveryMode;
 
+    @Column(name = "paid", nullable = false)
+    private Boolean paid=false;
+
     @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_shop")

@@ -19,14 +19,25 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * The type Feedback list controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping(value = "/feedbackList")
 public class FeedbackListController {
 
+    /**
+     * The Feedback repository.
+     */
     @Autowired
     FeedbackRepository feedbackRepository;
 
+    /**
+     * Show feedback list string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String showFeedbackList() {
 //        List<Feedback> feedbacks = feedbackRepository.findAll();
@@ -38,6 +49,11 @@ public class FeedbackListController {
         return "feedbackList";
     }
 
+    /**
+     * Ajax show feedback list un read response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/unread")
     public ResponseEntity<List<Feedback>> ajaxShowFeedbackListUnRead() {
         List<Feedback> feedbacks = feedbackRepository.findAll().stream()
@@ -46,6 +62,11 @@ public class FeedbackListController {
         return ResponseEntity.ok(feedbacks);
     }
 
+    /**
+     * Ajax show feedback list read response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/read")
     public ResponseEntity<List<Feedback>> ajaxShowFeedbackListRead() {
         List<Feedback> feedbacks = feedbackRepository.findAll().stream()
@@ -55,6 +76,12 @@ public class FeedbackListController {
     }
 
 
+    /**
+     * Is read string.
+     *
+     * @param feedbackId the feedback id
+     * @return the string
+     */
     @PostMapping(value = "/statutlu")
     public String isRead(@RequestParam Long feedbackId) {
         Optional<Feedback> feed = feedbackRepository.findById(feedbackId);
@@ -71,6 +98,12 @@ public class FeedbackListController {
         return "redirect:/feedbackList";
     }
 
+    /**
+     * Is not read string.
+     *
+     * @param feedbackId the feedback id
+     * @return the string
+     */
     @PostMapping(value = "/statutNonlu")
     public String isNotRead(@RequestParam Long feedbackId) {
         Optional<Feedback> feed = feedbackRepository.findById(feedbackId);
@@ -88,6 +121,12 @@ public class FeedbackListController {
         return "redirect:/feedbackList";
     }
 
+    /**
+     * Delete feedback response entity.
+     *
+     * @param feedbackId the feedback id
+     * @return the response entity
+     */
     @PostMapping(value = "/delete")
     public ResponseEntity deleteFeedback(@RequestParam Long feedbackId) {
 
@@ -99,3 +138,4 @@ public class FeedbackListController {
         return ResponseEntity.ok(feedbackId);
     }
 }
+

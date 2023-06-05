@@ -100,7 +100,7 @@
                         <a class="dropdown-item" href="${pageContext.request.contextPath}/changePassword">Modifier mot
                             de passe</a>
                         <hr class="dropdown-divider">
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Se déconnecter</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/logout" onclick="deleteSession()">Se déconnecter</a>
                     </sec:authorize>
                 </div>
             </div>

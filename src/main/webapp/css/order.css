@@ -1141,3 +1141,7 @@ footer.dark, footer.dark a {
 .results--grid .quantity{
     width: 50px;
 }
+
+body{
+    padding-bottom: 100px;
+}

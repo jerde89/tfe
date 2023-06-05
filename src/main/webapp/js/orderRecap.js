@@ -1,4 +1,5 @@
 let deliveryPicker = null;
+var stripe = Stripe('pk_test_51NEFr6HwVknbXBSIkaDGhlfwPNXrYuvCx9MJ7TtsZJ1HkzCkHLQQy3eC3XBrweaOFsVIZrz9qHnL7pJG9hr74h9L00MDst2wnM')
 $(document).ready(function () {
     documentLoaded();
     $('input[type=radio][name=delivery_mode]').change(function () {
@@ -70,7 +71,7 @@ function documentLoaded() {
 
 
 function showMyBag() {
-    var myBag = JSON.parse(localStorage.getItem("myBag"));
+    var myBag = JSON.parse(sessionStorage.getItem("myBag"));
     if (!myBag) {
         return;
     }
@@ -127,7 +128,7 @@ function changeQuantity(id, element, priceUnit) {
 }
 
 function updateMyBag(productId, newQuantity) {
-    var myBag = JSON.parse(localStorage.getItem("myBag"));
+    var myBag = JSON.parse(sessionStorage.getItem("myBag"));
     if (!myBag) {
         return;
     }
@@ -144,11 +145,11 @@ function updateMyBag(productId, newQuantity) {
     myBag.total += diff;
     $('#mybBagCount').html(myBag.total);
 
-    localStorage.setItem("myBag", JSON.stringify(myBag));
+    sessionStorage.setItem("myBag", JSON.stringify(myBag));
 }
 
 function resetBag() {
-    localStorage.removeItem("myBag");
+    sessionStorage.removeItem("myBag");
     $('#mybBagCount').html(0);
 }
 
@@ -169,8 +170,8 @@ function calculationTotalOrders() {
     $("#totalOrders").html(Number(totalOrders).toFixed(2) + "€");
 }
 
-function sendOrder() {
-    var myBag = JSON.parse(localStorage.getItem("myBag"));
+function  saveOrder() {
+    var myBag = JSON.parse(sessionStorage.getItem("myBag"));
     if (!myBag) {
         return;
     }
@@ -183,40 +184,123 @@ function sendOrder() {
         deliveryMode: $('input[name="delivery_mode"]:checked').val(),
         orderDetails: []
     }
+    var checkoutList = []
+
     myBag.record.forEach(product => {
         var oderDetail = {
-            //id: product.id,
-            //price: product.price,
             quantity: parseInt($("#quantity_" + product.id).val(), 10),
-            // total: $("#totalPrice_" + product.id).html().replace('€', '').trim()
             productVersion: {
                 id: product.id
-            }
+            },
         }
         order.orderDetails.push(oderDetail);
+    });
+    myBag.record.forEach(product => {
+        var checkoutItem = {
+            quantity: parseInt($("#quantity_" + product.id).val(), 10),
+            price: priceWithTva( product.price, product.rateTVA ),
+            productId: product.productId,
+            productName: product.name,
+
+        }
+        checkoutList.push(checkoutItem);
     });
     const request = $.ajax({
         contentType: 'application/json',
         type: "POST",
         url: pageContextPath + "/order",
+        //url: pageContextPath + "/create-checkout-session",
         data: JSON.stringify(order),
-        success: successSaveOrder,
+        stripeAPIToken: 'pk_test_51NEFr6HwVknbXBSIkaDGhlfwPNXrYuvCx9MJ7TtsZJ1HkzCkHLQQy3eC3XBrweaOFsVIZrz9qHnL7pJG9hr74h9L00MDst2wnM',
+        success: function(){
+
+
+        },
         fail: fail,
         dataType: "json",
-        headers: {'X-CSRF-Token': $('#_csrf').val()}
+        headers: {'X-CSRF-Token': $('#_csrf').val()
+
+            ,}
 
     });
-    request.fail(function (jqXHR, textStatus) {
-        alert("Request failed: " + textStatus);
-    });
+    // request.fail(function (jqXHR, textStatus) {
+    //     alert("Request failed: " + textStatus);
+    // });
 
 }
+// Checkout
 
+async function  sendOrder() {
+    var myBag = JSON.parse(sessionStorage.getItem("myBag"));
+    if (!myBag) {
+        return;
+    }
+    if (!myBag.record) {
+        return;
+    }
+    let order = {
+        deliveryDate: $("#datepicker").val(),
+        deliveryMode: $('input[name="delivery_mode"]:checked').val(),
+        orderDetails: []
+    }
+    var checkoutList = []
+
+    myBag.record.forEach(product => {
+        var oderDetail = {
+            quantity: parseInt($("#quantity_" + product.id).val(), 10),
+            productVersion: {
+                id: product.id
+            },
+        }
+        order.orderDetails.push(oderDetail);
+    });
+    myBag.record.forEach(product => {
+        var checkoutItem = {
+            quantity: parseInt($("#quantity_" + product.id).val(), 10),
+            price: priceWithTva( product.price, product.rateTVA ),
+            productId: product.productId,
+            productName: product.name,
+
+        }
+        checkoutList.push(checkoutItem);
+    });
+    const request = await $.ajax({
+        contentType: 'application/json',
+        type: "POST",
+
+        url: pageContextPath + "/order/create-checkout-session",
+        data: JSON.stringify(checkoutList),
+        stripeAPIToken: 'pk_test_51NEFr6HwVknbXBSIkaDGhlfwPNXrYuvCx9MJ7TtsZJ1HkzCkHLQQy3eC3XBrweaOFsVIZrz9qHnL7pJG9hr74h9L00MDst2wnM',
+        success: function(response){
+            saveOrder()
+            sessionStorage.setItem('sessionId', response.sessionId);
+            successSaveOrder()
+            return stripe.redirectToCheckout({ sessionId : response.sessionId })
+
+            // create an object with the key of the array
+            // where html is the key of array that you want, $response['html'] = "<a>something..</a>";
+        },
+        fail: fail,
+        dataType: "json",
+        headers: {'X-CSRF-Token': $('#_csrf').val()
+
+            ,}
+
+    });
+    // request.fail(function (jqXHR, textStatus) {
+    //     alert("Request failed: " + textStatus);
+    // });
+
+}
 function successSaveOrder() {
     resetBag();
-    location.href = "/order";
-}
 
+}
 function fail() {
     alert('ben jouki biloute');
 }
+
+function priceWithTva(price, tva) {
+    return Number(parseFloat(price) * (1 + (tva / 100))).toFixed(2);
+}
+

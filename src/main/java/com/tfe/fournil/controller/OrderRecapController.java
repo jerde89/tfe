@@ -14,14 +14,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
-
+/**
+ * The type Order recap controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping("/orderRecap")
 public class OrderRecapController {
+    /**
+     * The Order service.
+     */
     @Autowired
     OrderService orderService;
 
+    /**
+     * Show order recap string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String showOrderRecap() {
         return "orderRecap";

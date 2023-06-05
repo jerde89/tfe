@@ -24,17 +24,35 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 
+/**
+ * The type My personal data controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping(value = "/myPersonalData")
 public class MyPersonalDataController {
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
+    /**
+     * The City repository.
+     */
     @Autowired
     CityRepository cityRepository;
 
+    /**
+     * Show my personal data string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("")
     public String showMyPersonalData(Model model) {
         log.info("test Controller MyPersonalData");
@@ -46,6 +64,15 @@ public class MyPersonalDataController {
         return "myPersonalData";
     }
 
+    /**
+     * Modified user string.
+     *
+     * @param model         the model
+     * @param user          the user
+     * @param bindingResult the binding result
+     * @param session       the session
+     * @return the string
+     */
     @PostMapping(value = "/modifiedUser")
     public String modifiedUser(Model model,
                                @Validated(MyPersonalData.class) User user,
@@ -87,6 +114,11 @@ public class MyPersonalDataController {
         return "redirect:/myPersonalData";
     }
 }
+
+
+
+
+
 
 
 

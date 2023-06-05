@@ -13,21 +13,42 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type User service.
+ */
 @Service
 public class UserService {
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The Mail service.
+     */
     @Autowired
     MailService mailService;
 
 
+    /**
+     * Check if email is unique boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean checkIfEmailIsUnique(String email) {
         List<User> userList = userRepository.findByEmail(email);
         return CollectionUtils.isEmpty(userList);
     }
 
 
+    /**
+     * Change password.
+     *
+     * @param dto the dto
+     * @throws Exception the exception
+     */
     public void changePassword(ChangePasswordDTO dto) throws Exception {
         if (!dto.getNewPassword().equals(dto.getNewConfirmPassword())) {
             throw new Exception("Le nouveau mot de passe et le mot de passe confirmer sont différents");
@@ -45,6 +66,11 @@ public class UserService {
         userRepository.save(currentUser);
     }
 
+    /**
+     * Gets current user.
+     *
+     * @return the current user
+     */
     public Optional<User> getCurrentUser() {
         //Avec l'objet principal, on recuprère via le security spring boot l'email, le mdp et le role
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -62,6 +88,11 @@ public class UserService {
 
     }
 
+    /**
+     * Reset password.
+     *
+     * @param email the email
+     */
     public void resetPassword(String email)  {
         User user = userRepository.findByUsername(email);
 //        if (user == null) {
@@ -70,6 +101,12 @@ public class UserService {
         sendMailResetPassword(user, "reset password");
     }
 
+    /**
+     * Send mail reset password.
+     *
+     * @param user    the user
+     * @param subject the subject
+     */
     public void sendMailResetPassword(User user, String subject) {
         //création d'une variable newpassword qui va chercher le résultat du service GeneratePassword
         String newPassword = GeneratePassword.generatePassword(10);
@@ -78,6 +115,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Check if email exist boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public boolean checkIfEmailExist(String email) {
 //        List<User> userList = userRepository.findByEmail(email);
 //        return (long) userList.size() == 1;
@@ -89,6 +132,12 @@ public class UserService {
         }
     }
 
+    /**
+     * Map to user dto user dto.
+     *
+     * @param user the user
+     * @return the user dto
+     */
     public UserDTO mapToUserDTO(User user) {
         UserDTO userDTO = new UserDTO();
         userDTO.setFirstName(user.getFirstname());

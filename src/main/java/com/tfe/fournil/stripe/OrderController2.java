@@ -12,12 +12,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+/**
+ * The type Order controller 2.
+ */
 @Slf4j
 @Controller
 public class OrderController2 {
     @Autowired
     private OrderService2 orderService2;
 
+    /**
+     * Checkout list response entity.
+     *
+     * @param checkoutItemDtoList the checkout item dto list
+     * @return the response entity
+     * @throws StripeException the stripe exception
+     */
     @PostMapping("/create-checkout-session")
     public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList)
             throws StripeException {

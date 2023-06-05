@@ -14,12 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Order service 2.
+ */
 @Service
 @Slf4j
 public class OrderService2 {
-//    @Value("${BASE_URL}")
 
-    private String baseURL=" ";
+    //Important pour Stripe
+    private String baseURL="http://localhost:8080";
 
     @Value("${STRIPE_SECRET_KEY}")
     private String apiKey;
@@ -29,36 +32,6 @@ public class OrderService2 {
      */
 //    @Autowired
 ////    ContributionUserRepository contributionUserRepository;
-
-    /**
-     * Get my cart list.
-     *
-     * @param user the user
-     * @return the list
-     */
-//    public List<ContributionRequestDto> getMyCart(User user){
-//
-//        log.info("Call service getMyCart order fir user {}", user.getEmail());
-//
-//        List<ContributionRequestDto> contributionRequestDtoList = new ArrayList<>();
-//        List<ContributionUser> contributionUserList = contributionUserRepository.getMyCart(user);
-//
-//        for (ContributionUser contributionUser: contributionUserList
-//        ) {
-//            ContributionRequestDto contributionRequestDto = ContributionRequestDto.builder()
-//                    .quantity(contributionUser.getQuantity())
-//                    .label(contributionUser.getContribution().getLabel())
-//                    .price(contributionUser.getContribution().getPrice())
-//                    .id(contributionUser.getContribution().getId())
-//                    .build();
-//            contributionRequestDtoList.add(contributionRequestDto);
-//
-//            log.info("Added in list {}", contributionRequestDto.getLabel());
-//        }
-//        log.info("Size list {}", contributionUserList.size());
-//
-//        return contributionRequestDtoList;
-//    }
 
 
     /**
@@ -74,15 +47,17 @@ public class OrderService2 {
         // sucess and failure urls
 
         //page de succès ou erreur
-        String successURL = baseURL + "/user/payment/success";
+        String successURL = baseURL + "/order/successStripe";
 
-        String failureURL = baseURL + "/user/payment/failed";
+        String failureURL = baseURL + "/order/errorStripe";
 
         Stripe.apiKey = apiKey;
 
         List<SessionCreateParams.LineItem> sessionItemList = new ArrayList<>();
 
         for (CheckoutItemDto checkoutItemDto: checkoutItemDtoList) {
+            log.info(" Item dto name : " + checkoutItemDto.toString());
+
             sessionItemList.add(createSessionLineItem(checkoutItemDto));
         }
         log.info("CheckItemDtoList size {}", checkoutItemDtoList.size());
@@ -120,29 +95,5 @@ public class OrderService2 {
                 ).build();
     }
 
-    /**
-     * Sold my cart boolean.
-     *
-     * @param user the user
-     * @return the boolean
-     */
 
-    //permet de vider mon panier
-//    public Boolean soldMyCart(User user){
-//
-//        List<ContributionUser> contributionUserList = contributionUserRepository.getMyCart(user);
-//
-//        try{
-//            for (ContributionUser contributionUser: contributionUserList
-//            ) {
-//                contributionUser.setIsPay(true);
-//                contributionUserRepository.save(contributionUser);
-//                log.info("Contribution is Paid saved {}", contributionUser.getContribution().getId());
-//            }
-//            return true;
-//        }catch(Exception e) {
-//            log.warn("Error save isPaid contribution : {}", e.getMessage());
-//            return false;
-//        }
-//    }
 }

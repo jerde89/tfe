@@ -15,15 +15,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The type Product service.
+ */
 @Service
 @Slf4j
 public class ProductService {
+    /**
+     * The Product version repository.
+     */
     @Autowired
     ProductVersionRepository productVersionRepository;
 
+    /**
+     * The Product repository.
+     */
     @Autowired
     ProductRepository productRepository;
 
+    /**
+     * The Product category repository.
+     */
     @Autowired
     ProductCategoryRepository productCategoryRepository;
 
@@ -38,9 +50,23 @@ public class ProductService {
         }
         return product;
     }
+
+    /**
+     * Update product product.
+     *
+     * @param id          the id
+     * @param name        the name
+     * @param description the description
+     * @param category    the category
+     * @param price       the price
+     * @param tax_rate    the tax rate
+     * @param enable      the enable
+     * @param url         the url
+     * @return the product
+     */
     public Product updateProduct(Long id, String name, String description,
-                              long category, float price, int tax_rate,
-                              boolean enable){
+                                 long category, float price, int tax_rate,
+                                 boolean enable, String url){
         Product product = findProductById(id);
         product.setName(name);
         product.setDescription(description);
@@ -48,6 +74,9 @@ public class ProductService {
         product.setTaxRate(tax_rate);
         product.setUpdateAt(new Date());
         product.setEnable(enable);
+        if(url!=""){
+            product.setImg(url);
+        }
         Optional<ProductCategory> productCategory = productCategoryRepository.findById(category);
         productCategory.ifPresent(product::setCategory);
         Product productSave = productRepository.save(product);
@@ -55,6 +84,13 @@ public class ProductService {
         return productSave;
     }
 
+    /**
+     * Update product version.
+     *
+     * @param product  the product
+     * @param price    the price
+     * @param taxeRate the taxe rate
+     */
     public void updateProductVersion(Product product, float price, int taxeRate) {
         List<ProductVersion> productVersions = productVersionRepository.findAll();
         productVersions.stream()

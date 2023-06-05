@@ -1,5 +1,23 @@
 package com.tfe.fournil.config;
 
+/**
+ * The enum Authority.
+ */
 public enum Authority {
-    ADMIN, EMPLOYEE, USER, FREE
+    /**
+     * Admin authority.
+     */
+    ADMIN,
+    /**
+     * Employee authority.
+     */
+    EMPLOYEE,
+    /**
+     * User authority.
+     */
+    USER,
+    /**
+     * Free authority.
+     */
+    FREE
 }

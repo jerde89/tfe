@@ -9,13 +9,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The type Welcome controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping("")
 public class WelcomeController {
 
+    /**
+     * The Mail service.
+     */
     @Autowired
     MailService mailService;
+
+    /**
+     * Welcome appel string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String welcomeAppel() {
         //Nom de la JSP

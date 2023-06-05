@@ -17,15 +17,26 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Contact controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping("/contact")
 public class ContactController {
 
-    //injecte la classe
+    /**
+     * The Feedback repository.
+     */
+//injecte la classe
     @Autowired
     FeedbackRepository feedbackRepository;
 
+    /**
+     * Show contact string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String showContact()
     {
@@ -36,7 +47,16 @@ public class ContactController {
 
     }
 
-    //model ajouter attribut pour vue
+    /**
+     * Save feedback string.
+     *
+     * @param model         the model
+     * @param feedback      the feedback
+     * @param bindingResult the binding result
+     * @param session       the session
+     * @return the string
+     */
+//model ajouter attribut pour vue
     //Bindinresult récupère erreurs validation
     @PostMapping(value="/sendFeedback")
     public String saveFeedback(Model model, @Valid Feedback feedback, BindingResult bindingResult, HttpSession session)
@@ -48,7 +68,7 @@ public class ContactController {
             log.error("call error" );
             List<String> errors = bindingResult.getAllErrors().stream().map(e -> e.getDefaultMessage()).collect(Collectors.toList());
             log.error(errors.toString());
-           // model.addAttribute("errors", errors);
+            // model.addAttribute("errors", errors);
             session.setAttribute("errors", errors);
         }else{
             log.info("save feedback success");
@@ -57,7 +77,7 @@ public class ContactController {
             session.setAttribute("success", "Votre feedback a été enregistré");
 
         }
-       return "redirect:/contact";
+        return "redirect:/contact";
 
     }
 

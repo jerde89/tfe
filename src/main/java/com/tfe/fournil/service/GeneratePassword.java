@@ -4,12 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Random;
 
-/** * The type Generate password. */
+/**
+ * The type Generate password.
+ */
 @Slf4j
 public class GeneratePassword {
-    /**     * Generate password string.     *
+    /**
+     * Generate password string.     *
      * * @param length the length
-     * * @return the string     */
+     * * @return the string      @param length the length
+     *
+     * @return the string
+     */
     public static String generatePassword(int length)
     {
         log.info("Generate psw length {}", length);
@@ -25,3 +31,4 @@ public class GeneratePassword {
         return String.valueOf(newPassword);
     }
 }
+

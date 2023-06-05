@@ -14,29 +14,54 @@ import java.util.Date;
 import java.util.List;
 
 
+/**
+ * The type Category controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
 
+    /**
+     * The Product category repository.
+     */
     @Autowired
     ProductCategoryRepository productCategoryRepository;
 
+    /**
+     * The Category service.
+     */
     @Autowired
     CategoryService categoryService;
 
 
+    /**
+     * Show category list string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String showCategoryList() {
         return "category";
     }
 
+    /**
+     * Ajax showdisplay categories response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/getAll")
     public ResponseEntity<List<ProductCategory>> ajaxShowdisplayCategories() {
         List<ProductCategory> categories = productCategoryRepository.findAll();
         return ResponseEntity.ok(categories);
     }
 
+    /**
+     * Add category response entity.
+     *
+     * @param category the category
+     * @return the response entity
+     */
     @PostMapping(value = "")
     public ResponseEntity<ProductCategory> addCategory(@RequestBody ProductCategory category) {
         category.setUpdateAt(new Date());
@@ -46,6 +71,13 @@ public class CategoryController {
     }
 
 
+    /**
+     * Modify category response entity.
+     *
+     * @param newCategory the new category
+     * @param id          the id
+     * @return the response entity
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity<ProductCategory> modifyCategory(@RequestBody ProductCategory newCategory, @PathVariable long id) {
         ProductCategory productCategory = productCategoryRepository.findById(id)
@@ -63,6 +95,12 @@ public class CategoryController {
         return ResponseEntity.ok(productCategory);
     }
 
+    /**
+     * Check if category is unique response entity.
+     *
+     * @param name the name
+     * @return the response entity
+     */
     @GetMapping("/nameIsUnique/{name}")
     public ResponseEntity<Boolean> checkIfCategoryIsUnique(@PathVariable("name") String name) {
         return ResponseEntity.ok(categoryService.checkIfCategoryIsUnique(name));

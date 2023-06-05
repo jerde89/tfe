@@ -27,9 +27,18 @@
 
 <div class="container">
 
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#tab-table1" data-toggle="tab">En cours ou réalisées</a>
+        </li>
+        <li>
+            <a href="#tab-table2" data-toggle="tab">En attentes</a>
+        </li>
+    </ul>
+
     <div class="tab-content">
         <div class="tab-pane active m-4" id="tab-table1">
-            <table class="table table-striped table-bordered hover table-hover" id="orderGrid" cellspacing="0"
+            <table class="table table-striped table-bordered hover table-hover" id="orderGridWaiting" cellspacing="0"
                    width="100%">
                 <thead>
                 <tr>
@@ -38,12 +47,29 @@
                     <th>Nom</th>
                     <th>Mode de livraison</th>
                     <th>Total</th>
+                    <th>Payé?</th>
                     <th>Statut</th>
                 </tr>
                 </thead>
             </table>
         </div>
+        <div class="tab-pane m-4" id="tab-table2">
+            <table class="table table-striped table-bordered hover table-hover" id="orderGridPending" cellspacing="0"
+                   width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Date de réception</th>
+                    <th>Nom</th>
+                    <th>Mode de livraison</th>
+                    <th>Total</th>
+                    <th>Payé?,,</th>
+                    <th>Statut</th>
 
+                </tr>
+                </thead>
+            </table>
+        </div>
     </div>
 </div>
 

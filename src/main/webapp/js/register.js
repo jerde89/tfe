@@ -91,11 +91,18 @@ function checkEmailUser() {
 function checkPassword() {
 
     var password = $("#inputPassword").val();
+    var regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/;
 
-    if (password.length < 6) {
-        document.getElementById("errorPassword").innerHTML = "Veuillez indiquer au moins 6 caractères";
+    // if (password.length < 6) {
+    //     document.getElementById("errorPassword").innerHTML = "Veuillez indiquer au moins 6 caractères";
+    //     $("#inputPassword").addClass("fieldMistake ");
+    //     return false;
+
+        if (!password.match(regexPassword)) {
+        document.getElementById("errorPassword").innerHTML = "Le mot de passe doit contenir au moins 8 caractères, 1 majuscule, 1 minuscule, 1 chiffre(0-9), 1 symbole";
         $("#inputPassword").addClass("fieldMistake ");
         return false;
+
 
     } else if (password.length > 50) {
         document.getElementById("errorPassword").innerHTML = "Maximun 50 Caractères";

@@ -14,19 +14,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
+/**
+ * The type Web security configuration.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private String[] FREE_URLS =  { "/", "/imageProduct/**","/home", "/register", "/addUser", "/passwordForgot", "/passwordForgot/checkIfEmailExist" };
     private String[] USER_URLS =  {"/myPersonalData", "/myPersonalData/*", "/orderRecap"};
-    private String[] EMPLOYE_URLS = {"/feedbackList", "/feedbackList/statutlu", "/feedbackList/statutNonlu",
+    private String[] EMPLOYE_URLS = {"/feedbackList",  "/feedbackList/statutNonlu",
             "/feedbackList/delete","/category/*", "/orderManage", "/orderPreparation"};
-    private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu","/shop"};
-
+    private String[] ADMIN_URLS =  {"/managementCategoryProduct", "/feedbackList/statutlu", "/feedbackList/statutlu","/shop"};
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Authentication provider authentication provider.
+     *
+     * @return the authentication provider
+     */
     @Bean
     AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider
@@ -66,3 +73,4 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     }
 }
+

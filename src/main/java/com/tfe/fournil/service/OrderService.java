@@ -9,33 +9,67 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * The type Order service.
+ */
 @Service
 @Slf4j
 public class OrderService {
+    /**
+     * The Order repository.
+     */
     @Autowired
     OrderRepository orderRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
 
+    /**
+     * Add order.
+     *
+     * @param order the order
+     */
     public void addOrder(Order order) {
         orderRepository.save(order);
     }
 
-    //*****
+    /**
+     * Find status waiting by delivery date desc map.
+     *
+     * @return the map
+     */
+//*****
     public Map<LocalDate, OrderByDateDTO> findStatusWaitingByDeliveryDateDesc() {
         List<Order> orders = orderRepository.findByStatus(OrderStatus.WAITING);
         return mapOrderByDeliveryDate(orders);
     }
 
+    /**
+     * Find status in progress by delivery date desc map.
+     *
+     * @return the map
+     */
     public Map<LocalDate, OrderByDateDTO> findStatusInProgressByDeliveryDateDesc() {
         List<Order> orders = orderRepository.findByStatus(OrderStatus.IN_PROGRESS);
         return mapOrderByDeliveryDate(orders);
     }
 
+    /**
+     * Find by status list.
+     *
+     * @return the list
+     */
     public List<OrderDTO> findByStatus() {
         List<Order> orders = orderRepository.findByStatusIn(Arrays.asList(OrderStatus.IN_PROGRESS, OrderStatus.PACKAGED, OrderStatus.DONE));
+        return mapOrder(orders);
+    }
+
+    public List<OrderDTO> findByStatusWaiting() {
+        List<Order> orders = orderRepository.findByStatusIn(Arrays.asList(OrderStatus.WAITING));
         return mapOrder(orders);
     }
 
@@ -46,6 +80,7 @@ public class OrderService {
             orderDTO.setId(order.getIdOrder());
             orderDTO.setCreationDate(order.getCreationDate());
             orderDTO.setDeliveryMode(order.getDeliveryMode());
+            orderDTO.setPaid(order.getPaid());
             orderDTO.setUser(userService.mapToUserDTO(order.getUser()));
             orderDTO.setDeliveryDate(order.getDeliveryDate());
             orderDTO.setOrderDetailDTOs(mapToOderDetailDto(order.getOrderDetails()));
@@ -76,6 +111,11 @@ public class OrderService {
     }
 
 
+    /**
+     * Update status to in progress.
+     *
+     * @param orderIds the order ids
+     */
     public void updateStatusToInProgress(List<Long> orderIds) {
         orderIds.forEach(id -> {
             Optional<Order> oderOptional = this.orderRepository.findById(id);
@@ -107,6 +147,12 @@ public class OrderService {
         return map;
     }
 
+    /**
+     * Update status.
+     *
+     * @param id     the id
+     * @param status the status
+     */
     public void updateStatus(Long id, OrderStatus status) {
         Optional<Order> oderOptional = this.orderRepository.findById(id);
         if (oderOptional.isEmpty()) {
@@ -117,6 +163,11 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    /**
+     * Find order for current user list.
+     *
+     * @return the list
+     */
     public List<OrderDTO> findOrderForCurrentUser() {
         Optional<User> currentUser = userService.getCurrentUser();
         if(currentUser.isEmpty()) {

@@ -16,16 +16,30 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 
 
+/**
+ * The type Change password controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping(value = "/changePassword")
 public class ChangePasswordController {
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * Show my personal data string.
+     *
+     * @return the string
+     */
     @GetMapping("")
     public String showMyPersonalData() {
 
@@ -33,6 +47,13 @@ public class ChangePasswordController {
         return "changePassword";
     }
 
+    /**
+     * Change password string.
+     *
+     * @param changePasswordDTO the change password dto
+     * @param session           the session
+     * @return the string
+     */
     @PostMapping ("/test")
     public String changePassword( ChangePasswordDTO changePasswordDTO, HttpSession session) {
         try {
@@ -47,3 +68,4 @@ public class ChangePasswordController {
 
 
 }
+

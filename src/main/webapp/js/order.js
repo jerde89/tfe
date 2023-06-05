@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 function addBagProduct(idProduct, maneProduct, price, rateTVA) {
     var quantity = parseInt($('#quantity_' + idProduct).val(), 10);
-    var myBag = JSON.parse(localStorage.getItem("myBag"));
+    var myBag = JSON.parse(sessionStorage.getItem("myBag"));
     if (!myBag) {
         myBag = {
             total: quantity,
@@ -29,7 +29,7 @@ function addBagProduct(idProduct, maneProduct, price, rateTVA) {
             ]
         };
         $('#mybBagCount').html(myBag.total);
-        localStorage.setItem("myBag", JSON.stringify(myBag));
+        sessionStorage.setItem("myBag", JSON.stringify(myBag));
         return;
     }
 
@@ -51,7 +51,7 @@ function addBagProduct(idProduct, maneProduct, price, rateTVA) {
         })
         myBag.total += quantity;
     }
-    localStorage.setItem("myBag", JSON.stringify(myBag));
+    sessionStorage.setItem("myBag", JSON.stringify(myBag));
     $('#mybBagCount').html(myBag.total);
 }
 
@@ -91,9 +91,9 @@ function findProductByCategory() {
                     '                    <p class="profile__stats__title">Prix</p>\n' +
                     '                    <h5>' + priceWithTVA + '</h5>\n' +
                     '                </div>\n' +
-                    '                <div class="profile__stats">\n' +
+                    '                <div class="profile__stats ps-0" >\n' +
                     '                    <p class="profile__stats__title">Quantité</p>\n' +
-                    '                    <input id="quantity_' + product.currentVersion.id + '" type="number" value="1" class="quantity">\n' +
+                    '                    <input id="quantity_' + product.currentVersion.id + '" type="number" min="0" value="1" class="quantity">\n' +
                     '                </div>\n' +
                     '                <div class="profile__cta">\n' +
                     '                    <a class="button" onclick="addBagProduct(' + product.currentVersion.id + ',\'' + product.name + '\', ' + product.currentVersion.price + ', ' + product.currentVersion.taxRate + ')">Ajouter au panier</a>\n' +

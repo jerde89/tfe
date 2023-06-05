@@ -1,6 +1,7 @@
 package com.tfe.fournil.controller;
 
 import com.tfe.fournil.entity.Order;
+import com.tfe.fournil.entity.Order;
 import com.tfe.fournil.entity.User;
 import com.tfe.fournil.repository.OrderRepository;
 import com.tfe.fournil.service.UserService;
@@ -15,15 +16,30 @@ import java.util.List;
 import java.util.Optional;
 
 
+/**
+ * The type My oders controller.
+ */
 @Slf4j
 @Controller
 @RequestMapping("/myOrders")
 public class MyOdersController {
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
+    /**
+     * The Order repository.
+     */
     @Autowired
     OrderRepository orderRepository;
 
+    /**
+     * Show my orders string.
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("")
     public String showMyOrders(Model model)
     {

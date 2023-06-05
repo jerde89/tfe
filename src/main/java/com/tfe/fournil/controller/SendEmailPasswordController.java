@@ -11,23 +11,39 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * The type Send email password controller.
+ */
 @Controller
 @RequestMapping(value = "/sendEmailPassword")
 @Slf4j
 public class SendEmailPasswordController
 {
+    /**
+     * The User repository.
+     */
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * The User service.
+     */
     @Autowired
     UserService userService;
 
+    /**
+     * Send email password string.
+     *
+     * @param email the email
+     * @return the string
+     */
     @PostMapping (value ="")
     public String sendEmailPassword (String email){
         User user = userRepository.findByUsername(email);
         if (user != null){
-           userService.sendMailResetPassword(user, "Reinitialisation du mot de passe");
+            userService.sendMailResetPassword(user, "Reinitialisation du mot de passe");
         }
         return "myPersonalData";
     }
 }
+

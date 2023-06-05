@@ -66,37 +66,10 @@
 
     <section class="results-section results--grid" id="productList">
 
-<%--        <c:forEach var="product" items="${productList}">--%>
-<%--            <div class="profile">--%>
-<%--                <div class="profile__image">--%>
-<%--                    <img src="http://localhost:8080/imageProduct/${product.img}" alt="${product.name}"/>--%>
-<%--                </div>--%>
-<%--                <div class="profile__info">--%>
-<%--                    <h3>${product.name}</h3>--%>
-<%--                    <p class="profile__info__extra">${product.description}</p>--%>
-<%--                </div>--%>
-<%--                <div class="profile__stats">--%>
-<%--                    <p class="profile__stats__title">Catégorie</p>--%>
-<%--                    <h5 class="profile__stats__info">${product.category.name}</h5>--%>
-<%--                </div>--%>
-<%--                <div class="profile__stats">--%>
-<%--                    <p class="profile__stats__title">Prix</p>--%>
-<%--                    <h5>${product.price}</h5>--%>
-<%--                </div>--%>
-<%--                <div class="profile__stats">--%>
-<%--                    <p class="profile__stats__title">Quantité</p>--%>
-<%--                        &lt;%&ndash;                    <h5 class="profile__stats__info">45 lbs</h5>&ndash;%&gt;--%>
-<%--                    <input id="quantity_${product.idProduct}" type="number" value="1" class="quantity">--%>
-<%--                </div>--%>
-<%--                <div class="profile__cta">--%>
-<%--                    <a class="button"--%>
-<%--                       onclick="addBagProduct(${product.idProduct},'${product.name}', '${product.price}', '${product.taxRate}')">Ajouter--%>
-<%--                        au panier</a>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </c:forEach>--%>
+
     </section>
 
 </main>
 </body>
+<c:import url="footer.jsp"/>
 </html>
