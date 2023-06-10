@@ -44,8 +44,8 @@ $(document).ready(function () {
 
 });
 
+//Fonction de vérification de l'imput "inputEmail" de la jsp "register"
 function checkEmailUser() {
-
     var emailUser = $("#inputEmail").val();
     if (emailUser == "" || emailUser == null) {
         document.getElementById("errorEmailUser").innerHTML = "Veuillez indiquer au moins un caractère";
@@ -87,7 +87,7 @@ function checkEmailUser() {
     });
 }
 
-
+//Fonction de vérification de l'imput "inputPassword" de la jsp "register"
 function checkPassword() {
 
     var password = $("#inputPassword").val();
@@ -115,6 +115,7 @@ function checkPassword() {
     }
 }
 
+//Fonction de vérification de l'imput "inputConfirmPassword" de la jsp "register"
 function checkConfirmPassword() {
 
     var confirmPassword = $("#inputConfirmPassword").val();
@@ -131,6 +132,7 @@ function checkConfirmPassword() {
     }
 }
 
+//Fonction de vérification de l'imput "inputName" de la jsp "register"
 function checkNameUser() {
     var nameUser = $("#inputName").val();
     if (nameUser === "" || nameUser == null) {
@@ -147,6 +149,7 @@ function checkNameUser() {
     return true;
 }
 
+//Fonction de vérification de l'imput "inputFirstname" de la jsp "register"
 function checkFirstnameUser() {
     var firstnameUser = $("#inputFirstname").val();
     if (firstnameUser == "" || firstnameUser == null) {
@@ -163,6 +166,7 @@ function checkFirstnameUser() {
     return true;
 }
 
+//Fonction de vérification de l'imput "inputPhone" de la jsp "register"
 function checkPhoneUser() {
 
     var phoneUser = $("#inputPhone").val();
@@ -183,6 +187,7 @@ function checkPhoneUser() {
     }
 }
 
+//Fonction de vérification de l'imput "inputStreet" de la jsp "register"
 function checkStreet() {
 
     var street = $("#inputStreet").val();
@@ -203,6 +208,7 @@ function checkStreet() {
     }
 }
 
+//Fonction de vérification de l'imput "inputNumber" de la jsp "register"
 function checkNumber() {
 
     var number = $("#inputNumber").val();
@@ -224,7 +230,7 @@ function checkNumber() {
 
 
 
-// Fonction de vérification des différents champs sur le Onsubmit du formulaire registerForm (register.jsp)
+//Fonction permettant de vérifier tous les "imput" de la jsp "register"
 function validateRegisterForm(origin) {
     try {
         //Par défaut, on met que le formulaire est valide (true)

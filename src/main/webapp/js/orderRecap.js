@@ -205,6 +205,14 @@ function  saveOrder() {
         }
         checkoutList.push(checkoutItem);
     });
+    if ($('input[name="delivery_mode"]:checked').val() === 'HOME') {
+        var checkoutItem = {
+            quantity: 1,
+            price: 2,
+            productName: "livraison",
+        }
+        checkoutList.push(checkoutItem);
+    }
     const request = $.ajax({
         contentType: 'application/json',
         type: "POST",
@@ -264,6 +272,17 @@ async function  sendOrder() {
         }
         checkoutList.push(checkoutItem);
     });
+    if ($('input[name="delivery_mode"]:checked').val() === 'HOME') {
+
+        var checkoutItem = {
+            quantity: 1,
+            price: 2,
+            productName: "livraison",
+
+        }
+        checkoutList.push(checkoutItem);
+    }
+
     const request = await $.ajax({
         contentType: 'application/json',
         type: "POST",

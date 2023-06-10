@@ -3,6 +3,7 @@ package com.tfe.fournil.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.util.CollectionUtils;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(value = { "product", "productVersion" })
+@Builder
 public class Product {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

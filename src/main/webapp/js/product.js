@@ -278,6 +278,8 @@ function checkNameProduct(isNew) {
     }
 }
 
+
+
 function checkDescriptionProduct() {
     var descriptionProduct = $("#description").val();
 
@@ -294,6 +296,8 @@ function checkDescriptionProduct() {
     $("#description").removeClass("fieldMistake ");
     return true;
 }
+
+
 
 function checkPriceProduct() {
     var priceProduct = $("#price").val();

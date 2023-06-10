@@ -7,9 +7,9 @@
 <head>
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/welcome.css">
-
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e3a73d74-61bb-46cc-8c7f-140ca9e2949b" data-blockingmode="auto" type="text/javascript"></script>
 </head>
-<body>
+<body style="margin-bottom: 200px">
 
     <%@include file="navbar.jsp" %>
 
@@ -25,20 +25,16 @@
         <p>Principium autem unde latius se funditabat, emersit ex negotio tali. Chilo ex vicario et coniux eius Maxima nomine, questi apud Olybrium ea tempestate urbi praefectum, vitamque suam venenis petitam adseverantes inpetrarunt ut hi, quos suspectati sunt, ilico rapti conpingerentur in vincula, organarius Sericus et Asbolius palaestrita et aruspex Campensis.</p>
     </div>
 
-    <div class="col ms-auto text-center pt-5">
+    <div class="col ms-auto text-center pt-6">
         <div class="zoom">
             <div class="zoom :hover">
                 <img src="${pageContext.request.contextPath}/image/MaitreBoulanger.png" alt="Image des gérants"  width="20%" alt="Profil">
             </div>
         </div>
     </div>
-
-    <footer>
-        <%@include file="footer.jsp" %>
-    </footer>
-
+    <script id="CookieDeclaration" src="https://consent.cookiebot.com/e3a73d74-61bb-46cc-8c7f-140ca9e2949b/cd.js" type="text/javascript" async></script>
 </body>
-
+<%@include file="footer.jsp" %>
 
 </html>
 

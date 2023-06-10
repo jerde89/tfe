@@ -60,7 +60,7 @@ public class User {
 
     @NotBlank(message = "le mot de passe doit comporter au moins 1 caractère")
 
-
+    @Size(min = 8)
     @Column(name = "password", nullable = false)
     private String password;
 

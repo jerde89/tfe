@@ -1,3 +1,4 @@
+//Fonction de vérification de l'imput "nameFeedback" de la jsp "contact"
 function checkName() {
     var nameFeedback = document.forms["contactFeedback"]["nameFeedback"];
 
@@ -17,6 +18,7 @@ function checkName() {
 
 }
 
+//Fonction de vérification de l'imput "firstnameFeedback" de la jsp "contact"
 function checkFirstname() {
 
     var firstnameFeedback = document.forms["contactFeedback"]["firstnameFeedback"];
@@ -37,6 +39,7 @@ function checkFirstname() {
     }
 }
 
+//Fonction de vérification de l'imput "emailFeedback" de la jsp "contact"
 function checkEmail() {
 
     var email = document.forms["contactFeedback"]["emailFeedback"];
@@ -60,7 +63,7 @@ function checkEmail() {
 
 }
 
-
+//Fonction de vérification de l'imput "phoneFeedback" de la jsp "contact"
 function checkPhone() {
 
     var phone = document.forms["contactFeedback"]["phoneFeedback"];
@@ -82,6 +85,7 @@ function checkPhone() {
     }
 }
 
+//Fonction de vérification de l'imput "commentFeedback" de la jsp "contact"
 function checkComment() {
 
     var comment = document.forms["contactFeedback"]["commentFeedback"];
@@ -102,7 +106,8 @@ function checkComment() {
     }
 }
 
-
+//Fonction de vérification des imputs ci-dessus de la jsp "contact"
+//Utilisée lors de l'envoi du formulaire
 function validateContactFeedback() {
     try {
         let formIsValid = true;

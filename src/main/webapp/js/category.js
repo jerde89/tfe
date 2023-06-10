@@ -3,6 +3,9 @@ let nameAlreadyExist = false;
 
 
 $(document).ready(function () {
+
+    //Fonction permettant d'afficher le tableau des catégories
+
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
     });
@@ -34,7 +37,7 @@ $(document).ready(function () {
 
     });
 
-
+    //Fonction permettant de reformater la date au format "DD/MM/YYYY HH:mm"
     function renderDateTz(data, type, row) {
         if (!data) {
             return '';
@@ -43,6 +46,7 @@ $(document).ready(function () {
         return moment(data).format("DD/MM/YYYY HH:mm");
     }
 
+    //Fonction permettant d'afficher et faire appel à une fonction d'action
     function makeActionCategories(data, type, full, meta) {
         return '<div class="row"><div class="col-4 text-center">\n' +
             '                                         <button onclick="toggleCategoryPopup(' + full.id + ')" data-toggle="tooltip" data-placement="top" title="Modifier" >\n' +
@@ -55,13 +59,14 @@ $(document).ready(function () {
             '    </div> ';
     }
 
-
+    //permet d'afficher max 10 caractère et puis ....
     function minText10(data, type, full, meta) {
         var strReturn = data.substring(0, 10);
         strReturn += data.length > 9 ? '...' : '';
         return strReturn;
     }
 
+    //permet de rendre un mail en href
     function transformToMail(data) {
         return '<a href="mailto:' + data + '"/>' + data + '</a>';
     }
@@ -70,6 +75,7 @@ $(document).ready(function () {
 })
 ;
 
+//Fonction d'affichage du popup d'ajout ou de modification d'une catégorie
 function toggleCategoryPopup(id) {
     // Permet d'effacer les champs erreur à l'ouverture de la popup
     document.getElementById("errorName").innerHTML = "";
@@ -130,6 +136,7 @@ function toggleCategoryPopup(id) {
     }
 }
 
+//Fonction permettant d'enregistrer l'ajout ou la modification d'une catégorie par appel AJAX
 function callAjaxModifyCategory() {
     const id = $('#idCategory').val();
     console.log($('#idCategory').val());
@@ -167,6 +174,7 @@ function callAjaxModifyCategory() {
     });
 }
 
+//Fonction d'affichage d'un popup de succès lorsqu'une catégorie a été ajoutée ou modifiée
 function successSaveCategory() {
     categoryDatatable.ajax.reload();
     $.toast(
@@ -182,11 +190,13 @@ function successSaveCategory() {
     $("#formCategory").toggle();
 }
 
+//Fonction d'alerte fail
 function fail(e) {
     console.log(e);
     alert("fail: " + e);
 }
 
+//Fonction de vérification de l'imput "name" de la jsp "category"
 function checkNameCategory(isNew) {
     var nameCategory = $("#name").val();
 
@@ -230,7 +240,7 @@ function checkNameCategory(isNew) {
     });
 }
 
-
+//Fonction de vérification de l'imput "description" de la jsp "category"
 function checkDescriptionCategory() {
     var descriptionCategory = $("#description").val();
 
@@ -248,6 +258,7 @@ function checkDescriptionCategory() {
     return true;
 }
 
+//Fonction de vérification des imputs "name" & "description" de la jsp "category"
 function validateCategoryForm(isNew) {
     let formIsValid = true;
     checkNameCategory(isNew) === false ? formIsValid = false : formIsValid = formIsValid;
@@ -255,6 +266,7 @@ function validateCategoryForm(isNew) {
     return formIsValid;
 }
 
+//Fonction permettant de faire appel à la fonction callAjaxModifyCategory() si la focntion validateCategoryForm est vérifiée
 function saveCategoryForm() {
     const isNew = $("#idCategory").val() == "";
     var isValid = validateCategoryForm(isNew);
@@ -267,6 +279,7 @@ function closePopupCategory() {
     $("#formCategory").toggle();
 }
 
+//Fonction permettant d'afficher la popup d'ajout ou de modification d'une catégorie
 function showPopup(){
     $("#formCategory").dialog({
         modal: true,

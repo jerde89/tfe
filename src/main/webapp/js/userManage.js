@@ -2,6 +2,8 @@ var userManageDatatable;
 var userManageAjax;
 
 $(document).ready(function () {
+
+    //Permet l'affichage du tableau reprenant tous les utilisateurs
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         $.fn.dataTable.tables({visible: true, api: true}).columns.adjust();
     });
@@ -19,33 +21,38 @@ $(document).ready(function () {
             {data: 'makeActionUser', render: makeActionUser},
 
         ],
-        order: [[1, 'asc']],
+        order: [[0, 'asc']],
 
         "language": languageConfig
     });
 
+    //permet d'afficher max 10 caractère et puis ....
     function minText10(data, type, full, meta) {
         var strReturn = data.substring(0, 10);
         strReturn += data.length > 9 ? '...' : '';
         return strReturn;
     }
 
+    //permet d'afficher max 15 caractère et puis ....
     function minText15(data, type, full, meta) {
         var strReturn = data.substring(0, 15);
         strReturn += data.length > 14 ? '...' : '';
         return strReturn;
     }
 
+    //permet de rendre un mail en href
     function transformToMail(data) {
         return '<a href="mailto:' + data + '"/>' + data + '</a>';
     }
 
+    //permet de rendre un mail en href & max 10 caractère et puis ....
     function transformToMail10(data) {
         var strReturn = data.substring(0, 10);
         strReturn += data.length > 9 ? '...' : '';
         return '<a href="mailto:' + strReturn + '"/>' + strReturn + '</a>';
     }
 
+    //permet d'affciher le bouton d'action "plus d'informations"
     function makeActionUser(data, type, full, meta) {
         console.log(data);
         console.log(type);
@@ -63,7 +70,7 @@ $(document).ready(function () {
 
 });
 
-
+//Fonction d'affichage du popup d'informations de l'utilisateur
 function toggleUserPopup(id) {
     if (!id) {
         $("#formUserInfo").toggle();
@@ -149,6 +156,7 @@ function toggleUserPopup(id) {
     }
 }
 
+//fonction permettant de modifier un utilisateur (UNIQUEMENT pour les acteurs "ADMIN")
 function modifiedUser() {
     var data = {
         lastname: $('#lastname').val(),
@@ -181,6 +189,7 @@ function modifiedUser() {
     });
 }
 
+//fonction d'affichage d'un popup de succès lorsqu'un admin modifie les données d'un utilisateur
 function successSaveUser() {
     userManageDatatable.ajax.reload();
     $.toast(
@@ -196,12 +205,14 @@ function successSaveUser() {
     // $("#formCategory").toggle();
 }
 
+//Fonction d'alerte fail
 function fail(e) {
     console.log(e);
     alert("fail: " + e);
 
 }
 
+//Fonction de vérification de l'imput "lastname" de la jsp "userManage"
 function checkLastname() {
     var lastname = $("#lastname").val();
     if (lastname === "" || lastname == null) {
@@ -218,6 +229,7 @@ function checkLastname() {
     return true;
 }
 
+//Fonction de vérification de l'imput "firstname" de la jsp "userManage"
 function checkFirstnameUser() {
     var firstnameUser = $("#firstname").val();
     if (firstnameUser == "" || firstnameUser == null) {
@@ -234,6 +246,7 @@ function checkFirstnameUser() {
     return true;
 }
 
+//Fonction de vérification de l'imput "phone" de la jsp "userManage"
 function checkPhoneUser() {
 
     var phoneUser = $("#phone").val();
@@ -254,6 +267,7 @@ function checkPhoneUser() {
     }
 }
 
+//Fonction de vérification de l'imput "street" de la jsp "userManage"
 function checkStreet() {
 
     var street = $("#street").val();
@@ -274,6 +288,7 @@ function checkStreet() {
     }
 }
 
+//Fonction de vérification de l'imput "number" de la jsp "userManage"
 function checkNumber() {
 
     var number = $("#number").val();
@@ -293,6 +308,7 @@ function checkNumber() {
     }
 }
 
+//fonction permettant de vérifier tous les "imput" de la jsp "userManage"
 function validateUserManageForm() {
     try {
         //Par défaut, on met que le formulaire est valide (true)

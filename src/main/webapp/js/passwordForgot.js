@@ -1,3 +1,4 @@
+//Fonction de vérification de l'imput "inputEmail" de la jsp "passwordForgot"
 function checkEmailUser() {
 
     var emailUser = $("#inputEmail").val();

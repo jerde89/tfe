@@ -8,6 +8,8 @@
     <%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
+    <script src="${pageContext.request.contextPath}/js/orderRecap.js"></script>
+
     <title>Success</title>
 </head>
 <body>
@@ -31,7 +33,7 @@
 
                             </div>
                             <hr>
-                            <p>Votre commande es validée et payée.</p>
+                            <p>Votre commande est validée et payée.</p>
 
                             <p>Nous vous remercions pour votre confiance.</p>
 

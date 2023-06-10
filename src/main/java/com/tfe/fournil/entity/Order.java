@@ -64,6 +64,9 @@ public class Order {
             float productPrice = (orderDetail.getProductVersion().getPrice() * orderDetail.getQuantity()) * (((float) orderDetail.getProductVersion().getTaxRate()/100)+1);
             totalOrder.updateAndGet(v -> v + productPrice);
         });
+        if (DeliveryMode.HOME == deliveryMode) {
+            totalOrder.set(totalOrder.get() + 2);
+        }
         return totalOrder.get();
     }
 

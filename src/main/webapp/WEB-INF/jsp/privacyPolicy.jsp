@@ -1,29 +1,33 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page pageEncoding="UTF-8" %>
 <html>
 <head>
+    <%@include file="head.jsp" %>
 </head>
     <body>
-    <div class="module--wysiwyg" style="width: 60%">
-        <h3><strong>POLITIQUE DE CONFIDENTIALITÉ – </strong><strong>LE PAIN QUOTIDIEN</strong></h3>
-        <p><em>Dernière modification le 27 Mai 2022.</em></p>
-        <p>Tout d’abord, nous sommes heureux que vous soyez intéressé par les produits et services du Pain Quotidien.</p>
-        <p>La présente politique de confidentialité décrit la manière dont nous utilisons les données personnelles que vous nous fournissez via, par exemple, notre Application et notre Site internet.</p>
-        <p>Nous pouvons vous demander de nous communiquer certaines données personnelles, notamment votre prénom, votre nom et votre adresse électronique (données d’identification). Pour certaines obligations spécifiques, il peut vous être demandé de nous fournir des données supplémentaires, telles que les données de facturation ou de paiement.</p>
+
+    <%@include file="navbar.jsp" %>
+
+
+    <div class="module--wysiwyg" style="width: 60%; margin-left: 20px">
+        <h3><strong>POLITIQUE DE CONFIDENTIALITÉ – </strong><strong>LE FOURNIL DES GONCERIES</strong></h3>
+        <p><em>Dernière modification le 27 Mai 2023.</em></p>
+        <p>Tout d’abord, nous sommes heureux que vous soyez intéressé par les produits et services du Fournil des Gonceries.</p>
+        <p>La présente politique de confidentialité décrit la manière dont nous utilisons les données personnelles que vous nous fournissez via notre Site internet.</p>
+        <p>Nous pouvons vous demander de nous communiquer certaines données personnelles, notamment votre prénom, votre nom et votre adresse électronique (données d’identification). Pour certaines obligations spécifiques, il peut vous être demandé de nous fournir des données supplémentaires, telles que les données de paiement.</p>
         <p>Nous ne recueillons que les données personnelles nécessaires pour vous informer sur nos produits (et services), pour conclure un accord avec vous et pour vous contacter.</p>
         <p>À cette fin, nous nous basons sur le contrat qui nous lie, une obligation légale, notre intérêt légitime et, dans certains cas, votre consentement (voir également article 2).</p>
-        <p>Le traitement de vos données personnelles est soumis à la présente déclaration de confidentialité. Pour toute question et/ou commentaire, veuillez contacter: <a href="mailto:tartine-club@be.lepainquotidien.com">feedback@lepainquotidien.be</a> .</p>
+        <p>Le traitement de vos données personnelles est soumis à la présente déclaration de confidentialité. Pour toute question et/ou commentaire, veuillez contacter: <a href="mailto:lefournildesgonceries@gmail.com">lefournildesgonceries@gmail.com</a> .</p>
         <p>En fournissant vos données à caractère personnel, vous reconnaissez avoir pris connaissance de l’utilisation de vos données à caractère personnel conformément à la présente déclaration de confidentialité.</p>
         <p>&nbsp;</p>
         <p><strong><u>Article 1 – Définitions </u></strong></p>
-        <p>«&nbsp;<strong>Application</strong>&nbsp;» désigne l’application de fidélisation «&nbsp;Le Pain Quotidien&nbsp;» qui est développée pour les appareils mobiles pour les systèmes d’exploitation iOS et Android, personnalisée et exploitée par <strong>Como AI Malta Limited</strong>, ayant son siège social à Suite 10, 189 Marina Suites, Marina Street, Pieta PTA 9041 (Malte), qui agit en tant que Sous-traitant&nbsp;à cet égard.</p>
-        <p>Par «&nbsp;<strong>Société affiliée&nbsp;»</strong> on entend toute société qui est affiliée au Pain Quotidien dans la mesure où elle remplit les conditions d’une «&nbsp;société affiliée&nbsp;» telles que définies à l’article 1:20 du Code belge des sociétés et associations.</p>
-        <p>«&nbsp;<strong>Responsable du traitement</strong>&nbsp;» a la signification qui lui est donnée dans le Règlement général sur la protection des données n°2016/679. Le Pain Quotidien sera qualifiée de Responsable du traitement qui détermine les finalités et les moyens du traitement des Données personnelles.</p>
-        <p><strong>«&nbsp;Le Pain Quotidien</strong>&nbsp;» désigne PQ Belgium SA, opérant sous la dénomination «&nbsp;Le Pain Quotidien&nbsp;», société anonyme de droit belge, ayant son siège social à 1000 Bruxelles (Belgique), Avenue du Port 86/C et immatriculé à la Crossroads Bank of Enterprises sous le numéro 0810.307.316.</p>
+        <p>«&nbsp;<strong>Responsable du traitement</strong>&nbsp;» a la signification qui lui est donnée dans le Règlement général sur la protection des données n°2016/679. Le fournil des gonceries sera qualifiée de Responsable du traitement qui détermine les finalités et les moyens du traitement des Données personnelles.</p>
+        <p><strong>«&nbsp;Le fournil des gonceries</strong>&nbsp;»  ayant son siège social à 6032 Mont-sur-Marchienne (Belgique), 75 rue des gonceries et immatriculé au registre de la TVA sous le numéro be0628684912.</p>
         <p>«&nbsp;<strong>Données personnelles </strong>» a la signification qui lui est donnée dans le Règlement général sur la protection des données n°2016/679, à savoir toute information concernant une personne physique identifiée ou identifiable (également désignée «&nbsp;Personne concernée&nbsp;»).</p>
         <p>Le «&nbsp;<strong>Sous-traitant</strong>&nbsp;» a la signification qui lui est donnée dans le Règlement général sur la protection des données n°2016/679, à savoir celui qui traite les Données personnelles au nom et pour le compte du Responsable du traitement.</p>
-        <p>«&nbsp;<strong>Site internet</strong>&nbsp;» désigne le site internet du Pain Quotidien : <a href="http://www.lepainquotidien.com">www.lepainquotidien.com</a> .</p>
+        <p>«&nbsp;<strong>Site internet</strong>&nbsp;» désigne le site internet du fournil des gonceries : <a href="http://www.lefournildesgonceries.com">www.lefournildesgonceries.com</a> .</p>
         <p>&nbsp;</p>
         <p><strong><u>Article 2 – Finalités et fondements juridiques</u></strong></p>
         <p><strong>Données sur les clients </strong></p>
@@ -56,17 +60,13 @@
         <p>Nous mettons en place des mesures et des procédures raisonnables pour sécuriser et protéger les Données personnelles que nous recueillons par le biais de l’Application, du Site internet ou de manière générale par voie électronique. Ainsi, nous nous engageons, de manière raisonnable, à empêcher le traitement illicite de vos Données personnelles ainsi que la perte ou la suppression involontaire de celles-ci.</p>
         <p>Nous assurons la sécurité de vos Données personnelles en limitant notamment leur accès aux personnes qui ont besoin de les connaître (par exemple : seuls les employés, Sociétés affiliées ou sous-traitants qui ont besoin de vos Données personnelles aux fins décrites dans l’article 2 recevront l’autorisation d’accéder aux données).</p>
         <p>&nbsp;</p>
-        <p><strong><u>Article 4 – Comment Le Pain Quotidien collecte-t-elle vos Données personnelles et combien de temps les conserve-t-elle ? </u></strong></p>
+        <p><strong><u>Article 4 – Comment Le fournil des gonceries collecte-t-elle vos Données personnelles et combien de temps les conserve-t-elle ? </u></strong></p>
         <p><u>Collecte des données</u></p>
         <p>Nous recueillons vos Données personnelles – sans être exhaustif – dans les cas suivants:</p>
         <ul>
             <li>lors de l’envoi d’une demande d’information sur le Site internet (en utilisant le formulaire prévu à cet effet);</li>
-            <li>lorsque vous remplissez le formulaire d’inscription personnalisé par nos soins pour vous inscrire à l’Application;</li>
-            <li>lorsque vous vous inscrivez à l’Application via votre compte de médias sociaux;</li>
             <li>lorsque vous saisissez votre localisation via le Site internet;</li>
-            <li>lorsque vous effectuez un achat via l’Application;</li>
-            <li>lorsque vous utilisez l’Application à la suite de laquelle nous prendrons des décisions automatisées, lorsque vous l’acceptez;</li>
-            <li>lorsque vous concluez un contrat (d’emploi) avec nous;</li>
+            <li>lorsque vous effectuez un achat via le site web;</li>
             <li>lorsque vous nous appelez, nous envoyez un courriel ou correspondez avec nous d’une autre manière que par le biais de l’Application ou du Site internet.</li>
         </ul>
         <p>Nous évitons la collecte de Données personnelles qui ne sont pas nécessaires pour la poursuite des finalités énoncées à l’article 2.</p>
@@ -74,7 +74,6 @@
         <p><u>Conservation des données</u></p>
         <p>Les Données personnelles seront conservées et traitées par nos soins pendant la durée nécessaire aux fins du traitement.</p>
         <p>Les données relatives aux clients et aux fournisseurs ou sous-traitants seront supprimées de nos systèmes 7 ans après la fin du contrat concerné, à l’exception des Données personnelles que nous devons conserver plus longtemps en raison d’obligations légales spécifiques ou en cas de litige(s) en cours.</p>
-        <p>Veuillez noter que la suppression de l’Application de votre appareil n’entraîne pas la suppression ou l’anonymisation de vos Données personnelles. Vous devez nous contacter si vous souhaitez que vos données soient supprimées.</p>
         <p>Les Données personnelles de nos employés seront supprimées 5 ans après la fin du contrat de travail.</p>
         <p>Les Données personnelles des candidats seront supprimées après que le poste vacant concerné ait été pourvu ou deux ans après l’obtention de l’autorisation d’informer les candidats des futures possibilités d’emploi.</p>
         <p>Les autres données ne seront pas conservées plus de 2 ans après le dernier contact avec vous, sauf dans le cas où vous consentez à ce que l’on conserve ces données pendant une période plus longue.</p>
@@ -145,8 +144,8 @@
         <p>En tout état de cause, vous serez informé par courrier électronique de toute modification apportée à la présente déclaration de confidentialité.</p>
         <p>&nbsp;</p>
         <p><strong><u>Article 9 – Cookies </u></strong></p>
-        <p>Le Pain Quotidien utilise des «&nbsp;cookies&nbsp;» chaque fois que vous visitez le site internet. Un «&nbsp;cookie&nbsp;» Un cookie est un petit fichier texte, image ou logiciel, contenant des informations, qui est enregistré sur le disque dur de votre terminal à l’occasion de la consultation d’un site internet avec votre logiciel de navigation. Les cookies permettent à Le Pain Quotidien de reconnaître votre appareil lorsque vous visitez le site internet. Ils permettent à Le Pain Quotidien de vous fournir une navigation plus fluide et ergonomique et de vous fournir un service personnalisé.</p>
-        <p>Pour plus d’informations, nous vous renvoyons à notre déclaration sur les cookies qui se trouve sur le Site internet <a href="/cookie-statement">ici</a>.</p>
+        <p>Le Fournil des gonceries utilise des «&nbsp;cookies&nbsp;» chaque fois que vous visitez le site internet. Un «&nbsp;cookie&nbsp;» Un cookie est un petit fichier texte, image ou logiciel, contenant des informations, qui est enregistré sur le disque dur de votre terminal à l’occasion de la consultation d’un site internet avec votre logiciel de navigation. Les cookies permettent à Le Pain Quotidien de reconnaître votre appareil lorsque vous visitez le site internet. Ils permettent à Le Pain Quotidien de vous fournir une navigation plus fluide et ergonomique et de vous fournir un service personnalisé.</p>
+        <p>Pour plus d’informations, nous vous renvoyons à notre déclaration sur les cookies qui se trouve sur le Site internet <a href="/cookieStatement">ici</a>.</p>
     </div>
     </body>
 </html>

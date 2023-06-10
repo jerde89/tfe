@@ -110,7 +110,21 @@ public class UserService {
     public void sendMailResetPassword(User user, String subject) {
         //création d'une variable newpassword qui va chercher le résultat du service GeneratePassword
         String newPassword = GeneratePassword.generatePassword(10);
-        mailService.sendEmail(user.getEmail(), "mot de passe oublié", "votre mot de passe est " + newPassword);
+//        mailService.sendEmail(user.getEmail(), "Fournil - mot de passe oublié", "Votre nouveau mot de passe est " + newPassword);
+        mailService.sendEmail(user.getEmail(), "Fournil - Mot de passe oublié",
+                "Cher utilisateur,\n" +
+                        "\n" +
+                        "Nous vous prions de trouver ci-dessous votre nouveau mot de passe pour votre compte. Par mesure de précaution et afin de garantir la protection de vos informations, nous vous recommandons vivement de modifier votre mot de passe dès que possible.\n" +
+                        "\n" +
+                         newPassword +
+                        "\n" +
+                        "\n" +
+                        "Pour ce faire, veuillez accéder à la page de modification du mot de passe. Cela vous permettra de choisir un nouveau mot de passe solide et unique, renforçant ainsi la sécurité de votre compte.\n" +
+                        "\n" +
+                        "La sécurité de nos utilisateurs est une priorité absolue pour nous, et nous vous remercions de votre coopération dans cette démarche. Si vous avez des questions ou besoin d'une assistance supplémentaire, n'hésitez pas à nous contacter. Nous sommes là pour vous aider.\n" +
+                        "\n" +
+                        "Cordialement,\n" +
+                        "L'équipe de support " );
         user.setPassword(new BCryptPasswordEncoder().encode(newPassword));
         userRepository.save(user);
     }

@@ -77,7 +77,7 @@
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Nom :</label>
-                    <input type="text" class="form-control" id="name" name="name"/>
+                    <input type="text" class="form-control" id="name" name="name" onblur="checkNameProduct()"/>
                     <div class="col-12">
                         <div class="span-error-div"><span class="span-error4" id="errorName"></span></div>
                     </div>
@@ -87,7 +87,7 @@
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Description :</label>
-                    <input type="text" class="form-control" id="description" name="description"/>
+                    <input type="text" class="form-control" id="description" name="description" onblur="checkDescriptionProduct()"/>
                     <div class="col-12">
                         <div class="span-error-div"><span class="span-error4" id="errorDescription"></span></div>
                     </div>
@@ -98,7 +98,7 @@
                 <div class="col-12">
                     <label class="form-label text-black">Catégorie :</label>
                     <select class="form-control" name="category" id="category">
-                        <option value=""></option>
+
                         <%--                        var="category => une nouvelle variable appellée category--%>
                         <%--                        Items => reçu du controller ProdcutController de la focntion showCategoryList--%>
                         <c:forEach var="category" items="${categoryList}">
@@ -106,7 +106,7 @@
                         </c:forEach>
                     </select>
                     <div class="col-12">
-                        <div class="span-error-div"><span class="span-error4" id="errorTva"></span></div>
+                        <div class="span-error-div"><span class="span-error4" id="errorCategory"></span></div>
                     </div>
                 </div>
             </div>

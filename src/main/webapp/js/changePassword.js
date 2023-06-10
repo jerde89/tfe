@@ -1,4 +1,4 @@
-
+//Fonction de vérification de l'imput "inputOldPassword" de la jsp "changePassword"
 function checkPasswordOld() {
 
     var passwordOld = $("#inputOldPassword").val();

@@ -29,10 +29,6 @@
 
             <!-- Place for messages: error, alert etc ... -->
 
-
-
-
-
             <div class="row justify-content-center">
                 <div class="form-group">
                     <div class="col-xs-15">
@@ -42,6 +38,11 @@
                                     Email et/ou mot de passe invalide.
                                 </div>
                             </c:if>
+<%--                            <c:if test="${param.error != null }">--%>
+<%--                                <div class="alert alert-danger col-xs-offset-1 col-xs-10">--%>
+<%--                                    <c:out value="${param.error}"/>--%>
+<%--                                </div>--%>
+<%--                            </c:if>--%>
                             <c:if test="${param.logout != null }">
                                 <div class="alert alert-success col-xs-offset-1 col-xs-10">
                                     Vous êtes déconnecté.

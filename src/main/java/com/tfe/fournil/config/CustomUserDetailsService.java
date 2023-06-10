@@ -24,6 +24,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         if(user ==null) {
             throw new UsernameNotFoundException("User Not Found");
         }
+//        if(user.getEnabled() == false){
+//            throw new UsernameNotFoundException("Votre compte est désactiver. Veuillez contacter la boulangerie");
+//        }
 
         return new CustomUserDetails(user);
     }

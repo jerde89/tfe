@@ -22,7 +22,8 @@ import java.util.List;
 public class OrderService2 {
 
     //Important pour Stripe
-    private String baseURL="http://localhost:8080";
+//    private String baseURL="http://localhost:8080";
+    private String baseURL="http://192.168.75.1:8080";
 
     @Value("${STRIPE_SECRET_KEY}")
     private String apiKey;

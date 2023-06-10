@@ -10,10 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <%--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/fontawesome.min.css" integrity="sha384-z4tVnCr80ZcL0iufVdGQSUzNvJsKjEtqYZjiQrrYKlpGow+btDHDfQWkFjoaz/Zr" crossorigin="anonymous">--%>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/countrySelect.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
     <script src="${pageContext.request.contextPath}/js/register.js"></script>
-    <script src="${pageContext.request.contextPath}/js/countrySelect.js"></script>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
     </script>
@@ -71,12 +69,6 @@
                 <input type="email" class="form-control" id="inputEmail" name="email" value="${user.getEmail()}"   readonly>
             </div>
         </div>
-
-<%--        <input type="hidden"--%>
-<%--               name="password"--%>
-<%--               value="${user.getPassword()}"/>--%>
-
-
 
         <hr>
         <div class="row mx-2">
@@ -141,28 +133,6 @@
             </div>
         </div>
 
-
-<%--        <div class="row mx-2">--%>
-<%--            <div class="col-6">--%>
-<%--                <label for="inputPostalCode" class="form-label text-black">Code postal*</label>--%>
-<%--                <input type="text" class="form-control" id="inputPostalCode" name="Address.City.postalCode" value="${user.getAddress().getCity().getPostalCode()}" onblur="checkPostalCode()">--%>
-<%--                <div class="col-6">--%>
-<%--                    <div class="span-error-div"><span class="span-error4" id="errorPostalCode"></span></div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-
-<%--            <div class="col-6">--%>
-<%--                <label for="inputCityName" class="form-label text-black">Ville*</label>--%>
-<%--                <input type="text" class="form-control" id="inputCityName" name="Address.City.cityName" value="${user.getAddress().getCity().getCityName()}" onblur="checkCity()">--%>
-<%--                <div class="col-6">--%>
-<%--                    <div class="span-error-div">--%>
-<%--                        <span class="span-error4" id="errorCityName"></span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-
         <div class="row mx-2">
             <div class="col-6">
                 <label class="form-label text-black">Ville*</label>
@@ -192,15 +162,6 @@
             </div>
         </div>
 
-        <%--Procédure Jquery pour afficher les pays en liste déroulante   https://www.jqueryscript.net/form/country-picker-flags.html--%>
-<%--        <div class="row mx-2">--%>
-<%--            <div class="col-12">--%>
-<%--                <label class="form-label text-black">Pays*</label>--%>
-<%--                <input id="country_selector" type="text" class="form-control" name="Address.City.Country.countryName" value="${user.getAddress().getCity().getCountry().getCountryName()}">--%>
-<%--            </div>--%>
-<%--        </div>--%>
-
-
         <div class="form-group" style="text-align:center">
             <button id="submitBtn" type="submit" class="form-control btn btn-primary rounded submit px-3">Enregistrer mes modifications
             </button>
@@ -210,8 +171,6 @@
     </form>
 
 </div>
-
-
 
 </body>
 <%@include file="footer.jsp" %>
