@@ -1,10 +1,10 @@
 <%@ page pageEncoding="UTF-8" %>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+
 
 
 <div class=footer>
     <div class="row mx-2">
-        <div class="col-1"></div>
+<%--        <div class="col-1"></div>--%>
         <div class="col-4">
             <a href="/privacyPolicy" style="color: black; margin-right: 10px">Politique de confidentialité</a>
             <a href="/cookieStatement" style="color: black ; margin-right: 10px"">Gestion des cookies</a>
@@ -16,7 +16,8 @@
             <p style="color: black">2022 Company, Inc</p>
         </div>
 
-        <div class="nav col-md-3 justify-content-end list-unstyled d-flex">
+
+            <div class="nav col-md-4 justify-content-end list-unstyled d-flex">
             <li>
                 <a href="https://www.facebook.com/lefournildesgonceries">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" class="bi bi-facebook"
@@ -26,6 +27,7 @@
                 </a>
             </li>
         </div>
+
     </div>
 </div>
 

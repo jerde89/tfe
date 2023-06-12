@@ -3,8 +3,6 @@
 <%@ page pageEncoding="UTF-8" %>
 
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
-<script src="${pageContext.request.contextPath}/js/navbar.js"></script>
 <%--<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css' rel='stylesheet'>--%>
 <%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>--%>
 <%--<link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>--%>
@@ -33,8 +31,7 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/order">Commmander</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link ${pagina.endsWith('/contact') ? 'active' : ''}"
-                   href="${pageContext.request.contextPath}/contact">Contact</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/contact">Contact</a>
             </li>
             <li class="nav-item">
                 <sec:authorize access="hasAnyAuthority('ADMIN', 'EMPLOYEE')">

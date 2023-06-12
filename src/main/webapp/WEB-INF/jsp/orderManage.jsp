@@ -63,7 +63,7 @@
                     <th>Nom</th>
                     <th>Mode de livraison</th>
                     <th>Total</th>
-                    <th>Payé?,,</th>
+                    <th>Payé?</th>
                     <th>Statut</th>
 
                 </tr>

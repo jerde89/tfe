@@ -21,10 +21,20 @@ public class OrderDetail {
     private int quantity;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_version_id")
     private ProductVersion productVersion;
+
+    @Override
+    public String toString() {
+        return "OrderDetail{" +
+                "idOrderDetail=" + idOrderDetail +
+                ", quantity=" + quantity +
+                ", productVersion=" + productVersion +
+                '}';
+    }
 }

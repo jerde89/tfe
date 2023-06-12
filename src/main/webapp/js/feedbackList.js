@@ -175,20 +175,15 @@ function togglePopup(id, tableName) {
     // }
 }
 
-//Jac
-function actionDeleteFeedback(id) {
-    $("#deleteFeedBackIdHidden").val(id);
-    togglePopupDeleteFeedback();
-}
 
 function togglePopupDeleteFeedback() {
     return $(".contentConfirmationDeleteFeedback").toggle();
 
 }
 
-function callAjaxDeleteFeedback() {
+function callAjaxDeleteFeedback(id) {
     var data = {};
-    data.feedbackId = $("#deleteFeedBackIdHidden").val();
+    data.feedbackId = id;
     $.ajax({
         type: "POST", url: pageContextPath + "/feedbackList/delete",
         data: data, success: successDeleteFeedback, fail: fail,
@@ -213,7 +208,6 @@ function successDeleteFeedback() {
             stack: false,
         }
     );
-    togglePopupDeleteFeedback();
 }
 
 
@@ -286,6 +280,32 @@ function fail(e) {
 //         }
 //     });
 // } );
+
+
+
+function actionDeleteFeedback(id) {
+
+    $.confirm({
+        theme: 'bootstrap', // 'material', 'bootstrap',
+        title: 'Suppression du feedback',
+        alignMiddle: true,
+        content: 'Etes-vous sûr de vouloir supprimer ce feedback',
+        buttons: {
+            confirm: {
+                text: 'oui',
+                action: function () {
+                    callAjaxDeleteFeedback(id);
+                }
+            }, cancel: {
+                text: 'Non',
+                action: function () {
+                    return;
+                }
+            },
+        }
+    });
+
+}
 
 
 

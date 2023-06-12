@@ -184,7 +184,6 @@ function  saveOrder() {
         deliveryMode: $('input[name="delivery_mode"]:checked').val(),
         orderDetails: []
     }
-    var checkoutList = []
 
     myBag.record.forEach(product => {
         var oderDetail = {

@@ -27,6 +27,9 @@ public class OrderService {
     @Autowired
     UserService userService;
 
+    @Autowired
+    OrderDetailService orderDetailService;
+
 
     /**
      * Add order.
@@ -169,6 +172,16 @@ public class OrderService {
             order.setPaid(true);
             orderRepository.save(order);
         });
+    }
+
+    public void delete(Long id) {
+        Optional<Order> oderOptional = this.orderRepository.findById(id);
+        if (oderOptional.isEmpty()) {
+            return;
+        }
+        Order order = oderOptional.get();
+        order.getOrderDetails().forEach(orderDetailService::delete);
+        oderOptional.ifPresent(orderRepository::delete);
     }
 
     /**

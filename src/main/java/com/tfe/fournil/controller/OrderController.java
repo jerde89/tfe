@@ -200,6 +200,12 @@ public class OrderController {
         return ResponseEntity.ok(true);
     }
 
+    @DeleteMapping("deleteOrder")
+    public ResponseEntity<Boolean> deleteOrder(@RequestParam Long orderId){
+        orderService.delete(orderId);
+        return ResponseEntity.ok(true);
+    }
+
     /**
      * Checkout list response entity.
      *

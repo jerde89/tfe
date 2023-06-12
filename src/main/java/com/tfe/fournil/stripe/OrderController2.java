@@ -31,8 +31,6 @@ public class OrderController2 {
     @PostMapping("/create-checkout-session")
     public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList)
             throws StripeException {
-
-
         log.info("Call create-checkout-session for list size {}", checkoutItemDtoList.size());
         Session session = orderService2.createSession(checkoutItemDtoList);
         log.info("Session " + session.getId());

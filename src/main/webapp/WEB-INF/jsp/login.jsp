@@ -35,14 +35,11 @@
                         <div>
                             <c:if test="${param.error != null }">
                                 <div class="alert alert-danger col-xs-offset-1 col-xs-10">
-                                    Email et/ou mot de passe invalide.
+                                    Erreur d'authentification (Email et/ou mot de passe invalide ou compte désactivé).
+                                    <c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />.
                                 </div>
                             </c:if>
-<%--                            <c:if test="${param.error != null }">--%>
-<%--                                <div class="alert alert-danger col-xs-offset-1 col-xs-10">--%>
-<%--                                    <c:out value="${param.error}"/>--%>
-<%--                                </div>--%>
-<%--                            </c:if>--%>
+
                             <c:if test="${param.logout != null }">
                                 <div class="alert alert-success col-xs-offset-1 col-xs-10">
                                     Vous êtes déconnecté.

@@ -11,11 +11,11 @@ $(document).ready(function () {
         orderId: orderId,
     };
     $.ajax({
-        url: pageContextPath + '/order/changeStatusPaid',
-        type: 'PUT',
+        url: pageContextPath + '/order/deleteOrder',
+        type: 'DELETE',
         data: data,
         success: function () {
-            resetBag();
+             resetBag();
             $('#content').removeClass( "d-none");
         },
         headers: {'X-CSRF-Token': $('input[name=_csrf]').val()}

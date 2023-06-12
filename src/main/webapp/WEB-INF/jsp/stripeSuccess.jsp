@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Muli'>
     <script src="${pageContext.request.contextPath}/js/stripeSuccess.js"></script>
+    <script type="text/javascript">
+        var pageContextPath = "${pageContext.request.contextPath}";
 
+    </script>
     <title>Success</title>
 </head>
 <body>
@@ -52,9 +55,9 @@
         </div>
 
     </section>
-    <input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
-</div>
 
+</div>
+<input type="hidden" id='_csrf' name="${_csrf.parameterName}" value="${_csrf.token}">
 </body>
 <%@include file="footer.jsp" %>
 </html>

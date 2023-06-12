@@ -49,7 +49,7 @@ public class Order {
     private Shop shop;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id_user")
     private User user;
 
@@ -72,5 +72,20 @@ public class Order {
 
     public int getTotalProduct(){
         return this.getOrderDetails().stream().mapToInt(OrderDetail::getQuantity).sum();
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "idOrder=" + idOrder +
+                ", creationDate=" + creationDate +
+                ", deliveryDate=" + deliveryDate +
+                ", status=" + status +
+                ", deliveryMode=" + deliveryMode +
+                ", paid=" + paid +
+                ", shop=" + shop +
+                ", user=" + user +
+                ", orderDetails=" + orderDetails +
+                '}';
     }
 }

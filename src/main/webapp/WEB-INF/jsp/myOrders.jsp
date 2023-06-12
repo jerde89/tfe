@@ -33,8 +33,9 @@
                 <tr>
                     <th></th>
                     <th>Numéro de commande</th>
-                    <th>Date de reception commande</th>
+                    <th>Date de reception</th>
                     <th>Prix total</th>
+                    <th>Payé?</th>
                     <th>Etat</th>
                 </tr>
                 </thead>

@@ -8,9 +8,9 @@
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/welcome.css">
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e3a73d74-61bb-46cc-8c7f-140ca9e2949b" data-blockingmode="auto" type="text/javascript"></script>
-</head>
-<body style="margin-bottom: 200px">
 
+</head>
+<body>
     <%@include file="navbar.jsp" %>
 
 
@@ -33,8 +33,8 @@
         </div>
     </div>
     <script id="CookieDeclaration" src="https://consent.cookiebot.com/e3a73d74-61bb-46cc-8c7f-140ca9e2949b/cd.js" type="text/javascript" async></script>
+    <c:import url="footer.jsp"/>
 </body>
-<%@include file="footer.jsp" %>
 
 </html>
 

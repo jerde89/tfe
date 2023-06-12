@@ -52,3 +52,7 @@
 <%--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">--%>
 <link href='${pageContext.request.contextPath}/css/jquery-confirm.min.css' rel='stylesheet'/>
 <script src="${pageContext.request.contextPath}/js/jquery-confirm.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer.css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
+<script src="${pageContext.request.contextPath}/js/navbar.js"></script>
