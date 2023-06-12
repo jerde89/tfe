@@ -91,7 +91,7 @@ public class OrderService {
         return orderDTOS;
     }
 
-    private List<OrderDetailDTO> mapToOderDetailDto(List<OrderDetail>orderDetails) {
+    private List<OrderDetailDTO> mapToOderDetailDto(List<OrderDetail> orderDetails) {
         List<OrderDetailDTO> dtos = new ArrayList<>();
         orderDetails.forEach(orderDetail -> {
             OrderDetailDTO orderDetailDTO = new OrderDetailDTO();
@@ -163,6 +163,14 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    public void updateStatusPaid(Long id) {
+        Optional<Order> oderOptional = this.orderRepository.findById(id);
+        oderOptional.ifPresent(order -> {
+            order.setPaid(true);
+            orderRepository.save(order);
+        });
+    }
+
     /**
      * Find order for current user list.
      *
@@ -170,7 +178,7 @@ public class OrderService {
      */
     public List<OrderDTO> findOrderForCurrentUser() {
         Optional<User> currentUser = userService.getCurrentUser();
-        if(currentUser.isEmpty()) {
+        if (currentUser.isEmpty()) {
             return new ArrayList<>();
         }
         User user = currentUser.get();

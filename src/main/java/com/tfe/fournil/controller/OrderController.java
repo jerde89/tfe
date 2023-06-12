@@ -115,16 +115,16 @@ public class OrderController {
      * @return the response entity
      */
     @PostMapping("")
-    public ResponseEntity<Boolean> createOrder(@RequestBody Order order, HttpSession session) {
+    public ResponseEntity<Long> createOrder(@RequestBody Order order, HttpSession session) {
 
         log.info("test " + order.toString());
 
         userService.getCurrentUser().ifPresent(order::setUser);
         order.setStatus(OrderStatus.WAITING);
         order.setCreationDate(LocalDate.now());
-        order.setPaid(true);
+
         orderRepository.save(order);
-        return ResponseEntity.ok(true);
+        return ResponseEntity.ok(order.getIdOrder());
     }
 
 
@@ -172,7 +172,7 @@ public class OrderController {
      * @return the response entity
      */
     @PutMapping("statusToInProgress")
-    public ResponseEntity<Boolean> statusToInProgress(@RequestParam String orderIds){
+    public ResponseEntity<Boolean> statusToInProgress(@RequestParam String orderIds) {
         List<Long> collect = Arrays.stream(orderIds.split(","))
                 .map(s -> Long.parseLong(s.trim()))
                 .collect(Collectors.toList());
@@ -189,8 +189,14 @@ public class OrderController {
      */
     @PutMapping("changeStatus")
     public ResponseEntity<Boolean> changeStatus(@RequestParam Long orderId,
-                                                @RequestParam OrderStatus status){
+                                                @RequestParam OrderStatus status) {
         orderService.updateStatus(orderId, status);
+        return ResponseEntity.ok(true);
+    }
+
+    @PutMapping("changeStatusPaid")
+    public ResponseEntity<Boolean> changeStatusPaid(@RequestParam Long orderId) {
+        orderService.updateStatusPaid(orderId);
         return ResponseEntity.ok(true);
     }
 
@@ -204,13 +210,11 @@ public class OrderController {
     @PostMapping("/create-checkout-session")
     public ResponseEntity<StripeResponse> checkoutList(@RequestBody List<CheckoutItemDto> checkoutItemDtoList)
             throws StripeException {
-
-
         log.info("Call create-checkout-session for list size {}", checkoutItemDtoList.size());
         Session session = orderService2.createSession(checkoutItemDtoList);
         log.info("Session " + session.getId());
         StripeResponse stripeResponse = new StripeResponse(session.getId());
-        log.info("StripeResponse " + stripeResponse.toString());
+        log.info("StripeResponse " + stripeResponse);
         return new ResponseEntity<>(stripeResponse, HttpStatus.OK);
     }
 
@@ -220,10 +224,8 @@ public class OrderController {
      * @return the string
      */
     @GetMapping("/successStripe")
-    public String successStripe (){
-
-
-        return  "successStripe";
+    public String successStripe() {
+        return "stripeSuccess";
     }
 
     /**
@@ -232,9 +234,7 @@ public class OrderController {
      * @return the string
      */
     @GetMapping("/errorStripe")
-    public String errorStripe (){
-
-
-        return  "errorStripe";
+    public String errorStripe() {
+        return "stripeError";
     }
 }
