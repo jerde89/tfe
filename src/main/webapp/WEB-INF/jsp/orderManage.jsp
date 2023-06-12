@@ -9,6 +9,7 @@
     <meta charset="UTF-8">
     <%@include file="head.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderManage.css">
+    <script src="${pageContext.request.contextPath}/js/orderUtil.js"></script>
     <script src="${pageContext.request.contextPath}/js/orderManage.js"></script>
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";

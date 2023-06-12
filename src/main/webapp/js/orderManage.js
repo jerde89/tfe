@@ -14,7 +14,7 @@ $(document).ready(function () {
             {data: 'deliveryDate', render: DataTable.render.datetime('YYYY-MM-DD', 'DD/MM/YYYY', 'fr')},
             {data: 'user', render: makeUserFullName},
             {data: 'deliveryMode', render: renderDeliveryMode, className: 'dt-body-center'},
-            {data: 'total', render: renderTotalPrice, className: "text-right"},
+            {data: 'total', render: renderPrice, className: "text-right"},
             {data: 'paid', render: renderPaid, className: 'dt-body-center'},
             {data: 'status', render: renderDeliveryStatus, className: 'dt-body-center'},
 
@@ -50,13 +50,27 @@ $(document).ready(function () {
             {data: 'deliveryDate', render: DataTable.render.datetime('YYYY-MM-DD', 'DD/MM/YYYY', 'fr')},
             {data: 'user', render: makeUserFullName},
             {data: 'deliveryMode', render: renderDeliveryMode, className: 'dt-body-center'},
-            {data: 'total', render: renderTotalPrice, className: "text-right"},
+            {data: 'total', render: renderPrice, className: "text-right"},
             {data: 'paid', render: renderPaid, className: 'dt-body-center'},
             {data: 'status', render: renderStatusWaiting},
 
         ],
         order: [[1, 'desc']],
         "language": languageConfig
+    });
+    $('#orderGridPending tbody').on('click', 'td.dt-control', function () {
+        var tr = $(this).closest('tr');
+        var row = pending.row(tr);
+
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        } else {
+            // Open this row
+            row.child(format(row.data())).show();
+            tr.addClass('shown');
+        }
     });
 
     //Fonstion permettant de faire la concaténation du nom et du prénom
@@ -110,15 +124,6 @@ $(document).ready(function () {
         }
     }
 
-    //render permettant de formatter l'affichage du prix (arroundir + symbole €)
-    function renderTotalPrice(data) {
-        return addZeroes(Math.round(data * 100) / 100) + " €";
-    }
-
-    //focntion permettant d'avoir un ou 2 zéro(s) après la virgule en fonction du nombre
-    function addZeroes(num) {
-        return num.toLocaleString("fr", {useGrouping: false, minimumFractionDigits: 2})
-    }
 
     //render permettant d'affciher un icone différent suivant les statut
     function renderDeliveryStatus(data, type, full) {
@@ -153,18 +158,29 @@ function format(d) {
         '<thead>' +
         '<tr>' +
         ' <th>Produit</th>' +
+        ' <th>Produit unitaire</th>' +
         '<th>Quantité</th>' +
+        '<th>Prix total</th>' +
         '</tr>' +
         '</thead>' +
         '';
-
     d.orderDetailDTOs.forEach(el => {
-        console.log(el);
         subTableHtml += '<tr>' +
             "<td>" + el.productVersion.product.name + "</td>" +
+            // "<td>" + renderPrice(el.productVersion.product.price) + "</td>" +
+            "<td>" + renderPrice(el.priceWithTVA) + "</td>" +
             "<td>" + el.quantity + "</td>" +
+            "<td>" + renderPrice(el.total) + "</td>" +
             "</tr>";
     });
+    if (d.deliveryMode === "HOME") {
+        subTableHtml += '<tr>' +
+            "<td>Livraison</td>" +
+            "<td>" + renderPrice(2) + "</td>" +
+            "<td>1</td>" +
+            "<td>" + renderPrice(2) + "</td>" +
+            "</tr>";
+    }
     subTableHtml += '</table>';
     return subTableHtml;
 }
@@ -208,6 +224,7 @@ function changeOrderStatus(orderId, status, userFullName) {
     });
 
 }
+
 
 
 

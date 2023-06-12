@@ -29,6 +29,13 @@ public class OrderDetail {
     @JoinColumn(name = "product_version_id")
     private ProductVersion productVersion;
 
+    public Float getTotal(){
+        return (getProductVersion().getPrice() * getQuantity()) * (((float) getProductVersion().getTaxRate()/100)+1);
+    }
+
+    public float getPriceWithTVA(){
+        return (getProductVersion().getPrice() ) * (((float) getProductVersion().getTaxRate()/100)+1);
+    }
     @Override
     public String toString() {
         return "OrderDetail{" +

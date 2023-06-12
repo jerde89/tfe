@@ -17,6 +17,8 @@ public class OrderDetailDTO {
 
     private int quantity;
     private ProductVersionDTO productVersion;
+    private Float total;
+    private Float priceWithTVA;
 
     /**
      * Gets id order detail.
@@ -70,5 +72,21 @@ public class OrderDetailDTO {
      */
     public void setProductVersion(ProductVersionDTO productVersion) {
         this.productVersion = productVersion;
+    }
+
+    public Float getTotal() {
+        return total;
+    }
+
+    public void setTotal(Float total) {
+        this.total = total;
+    }
+
+    public Float getPriceWithTVA() {
+        return priceWithTVA;
+    }
+
+    public void setPriceWithTVA(Float priceWithTVA) {
+        this.priceWithTVA = priceWithTVA;
     }
 }

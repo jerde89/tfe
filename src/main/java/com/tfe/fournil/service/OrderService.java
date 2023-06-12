@@ -107,6 +107,8 @@ public class OrderService {
             productVersionDTO.setTaxRate(productVersion.getTaxRate());
             productVersionDTO.setProduct(productVersion.getProduct());
             orderDetailDTO.setProductVersion(productVersionDTO);
+            orderDetailDTO.setTotal(orderDetail.getTotal());
+            orderDetailDTO.setPriceWithTVA(orderDetail.getPriceWithTVA());
             dtos.add(orderDetailDTO);
         });
         return dtos;

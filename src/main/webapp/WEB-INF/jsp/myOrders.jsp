@@ -11,6 +11,7 @@
     <script type="text/javascript">
         var pageContextPath = "${pageContext.request.contextPath}";
     </script>
+    <script src="${pageContext.request.contextPath}/js/orderUtil.js"></script>
     <script src="${pageContext.request.contextPath}/js/myOrders.js"></script>
 </head>
 <body>
