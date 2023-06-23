@@ -69,3 +69,8 @@ button{
     z-index: 100;
     display: none;
 }
+
+#imagePreview img {
+    max-height: 100px;
+    max-width: 100px;
+}

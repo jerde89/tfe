@@ -111,6 +111,14 @@ function toggleProductPopup(id) {
     $('#update').val("");
     $('#enable').prop("checked", true)
     $("#file").val(null);
+    $("#errorFile").hide();
+    $("#imagePreview").html("");
+    $(".span-error4").each(function() {
+        $(this).html("");
+    });
+    $("input.fieldMistake").each(function() {
+        $(this).removeClass("fieldMistake");
+    });
     const isNew = id === -1;
     if (isNew) {
         $("#blockCreated").hide();
@@ -123,6 +131,7 @@ function toggleProductPopup(id) {
         $('#formProduct').dialog('option', 'title', 'Ajout d\'un produit');
         return;
     }
+
     $("#blockCreated").show();
     $("#blockUpdated").show();
     $("#formProductTitleAdd").hide();
@@ -141,6 +150,7 @@ function toggleProductPopup(id) {
             document.getElementById('description').value = c.description;
             document.getElementById('category').value = c.category.id;
             $('#imgUrl').html(c.img);
+            $("#imagePreview").html('<img src="/imageProduct/'+c.img+'"/>')
             document.getElementById('price').value = c.price;
             document.getElementById('tax_rate').value = c.taxRate;
             document.getElementById('created').innerHTML = moment(c.createdAt).format("DD/MM/YYYY HH:mm");
@@ -279,7 +289,6 @@ function checkNameProduct(isNew) {
 }
 
 
-
 function checkDescriptionProduct() {
     var descriptionProduct = $("#description").val();
 
@@ -384,4 +393,28 @@ function showPopup() {
             },
         ]
     });
+}
+
+function fileValidation(){
+    var fileInput = document.getElementById('file');
+    var filePath = fileInput.value;
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+    if(!allowedExtensions.exec(filePath)){
+        // alert('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        $("#errorFile").html('Please upload file having extensions .jpeg/.jpg/.png/.gif only.');
+        $("#errorFile").show();
+        $("#imagePreview").html("");
+        fileInput.value = '';
+        return false;
+    }else{
+        $("#errorFile").hide();
+        //Image preview
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#imagePreview").html('<img src="'+e.target.result+'"/>');
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
 }

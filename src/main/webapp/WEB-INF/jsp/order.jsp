@@ -33,7 +33,7 @@
 <%--</div>--%>
 <main>
     <section class="results-header">
-        <h1>Nos produits</h1>
+        <h1>Nos produits  ${pageContext.request.contextPath}</h1>
         <div class="results-header__option">
             <div class="option__button option--grid selected"><span></span><span></span><span></span><span></span><span>Grid</span>
             </div>

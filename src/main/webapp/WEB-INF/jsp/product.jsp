@@ -114,10 +114,17 @@
             <div class="row mx-1">
                 <div class="col-12">
                     <label class="form-label text-black">Image :</label>
-                    <input type="file" class="form-control" id="file" name="file"/>
+                    <input type="file" class="form-control" id="file" name="file" accept="image/*" onchange="return fileValidation()"/>
+                    <div class="col-12">
+                        <div class="span-error-div"><span class="span-error4" id="errorFile"></span></div>
+                    </div>
+                    <div id="imagePreview"></div>
                     <div  id="imgUrlDiv">
                         <span>Chemin actuel:</span>
                         <span id="imgUrl"></span>
+
+                        <!-- Image preview -->
+
                     </div>
                 </div>
             </div>
