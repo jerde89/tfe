@@ -67,8 +67,8 @@
                 <div class="row mx-2">
                     <div class="col-12">
                         <label for="inputOldPassword" class="form-label text-black">Ancien Mot de passe*</label>
-                        <div class="input-group" id="show_hide_password">
-                            <input type="password" class="form-control" id="inputOldPassword" name="oldPassword" placeholder="Ancien mot de passe" onblur="checkPasswordOld()">
+                        <div class="input-group" id="show_hide_password_old">
+                            <input type="password" class="form-control" id="inputOldPassword" name="oldPassword" placeholder="Ancien mot de passe">
                             <div class="input-group-addon">
                                 <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                             </div>

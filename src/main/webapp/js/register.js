@@ -13,36 +13,33 @@ $(function () {
 
 $(document).ready(function () {
     //Permet d'afficher ou non le mot de passe  => oeil
-    $("#show_hide_password a").on('click', function (event) {
-        event.preventDefault();
-        if ($('#show_hide_password input').attr("type") == "text") {
-            $('#show_hide_password input').attr('type', 'password');
-            $('#show_hide_password i').addClass("fa-eye-slash");
-            $('#show_hide_password i').removeClass("fa-eye");
-        } else if ($('#show_hide_password input').attr("type") == "password") {
-            $('#show_hide_password input').attr('type', 'text');
-            $('#show_hide_password i').removeClass("fa-eye-slash");
-            $('#show_hide_password i').addClass("fa-eye");
-        }
-    });
-    $("#show_hide_password_confirm a").on('click', function (event) {
-        event.preventDefault();
-        if ($('#show_hide_password_confirm input').attr("type") == "text") {
-            $('#show_hide_password_confirm input').attr('type', 'password');
-            $('#show_hide_password_confirm i').addClass("fa-eye-slash");
-            $('#show_hide_password_confirm i').removeClass("fa-eye");
-        } else if ($('#show_hide_password_confirm input').attr("type") == "password") {
-            $('#show_hide_password_confirm input').attr('type', 'text');
-            $('#show_hide_password_confirm i').removeClass("fa-eye-slash");
-            $('#show_hide_password_confirm i').addClass("fa-eye");
-        }
-    });
-    $("#country_selector").countrySelect({
-        defaultCountry: "be",
-        preferredCountries: ['be', 'fr', 'lu', 'nl', 'de'],
-    });
+    $("#show_hide_password_old a").on('click',
+        function(event){ showHidePassword(event,"show_hide_password_old")});
+    $("#show_hide_password a").on('click',
+        function(event){ showHidePassword(event,"show_hide_password")});
 
+    $("#show_hide_password_confirm a").on('click',
+        function(event){ showHidePassword(event,"show_hide_password_confirm")});
+    // $("#country_selector").countrySelect({
+    //     defaultCountry: "be",
+    //     preferredCountries: ['be', 'fr', 'lu', 'nl', 'de'],
+    // });
 });
+
+function showHidePassword(event, elementId) {
+    event.preventDefault();
+    let elInput = $('#' + elementId +' input');
+    let elementI = $('#' + elementId +' i');
+    if (elInput.attr("type") === "text") {
+        elInput.attr('type', 'password');
+        elementI.addClass("fa-eye-slash");
+        elementI.removeClass("fa-eye");
+    } else if (elInput.attr("type") === "password") {
+        elInput.attr('type', 'text');
+        elementI.removeClass("fa-eye-slash");
+        elementI.addClass("fa-eye");
+    }
+}
 
 //Fonction de vérification de l'imput "inputEmail" de la jsp "register"
 function checkEmailUser() {
